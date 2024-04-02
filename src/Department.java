@@ -1,6 +1,4 @@
 
-package com.noahkurtz.cis331project;
-
 import java.util.ArrayList;
 
 public class Department {

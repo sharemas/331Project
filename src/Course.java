@@ -1,6 +1,3 @@
-
-package com.noahkurtz.cis331project;
-
 import java.util.ArrayList;
 
 public class Course {
@@ -12,7 +9,7 @@ public class Course {
  public String startTime;
  public String endTime;
  public int numCredits;
- public ArrayList<Students> EnrolledStudents = new ArrayList<>();
+ public ArrayList<Student> EnrolledStudents = new ArrayList<>();
  
  public Course(String prefix, int number, String courseName,
         int daysWeek,String startTime,String endTime, int numCredits,ArrayList Students){
