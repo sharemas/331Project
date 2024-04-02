@@ -1,5 +1,5 @@
 public class Faculty{
-	private int facultyID;
+	private static int facultyID = 0;
 	public String name;
 	private String email;
 	public String buildingName;
@@ -9,7 +9,7 @@ public class Faculty{
 	public String position;
 	
 	
-	public Faculty(int facultyID, String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
+	public Faculty( String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
 		this.facultyID = facultyID;
 		this.name = name;
 		this.email = email;
@@ -18,10 +18,7 @@ public class Faculty{
 		this.phoneNum = phoneNum;
 		this.department = department;
 		this.position = position;
-	}
-	
-	public void setFaculty(int facultyID) {
-		this.facultyID = facultyID;
+		facultyID ++;
 	}
 	
 	public int getFaultyID() {
