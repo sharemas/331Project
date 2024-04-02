@@ -10,7 +10,7 @@ public class Faculty{
 	public String position;
 	
 	
-	public Faculty( String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
+	public Faculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
 		this.facultyID = facultyCount;
 		this.name = name;
 		this.email = email;
