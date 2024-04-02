@@ -9,10 +9,10 @@ public class Course {
  public String startTime;
  public String endTime;
  public int numCredits;
- public ArrayList<Student> EnrolledStudents = new ArrayList<>();
+ public ArrayList<Student> EnrolledStudents;
  
  public Course(String prefix, int number, String courseName,
-        int daysWeek,String startTime,String endTime, int numCredits,ArrayList Students){
+        int daysWeek,String startTime,String endTime, int numCredits){
  
         this.prefix = prefix;
         this.number = number;
@@ -21,6 +21,7 @@ public class Course {
         this.startTime = startTime;
         this.endTime = endTime;
         this.numCredits = numCredits;
+        this.EnrolledStudents = new ArrayList<>();
  }
  
 }
