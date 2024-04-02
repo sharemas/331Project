@@ -14,7 +14,7 @@ public class Student {
    public String contactName;
    private String contactPhoneNumber;
    private String contactAddress;
-   public ArrayList<Enrollement> StudentEnrollments = new ArrayList<>();
+   public ArrayList<Enrollment> StudentEnrollments = new ArrayList<>();
    
   public Student(String name, int SSN,int studentID,String address,String email, double GPA,
          String contactName, String contactPhoneNumber, String contactAddress){
