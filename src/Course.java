@@ -26,7 +26,7 @@ public class Course {
 
  
  public void AddStudent(Student student, Semester semester){
-        student.enrollStudent(semester, this);
+      
         EnrolledStudents.add(student);
  }
  

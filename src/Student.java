@@ -29,6 +29,7 @@ public class Student {
   }
         public void enrollStudent(Semester semester, Course course) {
           course.AddStudent(this, semester);
+          StudentEnrollments.add(new Enrollment(semester, course));
 	}
 	
 	public void unenrollStudent(Enrollment enrollment) {
