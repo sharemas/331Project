@@ -6,11 +6,16 @@ public class App {
 	
     public static ArrayList<Department> departmentList;
     public static ArrayList<Course> courseList;
-    public static ArrayList<Student> StudentList;
+    public static ArrayList<Student> StudentList; // we dont have this in the uml but
 	
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
+    	   departmentList = new ArrayList<>();
+    	   courseList = new ArrayList<>();
+    	   StudentList = new ArrayList<>(); // we dont have this in the uml but
+    		
+    	   
            
            
            boolean exit = false;
