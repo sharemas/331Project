@@ -164,7 +164,11 @@ public class App {
                 	   break;
                 	   
                    case 7: 
-                	   // Edit Course
+                	String select = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
+                	System.out.print("Select course to edit:\n" + ShowCourses() + select);
+                        Scanner sc = new Scanner(System.in);
+                        int coursenum = sc.nextInt();
+                        EditCourse(coursenum);
                 	   
                    case 8:
                 	   
@@ -176,13 +180,13 @@ public class App {
                 	   
                    case 9:
                 	   
-                	   // assign faculty to course 
+                	  AssignFaculty();
                 	   
                 			   
         			   break;
         			case 10:
         				
-        				// enroll student in a course 
+        				EnrollStudent();
         				break;
         				
         			case 11:
