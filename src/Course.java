@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Course {
+ppublic class Course {
     
  public String prefix;
  public int number;
@@ -12,7 +12,7 @@ public class Course {
  
  public ArrayList<Student> EnrolledStudents = new ArrayList<>();
  public Course(String prefix, int number, String courseName,
-        int daysWeek,String startTime,String endTime, int numCredits,ArrayList Students){
+        int daysWeek,String startTime,String endTime, int numCredits){
         this.prefix = prefix;
         this.number = number;
         this.courseName = courseName;
