@@ -165,7 +165,7 @@ public class App {
                        System.out.println("Select Student to edit: " + ShowStudents());
                        int studentSelection = scanner.nextInt(); 
                        EditStudents(studentSelection);                	   
-                	break;
+                       break;
                 	   
                    case 7: 
                 	String select = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
@@ -178,17 +178,12 @@ public class App {
                 	   
                 	   System.out.println("Select Faculty to edit:  " + ShowFaculty());
                 	   int facultySelection = scanner.nextInt();
-                	   EditFaculty(facultySelection);
-                	  
-                        
-                	   
+                	   EditFaculty(facultySelection);	   
                    case 9:
                 	   
                 	  AssignFaculty();
-                	   
-                			   
-        			   break;
-        			case 10:
+			       break; 
+        	   case 10:
         				
         				EnrollStudent();
         				break;
