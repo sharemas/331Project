@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
+	
+    
     public static ArrayList<Department> departmentList = new ArrayList<>();
     public static ArrayList<Course> courseList = new ArrayList<>();
     public static ArrayList<Student> StudentList = new ArrayList<>();
@@ -12,9 +14,11 @@ public class App {
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
-
-
+    	  
+           
+           
            boolean exit = false;
+           
            while (!exit) {
         	   System.out.println("\n");
                System.out.println("University Management System");
@@ -52,23 +56,14 @@ public class App {
                int choice = scanner.nextInt();
                scanner.nextLine();
                
-               switch (choice) {	       
-		case 0: 
-			exit = true;
-			break;	    
-		default: 
-			System.out.println("Invalid choice! Please choose these following option!);
-			break;
-		case 1: 
+               switch (choice) {
+                   case 1: 
                        System.out.println("Enter student's name: ");
                        String name = scanner.nextLine();
                        
                        System.out.println("Enter student's SSN: ");
                        int SSN = scanner.nextInt();
-<<<<<<< HEAD
-		       scanner.nextLine():
-=======
-
+                       scanner.nextLine();
                        
                        System.out.println("Enter student's address: ");
                        String address = scanner.nextLine();
@@ -78,13 +73,8 @@ public class App {
                        
                        System.out.println("Enter student's GPA: ");
                        double GPA = scanner.nextDouble();
-<<<<<<< HEAD
-		       scanner.nextLine();
-	
-=======
                        scanner.nextLine();
                        
->>>>>>> c661908 (masha edits)
                        System.out.println("Enter student's contact name: ");
                        String contactName = scanner.nextLine();
                        
@@ -107,14 +97,12 @@ public class App {
                        
                        System.out.println("Enter course number: ");
                        int courseNum = scanner.nextInt();
-		       scanner.nextLine();
                        
                        System.out.println("Enter course name: ");
                        String courseName = scanner.nextLine();
                        
                        System.out.println("Enter numbers of days per week: ");
                        int daysWeek = scanner.nextInt();
-		       scanner.nextLine();
                        
                        System.out.println("Enter start time: ");
                        String startTime = scanner.nextLine();
@@ -124,9 +112,9 @@ public class App {
                        
                        System.out.println("Enter numbers of credits: ");
                        int numCredits = scanner.nextInt();
-		       scanner.nextLine();
                        
                        createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
+                       // Method also adds to courseList
                        System.out.println("Course created successfully!");
                        break;
                        
@@ -142,7 +130,6 @@ public class App {
                        
                        System.out.println("Enter office number: ");
                        int officeNum = scanner.nextInt();
-		       scanner.nextLine();
                        
                        System.out.println("Enter faculty phone number: ");
                        String phoneNumber = scanner.nextLine();
@@ -159,31 +146,27 @@ public class App {
                        
            
                    case 4: 
-                	System.out.println("Enter a new department name: ");
-                	String departmentName = scanner.next();
-                	createDepartment(departmentName);
-			System.out.println("Department created successfully!);
-                	break;
+                	   System.out.println("Enter a new department name: ");
+                	   String departmentName = scanner.next();
+                	   createDepartment(departmentName);
+                	   break;
                 	   
                    case 5:
-                	System.out.println("Enter a new semester period: ");
-                	String period = scanner.next();
-                	System.out.println("Enter a new semester year: ");
-                	int year = scanner.nextInt();
-                	createSemester(period, year);  
-                	break;
+                	   System.out.println("Enter a new semester period: ");
+                	   String period = scanner.next();
+                	   System.out.println("Enter a new semester year: ");
+                	   int year = scanner.nextInt();
+                	   createSemester(period, year);
+                	  
+                	   break;
                 	   
                    case 6:
+
                        System.out.println("Select Student to edit: " + ShowStudents());
                        int studentSelection = scanner.nextInt(); 
-<<<<<<< HEAD
-                       EditStudents(studentSelection);                	   
-                	break;
-=======
                        EditStudents(studentSelection);
                        System.out.println(StudentList.get(0).name);
                 	   break;
->>>>>>> c661908 (masha edits)
                 	   
                    case 7: 
                 	
@@ -267,11 +250,9 @@ public class App {
              	
                }
            }
-	    scanner.close();
-	    System.out.println("Exiting the University Managament System!);
        }
        
-     public static void EnrollStudent(){
+      public static void EnrollStudent(){
      Course course;
      Semester semester;
      
@@ -290,7 +271,12 @@ public class App {
      
      StudentList.get(StudentNum-1).enrollStudent(semester, course);
     }  	   
+    
+    
     public static void AssignFaculty(){
+
+
+
      Course course;
      Faculty faculty;
      Semester semester;
