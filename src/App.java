@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class App {
 	
     
-    public static ArrayList<Department> departmentList;
-    public static ArrayList<Course> courseList;
-    public static ArrayList<Student> StudentList;
-    public static ArrayList<Faculty> FacultyList;
-    public static ArrayList<Semester> SemesterList;
-    public static ArrayList<Schedule> ScheduleList;
+    public static ArrayList<Department> departmentList = new ArrayList<>();
+    public static ArrayList<Course> courseList = new ArrayList<>();
+    public static ArrayList<Student> StudentList = new ArrayList<>();
+    public static ArrayList<Faculty> FacultyList = new ArrayList<>();
+    public static ArrayList<Semester> SemesterList = new ArrayList<>();
+    public static ArrayList<Schedule> ScheduleList = new ArrayList<>();
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
@@ -19,6 +19,7 @@ public class App {
            boolean exit = false;
            
            while (!exit) {
+        	   System.out.println("\n");
                System.out.println("University Management System");
                System.out.println("\nChoose an option");
                
@@ -155,15 +156,23 @@ public class App {
                 	   break;
                 	   
                    case 6:
-                	   // Edit Student
 
+                       System.out.println("Select Student to edit: " + ShowStudents());
+                       int studentSelection = scanner.nextInt(); 
+                       EditStudents(studentSelection);
+                	   
                 	   break;
                 	   
                    case 7: 
                 	   // Edit Course
                 	   
                    case 8:
-                	   // Edit Faculty
+                	   
+                	   System.out.println("Select Faculty to edit:  " + ShowFaculty());
+                	   int facultySelection = scanner.nextInt();
+                	   EditFaculty(facultySelection);
+                	  
+                        
                 	   
                    case 9:
                 	   
@@ -184,10 +193,10 @@ public class App {
         				break;
         					
         			case 13:
-        				//print a student's enrolled courses in a semester
+        				//print a student's enrolled courses in a semester  - masha
         				break;
         			case 14:
-        				// print a course's enrolled students in a semester
+        				// print a course's enrolled students in a semester  - masha
         				break;
         				
         			case 15:
@@ -274,6 +283,7 @@ public class App {
     public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
     	Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
     	department.FacultyList.add(newFaculty);
+    	FacultyList.add(newFaculty);
     }
     
     public static void createCourse(String prefix, int number, String courseName, int daysWeek,String startTime,String endTime, int numCredits) {
@@ -289,7 +299,7 @@ public class App {
     public static String ShowStudents(){
         String gen = "";
         for(int i = 0; i < StudentList.size(); i ++){
-            gen += "\n" + i+1 + ": " + StudentList.get(i).name;
+            gen += "\n" + (i+1) + ": " + StudentList.get(i).name;
         }
         return gen;
     }
@@ -297,7 +307,7 @@ public class App {
      public static String ShowFaculty(){
         String gen = "";
         for(int i = 0; i < FacultyList.size(); i ++){
-            gen += "\n" + i+1 + ": " + FacultyList.get(i).name;
+            gen += "\n" + (i+1) + ": " + FacultyList.get(i).name;
         }
         return gen;
     }
@@ -330,11 +340,11 @@ public class App {
       }
     
       public static void EditFaculty(int Faculty){
-        String Options = "\nChoose Option:\n1.Name:\n2.Phone Number:\n3.Email:\n4.Building Name:\n5.Office Number:\n6.Position Title:";
-        System.out.print("Select Student to edit:\n" + ShowFaculty() + Options);
+    	  String Options = "\nChoose Option:\n1.Name:\n2.Phone Number:\n3.Email:\n4.Building Name:\n5.Office Number:\n6.Position Title:";
         
         for(int i = 0; i < FacultyList.size(); i ++){
            if(i == Faculty-1){
+        	   
            System.out.print(Options);
            Scanner sc = new Scanner(System.in);
            int Selection = sc.nextInt();
@@ -435,7 +445,7 @@ public class App {
     
      public static void EditStudents(int Student){
         String Options = "\nChoose Option:\n1.Name:\n2.Address:\n3.Email:\n4.GPA:\n5.Contact Name:\n6.Contact Address:\n7.Contact Phone:";
-        System.out.print("Select Student to edit:\n" + ShowStudents() + Options);
+
         
         for(int i = 0; i < StudentList.size(); i ++){
            if(i == Student-1){
@@ -443,7 +453,7 @@ public class App {
            Scanner sc = new Scanner(System.in);
            int Selection = sc.nextInt();
            
-           if(Selection == 1){
+           if(Selection == 1) {
            Scanner Input = new Scanner(System.in);
            String input = Input.nextLine();
            StudentList.get(Student-1).name = input;
