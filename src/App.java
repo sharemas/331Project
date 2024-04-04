@@ -199,10 +199,10 @@ public class App {
         				break;
         				
         			case 11:
-        				// print course in a semester
+        				CourseSemester();
         				break;
         			case 12:
-        				//print courses taught by faculty memeber in a semester 
+        				FacultyCourses();
         				break;
         					
         			case 13:
@@ -251,7 +251,48 @@ public class App {
                }
            }
        }
-       
+
+ public static String FacultyCourses(){
+        String gen = "";
+        Semester semester;
+        Faculty faculty;
+        int count = 0;
+        Scanner Select = new Scanner(System.in);
+        System.out.print("Select Semester:\n" + showSemesters());
+        int SemesterNum = Select.nextInt();
+        semester = SemesterList.get(SemesterNum-1);
+        System.out.print("Select Faculty:\n" + ShowFaculty());
+        int FacultyNum = Select.nextInt();
+        faculty = FacultyList.get(FacultyNum-1); 
+        for(int i = 0; i < ScheduleList.size(); i++){
+        if(faculty == ScheduleList.get(i).faculty && semester == ScheduleList.get(i).semester){
+        count ++;
+        gen += "\n" + count + ":" + ScheduleList.get(i).course.courseName;
+        }
+        }
+        return gen;
+        }
+    
+    
+        public static String CourseSemester(){
+        String gen = "";
+        Semester semester;
+        int count = 0;
+     Scanner Select = new Scanner(System.in);
+     System.out.print("Select Semester:\n" + showSemesters());
+     int SemesterNum = Select.nextInt();
+     semester = SemesterList.get(SemesterNum-1);
+        for(int i = 0; i < ScheduleList.size(); i++){
+        if(semester == ScheduleList.get(i).semester){
+        count ++;
+        gen += "\n" + count + ":" + ScheduleList.get(i).course.courseName;
+        }
+        }
+        return gen;
+        }
+    
+
+	
       public static void EnrollStudent(){
      Course course;
      Semester semester;
