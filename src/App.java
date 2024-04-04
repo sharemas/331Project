@@ -4,19 +4,13 @@ import java.util.Scanner;
 
 public class App {
 	
-	 public List<Department> departmentList;
-	 public List<Course> courseList;
-
-	public App() {
-		  	
-	        departmentList = new ArrayList<>();
-	        courseList = new ArrayList<>();
-	    }
+    public static ArrayList<Department> departmentList;
+    public static ArrayList<Course> courseList;
+    public static ArrayList<Student> StudentList;
 	
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
-    	   App app = new App();
            
            
            boolean exit = false;
@@ -93,7 +87,7 @@ public class App {
                        System.out.println("Enter numbers of credits: ");
                        int numCredits = scanner.nextInt();
                        
-                       app.createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
+                       createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
                        System.out.println("Course created successfully!");
                        break;
                        
@@ -119,7 +113,7 @@ public class App {
                        System.out.println("Enter faculty position: ");
                        String position = scanner.nextLine();
                        
-                       app.createFaculty(facultyName, facultyEmail, buildingName, officeNum, phoneNumber, new Department(department), position);
+                       createFaculty(facultyName, facultyEmail, buildingName, officeNum, phoneNumber, new Department(department), position);
                        System.out.println("Faculty created successully!");
                        break;
                        
@@ -132,12 +126,12 @@ public class App {
            
     
     
-    public void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
+    public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
     	Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
     	department.FacultyList.add(newFaculty);
     }
     
-    public void createCourse(String prefix, int number, String courseName, int daysWeek,String startTime,String endTime, int numCredits) {
+    public static void createCourse(String prefix, int number, String courseName, int daysWeek,String startTime,String endTime, int numCredits) {
     	Course newCourse = new Course(prefix, number, courseName, daysWeek, startTime, endTime, numCredits);
     	courseList.add(newCourse);
     }
