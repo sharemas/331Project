@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
 	
     
-    public static ArrayList<Department> departmentList;
+     public static ArrayList<Department> departmentList;
     public static ArrayList<Course> courseList;
     public static ArrayList<Student> StudentList;
     public static ArrayList<Faculty> FacultyList;
@@ -21,11 +21,11 @@ public class App {
                System.out.println("\nChoose an option");
                System.out.println("1 - Create Student");
                System.out.println("2 - Create Course");
-               System.out.println("3 - Create Faculty");
+              // System.out.println("3 - Create Faculty");
                System.out.println("4 - Create Department");
                System.out.println("5 - Show Faculty by Department");
                System.out.println("6 - Show Departments");
-               System.out.println("7 - Assign Course to Faculty");
+               //System.out.println("7 - Assign Course to Faculty");
                System.out.println("8 - Print Student Enrollement by Course or Sem");
                System.out.println("9 - Print All Student Enrollement");
                System.out.println("10 - Delete Course");
@@ -62,7 +62,8 @@ public class App {
                        System.out.println("Enter student's contact address: ");
                        String contactAddress = scanner.nextLine();
                        
-                      // app.createStudent(name, SSN, address, email, GPA, contactName, contactNumber, contactAddress);
+                       Student student = new Student(name,SSN,address,email,GPA,contactName,contactNumber,contactAddress);
+                       StudentList.add(student);
                        System.out.println("Student created successfully!");
                        break;
                    
@@ -124,9 +125,7 @@ public class App {
        }
        
         	   
-           
-    
-    
+
     public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
     	Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
     	department.FacultyList.add(newFaculty);
