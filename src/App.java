@@ -12,6 +12,8 @@ public class App {
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
+
+
            boolean exit = false;
            while (!exit) {
         	   System.out.println("\n");
@@ -63,7 +65,10 @@ public class App {
                        
                        System.out.println("Enter student's SSN: ");
                        int SSN = scanner.nextInt();
+<<<<<<< HEAD
 		       scanner.nextLine():
+=======
+
                        
                        System.out.println("Enter student's address: ");
                        String address = scanner.nextLine();
@@ -73,8 +78,13 @@ public class App {
                        
                        System.out.println("Enter student's GPA: ");
                        double GPA = scanner.nextDouble();
+<<<<<<< HEAD
 		       scanner.nextLine();
 	
+=======
+                       scanner.nextLine();
+                       
+>>>>>>> c661908 (masha edits)
                        System.out.println("Enter student's contact name: ");
                        String contactName = scanner.nextLine();
                        
@@ -87,6 +97,8 @@ public class App {
                        Student student = new Student(name,SSN,address,email,GPA,contactName,contactNumber,contactAddress);
                        StudentList.add(student);
                        System.out.println("Student created successfully!");
+                       System.out.println(StudentList.get(0).name);
+                       
                        break;
                    
                    case 2: 
@@ -164,26 +176,41 @@ public class App {
                    case 6:
                        System.out.println("Select Student to edit: " + ShowStudents());
                        int studentSelection = scanner.nextInt(); 
+<<<<<<< HEAD
                        EditStudents(studentSelection);                	   
-                       break;
+                	break;
+=======
+                       EditStudents(studentSelection);
+                       System.out.println(StudentList.get(0).name);
+                	   break;
+>>>>>>> c661908 (masha edits)
                 	   
                    case 7: 
-                	String select = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
-                	System.out.print("Select course to edit:\n" + ShowCourses() + select);
+                	
+                	System.out.print("Select course to edit:\n" + ShowCourses());
                         Scanner sc = new Scanner(System.in);
                         int coursenum = sc.nextInt();
                         EditCourse(coursenum);
+                        
+                        break;
                 	   
                    case 8:
                 	   
                 	   System.out.println("Select Faculty to edit:  " + ShowFaculty());
                 	   int facultySelection = scanner.nextInt();
-                	   EditFaculty(facultySelection);	   
+                	   EditFaculty(facultySelection);
+                	   
+                	   break;
+                	  
+                        
+                	   
                    case 9:
                 	   
                 	  AssignFaculty();
-			       break; 
-        	   case 10:
+                	   
+                			   
+        			   break;
+        			case 10:
         				
         				EnrollStudent();
         				break;
@@ -192,14 +219,26 @@ public class App {
         				// print course in a semester
         				break;
         			case 12:
-        				//print courses taught by faculty memeber in a semester
+        				//print courses taught by faculty memeber in a semester 
         				break;
         					
         			case 13:
-        				//print a student's enrolled courses in a semester  - masha
+
+        				System.out.println("Please enter a student: " + ShowStudents());
+        				int studentSelectionforCourse = scanner.nextInt();
+        				System.out.println("Please enter a semester: " + showSemesters());
+        				int semester = scanner.nextInt();
+        				
+        				showStudentEnrollments(studentSelectionforCourse, semester);
+
         				break;
         			case 14:
-        				// print a course's enrolled students in a semester  - masha
+        				System.out.println("Please enter a course: " + ShowCourses());
+        				int courseSelection = scanner.nextInt();
+        				System.out.println("PLease enter a semester: " + showSemesters());
+        				int semesterSelection = scanner.nextInt();
+        				
+        				showCoursesStudents(courseSelection, semesterSelection);
         				break;
         				
         			case 15:
@@ -212,7 +251,7 @@ public class App {
         				
         				// show faculty in each department
         				
-        				 System.out.println("Enter department name: ");
+        			   System.out.println("Enter department name: ");
                   	   String showDepartmentName = scanner.next();
                   	   for (Department currDepartment: departmentList) {
                   		   if (currDepartment.departmentName.equalsIgnoreCase(showDepartmentName)) {
@@ -315,7 +354,7 @@ public class App {
       public static String ShowCourses(){
         String gen = "";
         for(int i = 0; i < courseList.size(); i ++){
-            gen += "\n" + i+1 + ": " + courseList.get(i).courseName;
+            gen += "\n" + (i+1) + ": " + courseList.get(i).courseName;
         }
         return gen;
     }
@@ -396,7 +435,7 @@ public class App {
       
       public static void EditCourse(int Course){
         String Options = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
-        System.out.print("Select Student to edit:\n" + ShowCourses() + Options);
+
         
         for(int i = 0; i < courseList.size(); i ++){
            if(i == Course-1){
@@ -504,7 +543,39 @@ public class App {
            }
         }
     }
+     
+   
+   
+    // need by semester too 
+    public static void showStudentEnrollments(int student, int semester) {
+    	Semester semester = semester
+    	for (Student currStudent: StudentList) {
+    		if (currStudent.GetStudentID() == (student - 1)){
+    			ArrayList<Enrollment> studentEnrollments = currStudent.StudentEnrollments;
+    			int i = 1;
+    			for (Enrollment enrollment : studentEnrollments) {
+    				if (enrollment.semester = )
+    				System.out.println(i+ ": " + enrollment.course.courseName);
+    			}
+    			
+    		}
+    	}
+    	
+    }
     
-    
+    //need by semester too 
+    public static void showCoursesStudents(int course, int semester) {
+    	for (int i = 0; i < courseList.size(); i ++) {
+    		if ((course - 1) == i) {
+    			ArrayList<Student> courseStudents = courseList.get(course - 1).EnrolledStudents;
+    			for (Student currStudent : courseStudents) {
+    				System.out.println(currStudent.name);
+    			}
+    			
+    			
+    		}
+    		
+    	}
+    }
  
 }
