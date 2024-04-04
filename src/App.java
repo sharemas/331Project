@@ -56,12 +56,21 @@ public class App {
                scanner.nextLine();
                
                switch (choice) {
-                   case 1: 
+			       
+		case 0: 
+			exit = true;
+			break;
+			    
+		default: 
+			System.out.println("Invalid choice! Please choose these following option!);
+			break;
+		case 1: 
                        System.out.println("Enter student's name: ");
                        String name = scanner.nextLine();
                        
                        System.out.println("Enter student's SSN: ");
                        int SSN = scanner.nextInt();
+		       scanner.nextLine():
                        
                        System.out.println("Enter student's address: ");
                        String address = scanner.nextLine();
@@ -71,7 +80,8 @@ public class App {
                        
                        System.out.println("Enter student's GPA: ");
                        double GPA = scanner.nextDouble();
-                       
+		       scanner.nextLine();
+	
                        System.out.println("Enter student's contact name: ");
                        String contactName = scanner.nextLine();
                        
@@ -92,12 +102,14 @@ public class App {
                        
                        System.out.println("Enter course number: ");
                        int courseNum = scanner.nextInt();
+		       scanner.nextLine();
                        
                        System.out.println("Enter course name: ");
                        String courseName = scanner.nextLine();
                        
                        System.out.println("Enter numbers of days per week: ");
                        int daysWeek = scanner.nextInt();
+		       scanner.nextLine();
                        
                        System.out.println("Enter start time: ");
                        String startTime = scanner.nextLine();
@@ -107,9 +119,10 @@ public class App {
                        
                        System.out.println("Enter numbers of credits: ");
                        int numCredits = scanner.nextInt();
+		       scanner.nextLine();
                        
                        createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
-                       // Method also adds to courseList
+                       courseList.add(course);
                        System.out.println("Course created successfully!");
                        break;
                        
@@ -125,6 +138,7 @@ public class App {
                        
                        System.out.println("Enter office number: ");
                        int officeNum = scanner.nextInt();
+		       scanner.nextLine();
                        
                        System.out.println("Enter faculty phone number: ");
                        String phoneNumber = scanner.nextLine();
@@ -144,6 +158,7 @@ public class App {
                 	   System.out.println("Enter a new department name: ");
                 	   String departmentName = scanner.next();
                 	   createDepartment(departmentName);
+			   System.out.println("Department created successfully!);
                 	   break;
                 	   
                    case 5:
@@ -229,6 +244,8 @@ public class App {
              	
                }
            }
+	    scanner.close();
+	    System.out.println("Exiting the University Managament System!);
        }
        
       public static void EnrollStudent(){
