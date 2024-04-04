@@ -212,7 +212,53 @@ public class App {
            }
        }
        
-        	   
+      public static void EnrollStudent(){
+     Course course;
+     Semester semester;
+     
+     System.out.print("Select Semester:\n" + showSemesters());
+     Scanner SemesterSelect = new Scanner(System.in);
+     int SemesterNum = SemesterSelect.nextInt();
+     System.out.print("Select student to assign:\n" + ShowStudents());
+     Scanner StudentSelect = new Scanner(System.in);
+     int StudentNum = StudentSelect.nextInt();
+     System.out.print("Select Course to assign to Student:\n" + ShowCourses());
+     Scanner CourseSelect = new Scanner(System.in);
+     int CourseNum = CourseSelect.nextInt();
+     
+     course = courseList.get(CourseNum-1);
+     semester = SemesterList.get(SemesterNum-1);
+     
+     StudentList.get(StudentNum-1).enrollStudent(semester, course);
+    }  	   
+    
+    
+    public static void AssignFaculty(){
+     Course course;
+     Faculty faculty;
+     Semester semester;
+     
+     System.out.print("Select Semester:\n" + showSemesters());
+     Scanner SemesterSelect = new Scanner(System.in);
+     int SemesterNum = SemesterSelect.nextInt();
+     System.out.print("Select faculty to assign:\n" + ShowFaculty());
+     Scanner FacultySelect = new Scanner(System.in);
+     int FacultyNum = FacultySelect.nextInt();
+     System.out.print("Select Course to assign to Faculty:\n" + ShowCourses());
+     Scanner CourseSelect = new Scanner(System.in);
+     int CourseNum = CourseSelect.nextInt();
+     
+     course = courseList.get(CourseNum-1);
+     faculty = FacultyList.get(FacultyNum-1);
+     semester = SemesterList.get(SemesterNum-1);
+     
+     Schedule newSchedule = new Schedule(semester,course,faculty);
+     ScheduleList.add(newSchedule);
+    }  	   
+    public static void createSemester(String DepartmentName){
+    Department newDepartment = new Department(DepartmentName);
+    departmentList.add(newDepartment);
+    }   
 
     public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
     	Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
