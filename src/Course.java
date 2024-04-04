@@ -11,6 +11,7 @@ public class Course {
  public int numCredits;
  
  public ArrayList<Student> EnrolledStudents = new ArrayList<>();
+ 
  public Course(String prefix, int number, String courseName,
         int daysWeek,String startTime,String endTime, int numCredits){
         this.prefix = prefix;

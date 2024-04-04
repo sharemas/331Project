@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class App {
 	
     
-     public static ArrayList<Department> departmentList;
+    public static ArrayList<Department> departmentList;
     public static ArrayList<Course> courseList;
     public static ArrayList<Student> StudentList;
     public static ArrayList<Faculty> FacultyList;
+    public static ArrayList<Semester> SemesterList;
+    public static ArrayList<Schedule> ScheduleList;
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
@@ -144,7 +146,11 @@ public class App {
                 	   break;
                 	   
                    case 5:
-                	   // Create Semester 
+                	   System.out.println("Enter a new semester period: ");
+                	   String period = scanner.next();
+                	   System.out.println("Enter a new semester year: ");
+                	   int year = scanner.nextInt();
+                	   createSemester(period, year);
                 	  
                 	   break;
                 	   
@@ -234,6 +240,9 @@ public class App {
     
     
     public static void AssignFaculty(){
+
+
+
      Course course;
      Faculty faculty;
      Semester semester;
@@ -255,9 +264,11 @@ public class App {
      Schedule newSchedule = new Schedule(semester,course,faculty);
      ScheduleList.add(newSchedule);
     }  	   
-    public static void createSemester(String DepartmentName){
-    Department newDepartment = new Department(DepartmentName);
-    departmentList.add(newDepartment);
+    public static void createSemester(String period, int year){
+    	
+    Semester newSemester = new Semester(period, year);
+    SemesterList.add(newSemester);
+    
     }   
 
     public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
