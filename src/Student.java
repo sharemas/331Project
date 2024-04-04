@@ -1,11 +1,13 @@
 
 
 import java.util.ArrayList;
+import java.util.ArrayList;
 
 
 public class Student {
    public String name;
    private int SSN;
+   private static int Count;
    private int studentID;
    private String address;
    private String email;
@@ -15,18 +17,18 @@ public class Student {
    private String contactAddress;
    public ArrayList<Enrollment> StudentEnrollments = new ArrayList<>();
    
-  public Student(String name, int SSN,int studentID,String address,String email, double GPA,
+  public Student(String name, int SSN,String address,String email, double GPA,
          String contactName, String contactPhoneNumber, String contactAddress){
+         studentID = Count;
          this.name = name;
          this.SSN = SSN;
-         this.studentID = studentID;
          this.address = address;
          this.email = email;
          this.GPA = GPA;
          this.contactName = contactName;
          this.contactPhoneNumber = contactPhoneNumber;
          this.contactAddress = contactAddress;
-         
+         Count ++;
   }
         public void enrollStudent(Semester semester, Course course) {
           course.AddStudent(this, semester);
@@ -92,3 +94,4 @@ public class Student {
     this.contactAddress = contactAddress;
     }
 }
+
