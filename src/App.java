@@ -3,8 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-	
-    
     public static ArrayList<Department> departmentList = new ArrayList<>();
     public static ArrayList<Course> courseList = new ArrayList<>();
     public static ArrayList<Student> StudentList = new ArrayList<>();
@@ -14,10 +12,7 @@ public class App {
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
-           
-           
            boolean exit = false;
-           
            while (!exit) {
         	   System.out.println("\n");
                System.out.println("University Management System");
@@ -55,12 +50,10 @@ public class App {
                int choice = scanner.nextInt();
                scanner.nextLine();
                
-               switch (choice) {
-			       
+               switch (choice) {	       
 		case 0: 
 			exit = true;
-			break;
-			    
+			break;	    
 		default: 
 			System.out.println("Invalid choice! Please choose these following option!);
 			break;
@@ -122,7 +115,6 @@ public class App {
 		       scanner.nextLine();
                        
                        createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
-                       courseList.add(course);
                        System.out.println("Course created successfully!");
                        break;
                        
@@ -155,28 +147,25 @@ public class App {
                        
            
                    case 4: 
-                	   System.out.println("Enter a new department name: ");
-                	   String departmentName = scanner.next();
-                	   createDepartment(departmentName);
-			   System.out.println("Department created successfully!);
-                	   break;
+                	System.out.println("Enter a new department name: ");
+                	String departmentName = scanner.next();
+                	createDepartment(departmentName);
+			System.out.println("Department created successfully!);
+                	break;
                 	   
                    case 5:
-                	   System.out.println("Enter a new semester period: ");
-                	   String period = scanner.next();
-                	   System.out.println("Enter a new semester year: ");
-                	   int year = scanner.nextInt();
-                	   createSemester(period, year);
-                	  
-                	   break;
+                	System.out.println("Enter a new semester period: ");
+                	String period = scanner.next();
+                	System.out.println("Enter a new semester year: ");
+                	int year = scanner.nextInt();
+                	createSemester(period, year);  
+                	break;
                 	   
                    case 6:
-
                        System.out.println("Select Student to edit: " + ShowStudents());
                        int studentSelection = scanner.nextInt(); 
-                       EditStudents(studentSelection);
-                	   
-                	   break;
+                       EditStudents(studentSelection);                	   
+                	break;
                 	   
                    case 7: 
                 	String select = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
@@ -248,7 +237,7 @@ public class App {
 	    System.out.println("Exiting the University Managament System!);
        }
        
-      public static void EnrollStudent(){
+     public static void EnrollStudent(){
      Course course;
      Semester semester;
      
@@ -267,12 +256,7 @@ public class App {
      
      StudentList.get(StudentNum-1).enrollStudent(semester, course);
     }  	   
-    
-    
     public static void AssignFaculty(){
-
-
-
      Course course;
      Faculty faculty;
      Semester semester;
