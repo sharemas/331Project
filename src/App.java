@@ -4,24 +4,20 @@ import java.util.Scanner;
 
 public class App {
 	
+    
     public static ArrayList<Department> departmentList;
     public static ArrayList<Course> courseList;
-    public static ArrayList<Student> StudentList; // we dont have this in the uml but
-	
+    public static ArrayList<Student> StudentList;
+    public static ArrayList<Faculty> FacultyList;
 	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
-    	   departmentList = new ArrayList<>();
-    	   courseList = new ArrayList<>();
-    	   StudentList = new ArrayList<>(); // we dont have this in the uml but
-    		
-    	   
            
            
            boolean exit = false;
            
            while (!exit) {
-        	   System.out.println("University Management System");
+               System.out.println("University Management System");
                System.out.println("\nChoose an option");
                System.out.println("1 - Create Student");
                System.out.println("2 - Create Course");
@@ -141,9 +137,200 @@ public class App {
     	courseList.add(newCourse);
     }
     
+    public static void creatSemester(String DepartmentName){
+    Department newDepartment = new Department(DepartmentName);
+    departmentList.add(newDepartment);
+    }
+    
+    public static String ShowStudents(){
+        String gen = "";
+        for(int i = 0; i < StudentList.size(); i ++){
+            gen += "\n" + i+1 + ": " + StudentList.get(i).name;
+        }
+        return gen;
+    }
+    
+     public static String ShowFaculty(){
+        String gen = "";
+        for(int i = 0; i < FacultyList.size(); i ++){
+            gen += "\n" + i+1 + ": " + FacultyList.get(i).name;
+        }
+        return gen;
+    }
+     
+      public static String ShowCourses(){
+        String gen = "";
+        for(int i = 0; i < courseList.size(); i ++){
+            gen += "\n" + i+1 + ": " + courseList.get(i).courseName;
+        }
+        return gen;
+    }
+    
+      public static void EditFaculty(int Faculty){
+        String Options = "\nChoose Option:\n1.Name:\n2.Phone Number:\n3.Email:\n4.Building Name:\n5.Office Number:\n6.Position Title:";
+        System.out.print("Select Student to edit:\n" + ShowFaculty() + Options);
+        
+        for(int i = 0; i < FacultyList.size(); i ++){
+           if(i == Faculty-1){
+           System.out.print(Options);
+           Scanner sc = new Scanner(System.in);
+           int Selection = sc.nextInt();
+           
+           if(Selection == 1){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           FacultyList.get(Faculty-1).name = input;
+           break;
+           }
+           
+           if(Selection == 2){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           FacultyList.get(Faculty-1).setPhoneNum(input);
+           break;
+           }
+           
+           if(Selection == 3){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           FacultyList.get(Faculty-1).setEmail(input);
+           break;
+           }
+           
+           if(Selection == 4){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           FacultyList.get(Faculty-1).buildingName = input;
+           break;
+           }
+           
+           if(Selection == 5){
+           Scanner Input = new Scanner(System.in);
+           int input = Integer.parseInt(Input.nextLine());
+           FacultyList.get(Faculty-1).officeNum = input;
+           break;
+           }
+           
+           if(Selection == 6){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           FacultyList.get(Faculty-1).position = input;
+           break;
+           }
+           }
+        }
+      }
+      
+      public static void EditCourse(int Course){
+        String Options = "\nChoose Option:\n1.Name:\n2.Start Time:\n3.End Time:\n4.Days per week:\n5.Credits:";
+        System.out.print("Select Student to edit:\n" + ShowCourses() + Options);
+        
+        for(int i = 0; i < courseList.size(); i ++){
+           if(i == Course-1){
+           System.out.print(Options);
+           Scanner sc = new Scanner(System.in);
+           int Selection = sc.nextInt();
+           
+           if(Selection == 1){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           courseList.get(Course-1).courseName = input;
+           break;
+           }
+           
+           if(Selection == 2){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           courseList.get(Course-1).startTime = input;
+           break;
+           }
+            
+           if(Selection == 3){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           courseList.get(Course-1).endTime = input;
+           break;
+           }
+             
+           if(Selection == 4){
+           Scanner Input = new Scanner(System.in);
+           int input = Integer.parseInt(Input.nextLine());
+           courseList.get(Course-1).daysWeek = input;
+           break;
+           }
+              
+           if(Selection == 5){
+           Scanner Input = new Scanner(System.in);
+           int input = Integer.parseInt(Input.nextLine());
+           courseList.get(Course-1).numCredits = input;
+           break;
+           }
+           }
+        }
+      }
     
     
-    
+     public static void EditStudents(int Student){
+        String Options = "\nChoose Option:\n1.Name:\n2.Address:\n3.Email:\n4.GPA:\n5.Contact Name:\n6.Contact Address:\n7.Contact Phone:";
+        System.out.print("Select Student to edit:\n" + ShowStudents() + Options);
+        
+        for(int i = 0; i < StudentList.size(); i ++){
+           if(i == Student-1){
+           System.out.print(Options);
+           Scanner sc = new Scanner(System.in);
+           int Selection = sc.nextInt();
+           
+           if(Selection == 1){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).name = input;
+           break;
+           }
+           
+           if(Selection == 2){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).SetAddress(input);
+           break;
+           }
+           
+            if(Selection == 3){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).SetEmail(input);
+           break;
+           }
+            
+           if(Selection == 4){
+           Scanner Input = new Scanner(System.in);
+           double input = Double.parseDouble(Input.nextLine());
+           StudentList.get(Student-1).GPA = input;
+           break;
+           }
+           
+           if(Selection == 5){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).contactName = input;
+           break;
+           }
+           
+            if(Selection == 6){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).SetContactAddress(input);
+           break;
+           }
+            
+           if(Selection == 7){
+           Scanner Input = new Scanner(System.in);
+           String input = Input.nextLine();
+           StudentList.get(Student-1).SetContactPhone(input);
+           break;
+           }
+           }
+        }
+    }
     
     
  
