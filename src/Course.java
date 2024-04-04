@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-ppublic class Course {
+public class Course {
     
  public String prefix;
  public int number;

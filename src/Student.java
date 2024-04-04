@@ -1,13 +1,10 @@
-
-
-import java.util.ArrayList;
 import java.util.ArrayList;
 
 
 public class Student {
    public String name;
    private int SSN;
-   private static int Count;
+   private static int Count = 0;
    private int studentID;
    private String address;
    private String email;

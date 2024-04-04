@@ -19,19 +19,35 @@ public class App {
            while (!exit) {
                System.out.println("University Management System");
                System.out.println("\nChoose an option");
+               
                System.out.println("1 - Create Student");
                System.out.println("2 - Create Course");
-              // System.out.println("3 - Create Faculty");
+               System.out.println("3 - Create Faculty");
                System.out.println("4 - Create Department");
-               System.out.println("5 - Show Faculty by Department");
-               System.out.println("6 - Show Departments");
+               System.out.println("5 - Create Semester");
+               
+               System.out.println("6 - Edit Student");
+               System.out.println("7 - Edit Course");
+               System.out.println("8 - Edit Faculty");
+               
+               System.out.println("9 - Assign Faculty to a Course");
+               System.out.println("10 - Enroll Student in a Course");
+               System.out.println("11 - Print Courses in a Semester");
+               System.out.println("12 - Print Courses taught by a Faculty member in a Semester");
+               
+               System.out.println("13 - Print a Student's Enrolled Courses in a Semester");
+               System.out.println("14 - Print a Course's Enrolled Students in a Semester");
+               
+               
+              // System.out.println("5 - Show Faculty by Department");
+            //   System.out.println("6 - Show Departments");
                //System.out.println("7 - Assign Course to Faculty");
-               System.out.println("8 - Print Student Enrollement by Course or Sem");
-               System.out.println("9 - Print All Student Enrollement");
-               System.out.println("10 - Delete Course");
-               System.out.println("11 - Delete Faculty");
-               System.out.println("0 - Exit");
-               System.out.print("Enter your choice: ");
+           //    System.out.println("8 - Print Student Enrollement by Course or Sem");
+           //    System.out.println("9 - Print All Student Enrollement");
+            //   System.out.println("10 - Delete Course");
+            //   System.out.println("11 - Delete Faculty");
+            //   System.out.println("0 - Exit");
+            //   System.out.print("Enter your choice: ");
                
                int choice = scanner.nextInt();
                scanner.nextLine();
@@ -90,6 +106,7 @@ public class App {
                        int numCredits = scanner.nextInt();
                        
                        createCourse(prefix, courseNum, courseName, daysWeek, startTime, endTime, numCredits);
+                       // Method also adds to courseList
                        System.out.println("Course created successfully!");
                        break;
                        
@@ -120,6 +137,77 @@ public class App {
                        break;
                        
            
+                   case 4: 
+                	   System.out.println("Enter a new department name: ");
+                	   String departmentName = scanner.next();
+                	   createDepartment(departmentName);
+                	   break;
+                	   
+                   case 5:
+                	   // Create Semester 
+                	  
+                	   break;
+                	   
+                   case 6:
+                	   // Edit Student
+
+                	   break;
+                	   
+                   case 7: 
+                	   // Edit Course
+                	   
+                   case 8:
+                	   // Edit Faculty
+                	   
+                   case 9:
+                	   
+                	   // assign faculty to course 
+                	   
+                			   
+        			   break;
+        			case 10:
+        				
+        				// enroll student in a course 
+        				break;
+        				
+        			case 11:
+        				// print course in a semester
+        				break;
+        			case 12:
+        				//print courses taught by faculty memeber in a semester
+        				break;
+        					
+        			case 13:
+        				//print a student's enrolled courses in a semester
+        				break;
+        			case 14:
+        				// print a course's enrolled students in a semester
+        				break;
+        				
+        			case 15:
+        				
+        				// show all departments
+                 	   showDepartments();
+                 	   break;
+                 	   
+        			case 16:
+        				
+        				// show faculty in each department
+        				
+        				 System.out.println("Enter department name: ");
+                  	   String showDepartmentName = scanner.next();
+                  	   for (Department currDepartment: departmentList) {
+                  		   if (currDepartment.departmentName.equalsIgnoreCase(showDepartmentName)) {
+                  			   ArrayList<Faculty> departmentFaculty = currDepartment.FacultyList;
+                  			   for (Faculty currFaculty: departmentFaculty) {
+                  				   System.out.println(currFaculty.name);
+                  			   }
+                  		   }
+                  	   }
+                  	   
+                  	   break;
+        			
+             	
                }
            }
        }
@@ -136,7 +224,7 @@ public class App {
     	courseList.add(newCourse);
     }
     
-    public static void creatSemester(String DepartmentName){
+    public static void createDepartment(String DepartmentName){
     Department newDepartment = new Department(DepartmentName);
     departmentList.add(newDepartment);
     }
@@ -164,6 +252,25 @@ public class App {
         }
         return gen;
     }
+      
+      public static String showSemesters() {
+    	  String gen = "";
+    	  for (int i = 0; i < SemesterList.size(); i ++) {
+    		  gen += "\n" + i + 1 + ": "+  SemesterList.get(i).period + " " + SemesterList.get(i).year;
+    	  }
+    	  
+    	  return gen;
+      }
+      
+      public static String showDepartments() {
+    	  String gen = "";
+    	  for (int i = 0; i < departmentList.size(); i ++) {
+    		  gen += "\n" + i + 1 + ": "+  departmentList.get(i).departmentName;
+    	  }
+ 
+    	  return gen;
+    	  
+      }
     
       public static void EditFaculty(int Faculty){
         String Options = "\nChoose Option:\n1.Name:\n2.Phone Number:\n3.Email:\n4.Building Name:\n5.Office Number:\n6.Position Title:";
