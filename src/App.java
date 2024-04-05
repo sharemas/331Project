@@ -216,7 +216,7 @@ public class App {
               //        System.out.println(testCourse.courseName + testCourse.prefix + testCourse.number + testCourse.daysWeek + testCourse.startTime + testCourse.endTime + testCourse.numCredits);
                        
                        System.out.println("Course created successfully!");
-                       AssignFaculty();
+                       AssignFaculty(); //assigns a faculty member in order to maintain integrity 
                        break;
                        
                    case 3: 
@@ -533,6 +533,8 @@ public class App {
            }
        }
 //Design for listing course taught by faculty member
+// takes selection for semester and faculty, searches trough the schedule and generates a string of courses
+// based on the objects that are found in the semester/faculty list
     public static String FacultyCourses(){
         	String gen = "";
         	Semester semester;
@@ -596,7 +598,8 @@ public class App {
         return gen;
         }
     
-    //Design course which is taught in this semester
+  //Design course which is taught in this semester, takes an input for semester then assigns that to its respective object type from its list
+ //searches through schedule for courses and genrates string report based on the semester object that was found
     public static String CourseSemester(){
         	String gen = "";
         	Semester semester;
@@ -634,7 +637,9 @@ public class App {
         		}
         return gen;
         }
-    //Facilitate the enrollement process of a student into a course for a specific semester
+   //Facilitate the enrollement process of a student into a course for a specific semester
+ //takes a student and course selection and passes the objects ref of the student/course to enrollment
+// within the student class where it the enrollment object is created and the student added to the course's student list
     public static void EnrollStudent(){
      Course course;
      Semester semester;
@@ -701,6 +706,8 @@ public class App {
     }  	   
     
     //Assigned faculty for the specific course and semester
+//take a selection of course,semester, takes their reference from their list, creates a new schedule object with those values
+	//this method is used whenever a new course is created in order to maintain the applications integrity
     public static void AssignFaculty(){
 
 
@@ -839,6 +846,8 @@ public class App {
     	  
       }
     //Take the selection and allow user to change the faculty information
+	// the corresponding selection is taken from the list and the user is allowed to select which variable to change from the object
+	// only values unrelated to the primary key are alowed to be changed
       public static void EditFaculty(int Faculty){
     	  String Options = "\nChoose Option:\n1.Name\n2.Phone Number\n3.Email\n4.Building Name\n5.Office Number\n6.Position Title";
         
@@ -923,6 +932,8 @@ public class App {
         }
       }
       //Take the selection and allow users to edit/change course information
+// the corresponding selection is taken from the list and the user is allowed to select which variable to change from the object
+	// only values unrelated to the primary key are alowed to be changed
       public static void EditCourse(int Course){
         String Options = "\nChoose Option:\n1.Name\n2.Start Time\n3.End Time\n4.Days per week\n5.Credits";
 
@@ -997,8 +1008,9 @@ public class App {
            }
         }
       }
-    
-    //Take the selection and allow user to edit/change student information
+	// allows the user to select a student from the student list based on the index
+    // the corresponding selection is taken from the list and the user is allowed to select which variable to change from the object
+	// only values unrelated to the primary key are alowed to be changed
      public static void EditStudents(int Student){
         String Options = "\nChoose Option:\n1.Name\n2.Address\n3.Email\n4.GPA\n5.Contact Name\n6.Contact Address\n7.Contact Phone";
 
@@ -1097,6 +1109,8 @@ public class App {
    
    
     // Show student in the certain semester 
+	//takes a student selection and a semester, corresponding to the list index
+	//searches through the student's enrollment lists and generates a string report of the courses
     public static void showStudentEnrollments(int student, int semester) {
     	//Semester semester = semester
     	for (Student currStudent: StudentList) {
@@ -1114,6 +1128,8 @@ public class App {
     }
     
     //Show student taking the certain course at the certain semester
+	//the user selects a course, that is in the courselist, (based on the index value)
+	//the course object displays all of the students in its student list 
     public static void showCoursesStudents(int course, int semester) {
     	for (int i = 0; i < courseList.size(); i ++) {
     		if ((course - 1) == i) {
