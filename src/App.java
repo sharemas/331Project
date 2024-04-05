@@ -3,7 +3,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-	
+	/*
+    Masha Share, Noah Kurtz, Tam Dang
+    
+    The purpose of the program is to allow for the creation of Sudents, Faculty,Course, Semesters
+    and departments, as well as generating reports based on the schedule/enrollements.
+    The program also allows for the assigning of courses to students and faculty.
+
+    
+    */
     
     public static ArrayList<Department> departmentList = new ArrayList<>();
     public static ArrayList<Course> courseList = new ArrayList<>();
