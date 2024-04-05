@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class App {
 	/*
-    Masha Share, Noah Kurtz, Tam Dang
-    
-    The purpose of the program is to allow for the creation of Sudents, Faculty,Course, Semesters
-    and departments, as well as generating reports based on the schedule/enrollements.
+    Team member: Masha Share, Noah Kurtz, Tam Dang
+    Date: April 5, 2024
+    Description: The purpose of the program is to allow for the creation of Sudents, Faculty, Course, Semesters
+    and Departments, as well as generating reports based on the schedule/enrollements. 
     The program also allows for the assigning of courses to students and faculty.
 
     
