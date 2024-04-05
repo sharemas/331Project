@@ -155,6 +155,8 @@ public class App {
                   //     System.out.println(testCourse.courseName + testCourse.prefix + testCourse.number + testCourse.daysWeek + testCourse.startTime + testCourse.endTime + testCourse.numCredits);
                        
                        System.out.println("Course created successfully!");
+
+		      AssignFaculty();       
                        break;
                        
                    case 3: 
