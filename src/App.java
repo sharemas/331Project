@@ -61,16 +61,15 @@ public class App {
                scanner.nextLine();
                
                switch (choice) {
-               
                    case 0:
-                	   exit = true; 
-                	   break;
+                	exit = true; 
+                	break;
                             
 
                    case 1: 
-                	   System.out.println("==================================================================");
-                	   System.out.println("Creating new student");
-                	   System.out.println();
+                       System.out.println("==================================================================");
+                       System.out.println("Creating new student");
+                       System.out.println();
                        System.out.print("Enter student's name: ");
                        String name = scanner.nextLine();
                        System.out.println();
@@ -114,9 +113,9 @@ public class App {
                        break;
                    
                    case 2: 
-                	   System.out.println("==================================================================");
-                	   System.out.println("Creating new course");
-                	   System.out.println();
+                       System.out.println("==================================================================");
+                       System.out.println("Creating new course");
+                       System.out.println();
                        System.out.print("Enter course prefix: ");
                        String prefix = scanner.nextLine();
                        System.out.println();
@@ -159,9 +158,9 @@ public class App {
                        break;
                        
                    case 3: 
-                	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new faculty member");
-                	   System.out.println();
+                	System.out.println("==================================================================");
+                	System.out.println("Creating a new faculty member");
+                	System.out.println();
                        System.out.print("Enter faculty name: ");
                        String facultyName = scanner.nextLine();
                        System.out.println();
@@ -198,81 +197,79 @@ public class App {
                        
            
                    case 4: 
-                	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new department");
-                	   System.out.println();
-                	   System.out.print("Enter a new department name: ");
-                	   String departmentName = scanner.next();
-                	   createDepartment(departmentName);
-                	   System.out.println("Department created successully!");
+                       
+                	System.out.println("==================================================================");
+                	System.out.println("Creating a new department");
+                	System.out.println();
+                	System.out.print("Enter a new department name: ");
+                	String departmentName = scanner.next();
+                	createDepartment(departmentName);
+                	System.out.println("Department created successully!");
               //  	   Department testDepartment = departmentList.get(0);
              //   	   System.out.println(testDepartment.departmentName);
-                	   break;
+                	break;
                 	   
                    case 5:
-                	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new semester");
-                	   System.out.println();
-                	   System.out.print("Enter a new semester period: ");
-                	   String period = scanner.next();
-                	   System.out.print("Enter a new semester year: ");
-                	   int year = scanner.nextInt();
-                	   createSemester(period, year);
-                	   System.out.println("Semester created successully!");
+                	System.out.println("==================================================================");
+                	System.out.println("Creating a new semester");
+                	System.out.println();
+                	System.out.print("Enter a new semester period: ");
+                	String period = scanner.next();
+                	System.out.print("Enter a new semester year: ");
+                	int year = scanner.nextInt();
+                	createSemester(period, year);
+                	System.out.println("Semester created successully!");
                 	 //  Semester testSemester = SemesterList.get(0);
                      //  System.out.println(testSemester.period + testSemester.year);
-                	   break;
+                	break;
                 	   
                    case 6:
-                	   System.out.println("==================================================================");
-                	   System.out.println("Editing a student");
-                	   System.out.println();
-                       System.out.println("Select Student to edit: " + ShowStudents());
-                       int studentSelection = scanner.nextInt(); 
-                       EditStudents(studentSelection);
-                	   break;
-                	   
-                   case 7: 
-                	   System.out.println("==================================================================");
-                	   System.out.println("Editing a course");
-                	   System.out.println();
-                	   	System.out.println("Select course to edit:" + ShowCourses());
-                        Scanner sc = new Scanner(System.in);
-                        int coursenum = sc.nextInt();
-                        EditCourse(coursenum);
-                        
+                	System.out.println("==================================================================");
+                	System.out.println("Editing a student");
+                	System.out.println();
+                        System.out.println("Select Student to edit: " + ShowStudents());
+                        int studentSelection = scanner.nextInt(); 
+                        EditStudents(studentSelection);
                         break;
                 	   
+                   case 7: 
+                	System.out.println("==================================================================");
+                	System.out.println("Editing a course");
+                	System.out.println();
+                	System.out.println("Select course to edit:" + ShowCourses());
+                        int coursenum = scanner.nextInt();
+                        EditCourse(coursenum);
+                        break;   
                    case 8:
-                	   System.out.println("==================================================================");
-                	   System.out.println("Editing a faculty member");
-                	   System.out.println();
-                	   
-                	   System.out.println("Select faculty to edit:  " + ShowFaculty());
-                	   int facultySelection = scanner.nextInt();
-                	   EditFaculty(facultySelection);      	   
-                	   break;
+                	System.out.println("==================================================================");
+                	System.out.println("Editing a faculty member");
+                	System.out.println();                	   
+                	System.out.println("Select faculty to edit:  " + ShowFaculty());
+                	int facultySelection = scanner.nextInt();
+                	EditFaculty(facultySelection);      	   
+                	break;
 	   
                    case 9:
-                	   System.out.println("==================================================================");
-                	   System.out.println("Assigning a faculty member to a course");
-                	   System.out.println(); 
-                	   AssignFaculty();
-        			   break;
-        			case 10:
-        				System.out.println("==================================================================");
-                 	    System.out.println("Enrolling a student in a course");
-        				EnrollStudent();
-        				break;
-        				
-        			case 11:
-        				System.out.println(CourseSemester());
-        				break;
-        			case 12:
-        				System.out.println("==================================================================");
-        				System.out.println("Printing courses taught by a faculty member");
-        				System.out.print(FacultyCourses());
-        				break;
+                	System.out.println("==================================================================");
+                	System.out.println("Assigning a faculty member to a course");
+                	System.out.println(); 
+                	AssignFaculty();
+                        break;
+        			   
+        	    case 10:
+                        System.out.println("==================================================================");
+                        System.out.println("Enrolling a student in a course");
+                        EnrollStudent();
+                        break; 
+                    case 11: 
+                        System.out.println(CourseSemester());
+                        break;
+                    case 12: 
+                        System.out.println("==================================================================");
+                        System.out.println("Printing course taught by a faculty member");
+                        System.out.println(FacultyCourses());
+			       
+
         					
         			case 13:
 
