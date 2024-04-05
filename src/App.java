@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class App {
 	/*
-    Team member: Masha Share, Noah Kurtz, Tam Dang
-    Date: April 5, 2024
-    Description: The purpose of the program is to allow for the creation of Sudents, Faculty, Course, Semesters
-    and Departments, as well as generating reports based on the schedule/enrollements. 
+    Masha Share, Noah Kurtz, Tam Dang
+    
+    The purpose of the program is to allow for the creation of Sudents, Faculty,Course, Semesters
+    and departments, as well as generating reports based on the schedule/enrollements.
     The program also allows for the assigning of courses to students and faculty.
 
     
@@ -19,7 +19,7 @@ public class App {
     public static ArrayList<Faculty> FacultyList = new ArrayList<>();
     public static ArrayList<Semester> SemesterList = new ArrayList<>();
     public static ArrayList<Schedule> ScheduleList = new ArrayList<>();
-	
+	// creates static arrays to hold objects
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
     	   // for testing 
@@ -33,7 +33,7 @@ public class App {
     	  // end testing stuff
            boolean exit = false;
            
-           while (!exit) {
+           while (!exit) {//starts program
         	   System.out.println("==================================================================");
                System.out.printf("%s", "University Management System");
                System.out.printf("%s","\nChoose an option\n");
@@ -130,7 +130,7 @@ public class App {
                        System.out.print("Enter student's contact address: ");
                        String contactAddress = scanner.nextLine();
                        System.out.println();
-                       
+                       //create student object from inputs and add to list
                        Student student = new Student(name,SSN,address,email,GPA,contactName,contactNumber,contactAddress);
                        StudentList.add(student);
              //          Student studentTest = StudentList.get(StudentList.size() - 1);
@@ -211,6 +211,7 @@ public class App {
               //        System.out.println(testCourse.courseName + testCourse.prefix + testCourse.number + testCourse.daysWeek + testCourse.startTime + testCourse.endTime + testCourse.numCredits);
                        
                        System.out.println("Course created successfully!");
+			       // crete course using inputs, immediately has a faculty assigned in order to maintain integrity
 			AssignFaculty();
                        break;
                        
@@ -256,7 +257,7 @@ public class App {
                        //Create department later be use in trading faculty
                        Department facultyDepartment = null; 
                       
-                       if (departmentList.isEmpty()) {
+                       if (departmentList.isEmpty()) { //checks if there are no departments & has the user create one to assign faculty too
                     	   System.out.println("No departments found, please create a new one");
                     	   System.out.print("Please enter department name: ");
                     	   String departmentName = scanner.nextLine();
@@ -270,7 +271,7 @@ public class App {
                                System.out.println((i + 1) + ": " + currDepartment.departmentName);
                            }
                     	   
-                    	   int departmentIndex = -1;
+                    	   int departmentIndex = -1; 
                            while (departmentIndex < 0 || departmentIndex >= departmentList.size()) {
                              
                                if (scanner.hasNextInt()) {
@@ -291,7 +292,7 @@ public class App {
                        System.out.print("Enter faculty position: ");
                        String position = scanner.nextLine();
                        System.out.println();
-   
+   			// creates faculty based on validated inputs & department
                        createFaculty(facultyName, facultyEmail, buildingName, officeNum, phoneNumber, facultyDepartment, position);
                        System.out.println("Faculty created successully!");
                        break;
@@ -299,7 +300,7 @@ public class App {
            
                    case 4: 
                 	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new department");
+                	   System.out.println("Creating a new department"); //allows for the creation of new deparments
                 	   System.out.println();
                 	   System.out.print("Enter a new department name: ");
                 	   String departmentName = scanner.next();
@@ -311,7 +312,7 @@ public class App {
                 	   
                    case 5:
                 	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new semester");
+                	   System.out.println("Creating a new semester"); //allows for the creation of semesters
                 	   System.out.println();
                 	   System.out.print("Enter a new semester period: ");
                 	   String period = scanner.next();
@@ -336,7 +337,7 @@ public class App {
                 	   
                    case 6:
                 	System.out.println("==================================================================");
-                	System.out.println("Editing a student");
+                	System.out.println("Editing a student"); //allows for the editing of students, displays students and then takes input
                 	System.out.println();
                     System.out.println("Select Student to edit: " + ShowStudents());
                     int studentSelection = 0;
@@ -364,7 +365,7 @@ public class App {
                    case 7: 
                 	System.out.println("==================================================================");
                 	System.out.println("Editing a course");
-                	System.out.println();
+                	System.out.println();  //allows for editing of courses, first shows a list & takes selection
                 	System.out.println("Select Course to edit: " + ShowCourses());
                 	   int courseSelection = 0;
 
@@ -390,7 +391,7 @@ public class App {
 
                    case 8:
                 	System.out.println("==================================================================");
-                	System.out.println("Editing a faculty member");
+                	System.out.println("Editing a faculty member"); //allows for the editing of faculty, diplays faculty and takes selection
                 	System.out.println();                	   
                 	System.out.println("Select faculty to edit:  " + ShowFaculty());
                 	 int facultySelection = 0;
@@ -416,14 +417,14 @@ public class App {
 	   
                    case 9:
                 	System.out.println("==================================================================");
-                	System.out.println("Assigning a faculty member to a course");
+                	System.out.println("Assigning a faculty member to a course"); //assign faculty
                 	System.out.println(); 
                 	AssignFaculty();
                         break;
         			   
         	    case 10:
                         System.out.println("==================================================================");
-                        System.out.println("Enrolling a student in a course");
+                        System.out.println("Enrolling a student in a course"); //enroll student
                         EnrollStudent();
                         break; 
                     case 11: 
@@ -431,18 +432,18 @@ public class App {
                         break;
                     case 12: 
                         System.out.println("==================================================================");
-                        System.out.println("Printing course taught by a faculty member");
+                        System.out.println("Printing course taught by a faculty member"); //prints course - faculty report
                         System.out.println(FacultyCourses());
 			break;
 		     case 13: 
-                        System.out.println("Please enter a student: " + ShowStudents());
+                        System.out.println("Please enter a student: " + ShowStudents()); //shows the enrollments for a given student/semester
                         int studentSelectionforCourse = scanner.nextInt();
                         System.out.println("Please enter a semester: " + showSemesters());
                         int semester = scanner.nextInt();
                         showStudentEnrollments(studentSelectionforCourse, semester);
                         break;
                     case 14: 
-                        System.out.println("Please enter a course: " + ShowCourses());
+                        System.out.println("Please enter a course: " + ShowCourses()); // shows enrollments for 
                         int courseSelection2 = scanner.nextInt();
                         System.out.println("Please enter a semester: " + showSemesters());
                         int semesterSelection = scanner.nextInt();
