@@ -268,56 +268,42 @@ public class App {
                         System.out.println("==================================================================");
                         System.out.println("Printing course taught by a faculty member");
                         System.out.println(FacultyCourses());
-			       
-
-        					
-        			case 13:
-
-        				System.out.println("Please enter a student: " + ShowStudents());
-        				int studentSelectionforCourse = scanner.nextInt();
-        				System.out.println("Please enter a semester: " + showSemesters());
-        				int semester = scanner.nextInt();
-        				
-        				showStudentEnrollments(studentSelectionforCourse, semester);
-
-        				break;
-        			case 14:
-        				System.out.println("Please enter a course: " + ShowCourses());
-        				int courseSelection = scanner.nextInt();
-        				System.out.println("PLease enter a semester: " + showSemesters());
-        				int semesterSelection = scanner.nextInt();
-        				
-        				showCoursesStudents(courseSelection, semesterSelection);
-        				break;
-        				
-        			case 15:
-        				
-        				// show all departments
-                 	   showDepartments();
-                 	   break;
-                 	   
-        			case 16:
-        				
-        				// show faculty in each department
-        				
-        			   System.out.println("Enter department name: ");
-                  	   String showDepartmentName = scanner.next();
-                  	   for (Department currDepartment: departmentList) {
-                  		   if (currDepartment.departmentName.equalsIgnoreCase(showDepartmentName)) {
-                  			   ArrayList<Faculty> departmentFaculty = currDepartment.FacultyList;
-                  			   for (Faculty currFaculty: departmentFaculty) {
-                  				   System.out.println(currFaculty.name);
-                  			   }
-                  		   }
-                  	   }
-                  	   
-                  	   break;
-        			
-             	
-               
-        			default: 
-        				System.out.println("Invalid choice. Please enter a number between 0 and 14.");
-        				break;
+			break;
+		     case 13: 
+                        System.out.println("Please enter a student: " + ShowStudents());
+                        int studentSelectionforCourse = scanner.nextInt();
+                        System.out.println("Please enter a semester: " + showSemesters());
+                        int semester = scanner.nextInt();
+                        showStudentEnrollments(studentSelectionforCourse, semester);
+                        break;
+                    case 14: 
+                        System.out.println("Please enter a course: " + ShowCourses());
+                        int courseSelection = scanner.nextInt();
+                        System.out.println("Please enter a semester: " + showSemesters());
+                        int semesterSelection = scanner.nextInt();
+                        showCoursesStudents(courseSelection, semesterSelection);
+                        break;
+                    case 15: 
+                        showDepartments();
+                        break;
+                    case 16: 
+                        System.out.println("Enter department name: ");
+                        String showDepartmentName = scanner.next();
+                        for (Department currDepartment : departmentList)
+                        {
+                          if (currDepartment.departmentName.equalsIgnoreCase(showDepartmentName))
+                          {
+                            ArrayList<Faculty> departmentFaculty = currDepartment.FacultyList;
+                            for (Faculty currFaculty: departmentFaculty)
+                            {
+                                System.out.println(currFaculty.name);
+                            }    
+                          }
+                        }
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a number between 0 and 14.");
+                        break;       
                }
            }
        }
