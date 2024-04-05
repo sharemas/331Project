@@ -307,7 +307,7 @@ public class App {
                }
            }
        }
-
+//Design for listing course taught by faculty member
     public static String FacultyCourses(){
         	String gen = "";
         	Semester semester;
@@ -335,7 +335,7 @@ public class App {
         }
         return gen;
         }
-    
+    //Design course which is taught in this semester
     public static String CourseSemester(){
         	String gen = "";
         	Semester semester;
@@ -352,7 +352,7 @@ public class App {
         		}
         return gen;
         }
-    
+    //Facilitate the enrollement process of a student into a course for a specific semester
     public static void EnrollStudent(){
      Course course;
      Semester semester;
@@ -374,7 +374,7 @@ public class App {
      StudentList.get(StudentNum-1).enrollStudent(semester, course);
     }  	   
     
-    
+    //Assigned faculty for the specific course and semester
     public static void AssignFaculty(){
 
 
@@ -401,30 +401,31 @@ public class App {
      System.out.println("Successfully assigned "+  faculty.name + " to teach " + course.prefix + " " + course.number);
  
     }  	   
-    
+    //Stored all the semesters in the system
     public static void createSemester(String period, int year){
     	
     Semester newSemester = new Semester(period, year);
     SemesterList.add(newSemester);
     
-    }   
-
+    }  
+    //Creating a new faculty member within the system and associate that faculty to the specific department
     public static void createFaculty(String name, String email, String buildingName, int officeNum, String phoneNum, Department department, String position) {
-    	Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
-    	department.FacultyList.add(newFaculty);
-    	FacultyList.add(newFaculty);
+    Faculty newFaculty = new Faculty(name, email, buildingName, officeNum,  phoneNum,  department,  position);
+    department.FacultyList.add(newFaculty);
+    FacultyList.add(newFaculty);
     }
     
+    // Creating new courses and adding that the current course list
     public static void createCourse(String prefix, int number, String courseName, int daysWeek,String startTime,String endTime, int numCredits) {
     	Course newCourse = new Course(prefix, number, courseName, daysWeek, startTime, endTime, numCredits);
     	courseList.add(newCourse);
     }
-    
+    //Creating new department and additing that to the current department list
     public static void createDepartment(String DepartmentName){
     Department newDepartment = new Department(DepartmentName);
     departmentList.add(newDepartment);
     }
-    
+   //Display the string of students 
     public static String ShowStudents(){
         String gen = "";
         for(int i = 0; i < StudentList.size(); i ++){
@@ -432,7 +433,7 @@ public class App {
         }
         return gen;
     }
-    
+    //Display the string of faculty
      public static String ShowFaculty(){
         String gen = "";
         for(int i = 0; i < FacultyList.size(); i ++){
@@ -440,7 +441,7 @@ public class App {
         }
         return gen;
     }
-     
+     //Display the string of courses
       public static String ShowCourses(){
         String gen = "";
         for(int i = 0; i < courseList.size(); i ++){
@@ -448,7 +449,7 @@ public class App {
         }
         return gen;
     }
-      
+    //Display the string for semester  
       public static String showSemesters() {
     	  String gen = "";
     	  for (int i = 0; i < SemesterList.size(); i ++) {
@@ -457,7 +458,7 @@ public class App {
     	  
     	  return gen;
       }
-      
+     //Display the string for department 
       public static String showDepartments() {
     	  String gen = "";
     	  for (int i = 0; i < departmentList.size(); i ++) {
@@ -467,7 +468,7 @@ public class App {
     	  return gen;
     	  
       }
-    
+    //Take the selection and allow user to change the faculty information
       public static void EditFaculty(int Faculty){
     	  String Options = "\nChoose Option:\n1.Name\n2.Phone Number\n3.Email\n4.Building Name\n5.Office Number\n6.Position Title";
         
@@ -534,7 +535,7 @@ public class App {
            }
         }
       }
-      
+      //Take the selection and allow users to edit/change course information
       public static void EditCourse(int Course){
         String Options = "\nChoose Option:\n1.Name\n2.Start Time\n3.End Time\n4.Days per week\n5.Credits:";
 
@@ -593,7 +594,7 @@ public class App {
         }
       }
     
-    
+    //Take the selection and allow user to edit/change student information
      public static void EditStudents(int Student){
         String Options = "\nChoose Option:\n1.Name\n2.Address\n3.Email\n4.GPA\n5.Contact Name\n6.Contact Address\n7.Contact Phone";
 
@@ -674,7 +675,7 @@ public class App {
      
    
    
-    // need by semester too 
+    // Show student in the certain semester 
     public static void showStudentEnrollments(int student, int semester) {
     	//Semester semester = semester
     	for (Student currStudent: StudentList) {
@@ -691,7 +692,7 @@ public class App {
     	
     }
     
-    //need by semester too 
+    //Show student taking the certain course at the certain semester
     public static void showCoursesStudents(int course, int semester) {
     	for (int i = 0; i < courseList.size(); i ++) {
     		if ((course - 1) == i) {
