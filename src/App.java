@@ -61,7 +61,7 @@ public class App {
                scanner.nextLine();
                
                switch (choice) {
-                   case 0:
+                   case 15:
                 	exit = true; 
                 	break;
                             
@@ -329,26 +329,80 @@ public class App {
                 	System.out.println("==================================================================");
                 	System.out.println("Editing a student");
                 	System.out.println();
-                        System.out.println("Select Student to edit: " + ShowStudents());
-                        int studentSelection = scanner.nextInt(); 
-                        EditStudents(studentSelection);
+                    System.out.println("Select Student to edit: " + ShowStudents());
+                    int studentSelection = 0;
+
+                    while (true) {
+                        try {
+                            studentSelection = scanner.nextInt();
+                            scanner.nextLine(); 
+                            
+                            if (studentSelection < 1 || studentSelection > StudentList.size()) {
+                                System.out.println("Please select a student from the list.");
+                                continue; 
+                            }
+                            
+                            EditStudents(studentSelection);
+                            break; 
+                        } catch (java.util.InputMismatchException e) {
+                            System.out.println("Please enter a valid integer for the student selection.");
+                            scanner.nextLine(); 
+                        }
+                    }
+                        
                         break;
-                	   
+                    
                    case 7: 
                 	System.out.println("==================================================================");
                 	System.out.println("Editing a course");
                 	System.out.println();
-                	System.out.println("Select course to edit:" + ShowCourses());
-                        int coursenum = scanner.nextInt();
-                        EditCourse(coursenum);
-                        break;   
+                	System.out.println("Select Course to edit: " + ShowCourses());
+                	   int courseSelection = 0;
+
+                       while (true) {
+                           try {
+                               courseSelection = scanner.nextInt();
+                               scanner.nextLine(); 
+                               
+                               if (courseSelection < 1 || courseSelection > courseList.size()) {
+                                   System.out.println("Please select a course from the list.");
+                                   continue; 
+                               }
+                               
+                               EditCourse(courseSelection);
+                               break; 
+                           } catch (java.util.InputMismatchException e) {
+                               System.out.println("Please enter a valid integer for the course selection.");
+                               scanner.nextLine(); 
+                           }
+                       }
+                       break;
+                   
+
                    case 8:
                 	System.out.println("==================================================================");
                 	System.out.println("Editing a faculty member");
                 	System.out.println();                	   
                 	System.out.println("Select faculty to edit:  " + ShowFaculty());
-                	int facultySelection = scanner.nextInt();
-                	EditFaculty(facultySelection);      	   
+                	 int facultySelection = 0;
+
+                     while (true) {
+                         try {
+                             facultySelection = scanner.nextInt();
+                             scanner.nextLine();
+                             
+                             if (facultySelection < 1 || facultySelection > FacultyList.size()) {
+                                 System.out.println("Please select a faculty from the list");
+                                 continue; 
+                             }
+                             
+                             EditFaculty(facultySelection);
+                             break; 
+                         } catch (java.util.InputMismatchException e) {
+                             System.out.println("Please enter a valid integer for the faculty selection.");
+                             scanner.nextLine(); 
+                     }    	
+                     }
                 	break;
 	   
                    case 9:
@@ -380,29 +434,12 @@ public class App {
                         break;
                     case 14: 
                         System.out.println("Please enter a course: " + ShowCourses());
-                        int courseSelection = scanner.nextInt();
+                        int courseSelection2 = scanner.nextInt();
                         System.out.println("Please enter a semester: " + showSemesters());
                         int semesterSelection = scanner.nextInt();
-                        showCoursesStudents(courseSelection, semesterSelection);
+                        showCoursesStudents(courseSelection2, semesterSelection);
                         break;
-                    case 15: 
-                        showDepartments();
-                        break;
-                    case 16: 
-                        System.out.println("Enter department name: ");
-                        String showDepartmentName = scanner.next();
-                        for (Department currDepartment : departmentList)
-                        {
-                          if (currDepartment.departmentName.equalsIgnoreCase(showDepartmentName))
-                          {
-                            ArrayList<Faculty> departmentFaculty = currDepartment.FacultyList;
-                            for (Faculty currFaculty: departmentFaculty)
-                            {
-                                System.out.println(currFaculty.name);
-                            }    
-                          }
-                        }
-                        break;
+                    
                     default:
                         System.out.println("Invalid choice. Please enter a number between 0 and 14.");
                         break;       
