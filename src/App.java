@@ -3,15 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-	/*
-    Masha Share, Noah Kurtz, Tam Dang
-    
-    The purpose of the program is to allow for the creation of Sudents, Faculty,Course, Semesters
-    and departments, as well as generating reports based on the schedule/enrollements.
-    The program also allows for the assigning of courses to students and faculty.
-
-    
-    */
+	
     
     public static ArrayList<Department> departmentList = new ArrayList<>();
     public static ArrayList<Course> courseList = new ArrayList<>();
@@ -19,7 +11,7 @@ public class App {
     public static ArrayList<Faculty> FacultyList = new ArrayList<>();
     public static ArrayList<Semester> SemesterList = new ArrayList<>();
     public static ArrayList<Schedule> ScheduleList = new ArrayList<>();
-	// creates static arrays to hold objects
+	
     public static void main(String[] args) throws Exception {
     	   Scanner scanner = new Scanner(System.in);
     	   // for testing 
@@ -33,7 +25,7 @@ public class App {
     	  // end testing stuff
            boolean exit = false;
            
-           while (!exit) {//starts program
+           while (!exit) {
         	   System.out.println("==================================================================");
                System.out.printf("%s", "University Management System");
                System.out.printf("%s","\nChoose an option\n");
@@ -58,12 +50,6 @@ public class App {
                System.out.printf("%2d%s",15,"-Exit\n");
                System.out.println();
                System.out.printf("%2s","Enter your choice: \n");
-              
-               
-               
-               
-              // System.out.println("5 - Show Faculty by Department");
-              //   System.out.println("6 - Show Departments");
 
                int choice = scanner.nextInt();
                scanner.nextLine();
@@ -130,7 +116,7 @@ public class App {
                        System.out.print("Enter student's contact address: ");
                        String contactAddress = scanner.nextLine();
                        System.out.println();
-                       //create student object from inputs and add to list
+                       
                        Student student = new Student(name,SSN,address,email,GPA,contactName,contactNumber,contactAddress);
                        StudentList.add(student);
              //          Student studentTest = StudentList.get(StudentList.size() - 1);
@@ -211,8 +197,7 @@ public class App {
               //        System.out.println(testCourse.courseName + testCourse.prefix + testCourse.number + testCourse.daysWeek + testCourse.startTime + testCourse.endTime + testCourse.numCredits);
                        
                        System.out.println("Course created successfully!");
-			       // crete course using inputs, immediately has a faculty assigned in order to maintain integrity
-			AssignFaculty();
+                       AssignFaculty();
                        break;
                        
                    case 3: 
@@ -254,10 +239,10 @@ public class App {
                        System.out.print("Select a number to enter faculty department: ");
                        
                        System.out.println();
-                       //Create department later be use in trading faculty
+                       
                        Department facultyDepartment = null; 
                       
-                       if (departmentList.isEmpty()) { //checks if there are no departments & has the user create one to assign faculty too
+                       if (departmentList.isEmpty()) {
                     	   System.out.println("No departments found, please create a new one");
                     	   System.out.print("Please enter department name: ");
                     	   String departmentName = scanner.nextLine();
@@ -271,7 +256,7 @@ public class App {
                                System.out.println((i + 1) + ": " + currDepartment.departmentName);
                            }
                     	   
-                    	   int departmentIndex = -1; 
+                    	   int departmentIndex = -1;
                            while (departmentIndex < 0 || departmentIndex >= departmentList.size()) {
                              
                                if (scanner.hasNextInt()) {
@@ -292,7 +277,7 @@ public class App {
                        System.out.print("Enter faculty position: ");
                        String position = scanner.nextLine();
                        System.out.println();
-   			// creates faculty based on validated inputs & department
+   
                        createFaculty(facultyName, facultyEmail, buildingName, officeNum, phoneNumber, facultyDepartment, position);
                        System.out.println("Faculty created successully!");
                        break;
@@ -300,7 +285,7 @@ public class App {
            
                    case 4: 
                 	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new department"); //allows for the creation of new deparments
+                	   System.out.println("Creating a new department");
                 	   System.out.println();
                 	   System.out.print("Enter a new department name: ");
                 	   String departmentName = scanner.next();
@@ -312,7 +297,7 @@ public class App {
                 	   
                    case 5:
                 	   System.out.println("==================================================================");
-                	   System.out.println("Creating a new semester"); //allows for the creation of semesters
+                	   System.out.println("Creating a new semester");
                 	   System.out.println();
                 	   System.out.print("Enter a new semester period: ");
                 	   String period = scanner.next();
@@ -337,7 +322,7 @@ public class App {
                 	   
                    case 6:
                 	System.out.println("==================================================================");
-                	System.out.println("Editing a student"); //allows for the editing of students, displays students and then takes input
+                	System.out.println("Editing a student");
                 	System.out.println();
                     System.out.println("Select Student to edit: " + ShowStudents());
                     int studentSelection = 0;
@@ -365,7 +350,7 @@ public class App {
                    case 7: 
                 	System.out.println("==================================================================");
                 	System.out.println("Editing a course");
-                	System.out.println();  //allows for editing of courses, first shows a list & takes selection
+                	System.out.println();
                 	System.out.println("Select Course to edit: " + ShowCourses());
                 	   int courseSelection = 0;
 
@@ -391,7 +376,7 @@ public class App {
 
                    case 8:
                 	System.out.println("==================================================================");
-                	System.out.println("Editing a faculty member"); //allows for the editing of faculty, diplays faculty and takes selection
+                	System.out.println("Editing a faculty member");
                 	System.out.println();                	   
                 	System.out.println("Select faculty to edit:  " + ShowFaculty());
                 	 int facultySelection = 0;
@@ -417,14 +402,14 @@ public class App {
 	   
                    case 9:
                 	System.out.println("==================================================================");
-                	System.out.println("Assigning a faculty member to a course"); //assign faculty
+                	System.out.println("Assigning a faculty member to a course");
                 	System.out.println(); 
                 	AssignFaculty();
                         break;
         			   
         	    case 10:
                         System.out.println("==================================================================");
-                        System.out.println("Enrolling a student in a course"); //enroll student
+                        System.out.println("Enrolling a student in a course");
                         EnrollStudent();
                         break; 
                     case 11: 
@@ -432,18 +417,18 @@ public class App {
                         break;
                     case 12: 
                         System.out.println("==================================================================");
-                        System.out.println("Printing course taught by a faculty member"); //prints course - faculty report
+                        System.out.println("Printing course taught by a faculty member");
                         System.out.println(FacultyCourses());
 			break;
 		     case 13: 
-                        System.out.println("Please enter a student: " + ShowStudents()); //shows the enrollments for a given student/semester
+                        System.out.println("Please enter a student: " + ShowStudents());
                         int studentSelectionforCourse = scanner.nextInt();
                         System.out.println("Please enter a semester: " + showSemesters());
                         int semester = scanner.nextInt();
                         showStudentEnrollments(studentSelectionforCourse, semester);
                         break;
                     case 14: 
-                        System.out.println("Please enter a course: " + ShowCourses()); // shows enrollments for 
+                        System.out.println("Please enter a course: " + ShowCourses());
                         int courseSelection2 = scanner.nextInt();
                         System.out.println("Please enter a semester: " + showSemesters());
                         int semesterSelection = scanner.nextInt();
@@ -484,6 +469,7 @@ public class App {
         }
         return gen;
         }
+    
     //Design course which is taught in this semester
     public static String CourseSemester(){
         	String gen = "";
@@ -506,21 +492,65 @@ public class App {
      Course course;
      Semester semester;
      
-     System.out.println("Select Semester:\n" + showSemesters());
-     Scanner SemesterSelect = new Scanner(System.in);
-     int SemesterNum = SemesterSelect.nextInt();
+     Scanner scanner = new Scanner(System.in);
      
-     System.out.println("Select student to assign:\n" + ShowStudents());
-     Scanner StudentSelect = new Scanner(System.in);
-     int StudentNum = StudentSelect.nextInt();
-     System.out.println("Select Course to assign to Student:\n" + ShowCourses());
-     Scanner CourseSelect = new Scanner(System.in);
-     int CourseNum = CourseSelect.nextInt();
+     int semesterNum = 0;
+     int courseNum = 0;
+     int studentNum = 0;
      
-     course = courseList.get(CourseNum-1);
-     semester = SemesterList.get(SemesterNum-1);
+     //for semester 
+     while (true) {
+         try {
+             System.out.println("Select Semester:\n" + showSemesters());
+             semesterNum = scanner.nextInt();
+             if (semesterNum < 1 || semesterNum > SemesterList.size()) {
+                 System.out.println("Please enter a valid semester number.");
+                 continue; 
+             }
+             break; 
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the semester selection.");
+             scanner.nextLine(); 
+         }
+     }
      
-     StudentList.get(StudentNum-1).enrollStudent(semester, course);
+     // for student selection
+     while (true) {
+         try {
+             System.out.println("Select a Student to assign:\n" + ShowStudents());
+             studentNum = scanner.nextInt();
+             if (studentNum < 1 || studentNum > StudentList.size()) {
+                 System.out.println("Please enter a valid student number.");
+                 continue; 
+             }
+             break; 
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the student selection.");
+             scanner.nextLine(); 
+         }
+     }
+     
+     // Select Course
+     while (true) {
+         try {
+             System.out.println("Select Course to assign to Student:\n" + ShowCourses());
+             courseNum = scanner.nextInt();
+             if (courseNum < 1 || courseNum > courseList.size()) {
+                 System.out.println("Please enter a valid course number.");
+                 continue; 
+             }
+             break; 
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the course selection.");
+             scanner.nextLine(); 
+         }
+     }  
+     
+     
+     course = courseList.get(courseNum-1);
+     semester = SemesterList.get(semesterNum-1);
+     
+     StudentList.get(studentNum-1).enrollStudent(semester, course);
     }  	   
     
     //Assigned faculty for the specific course and semester
@@ -531,19 +561,63 @@ public class App {
      Faculty faculty;
      Semester semester;
      
-     System.out.println("Select Semester:\n" + showSemesters());
-     Scanner SemesterSelect = new Scanner(System.in);
-     int SemesterNum = SemesterSelect.nextInt();
-     System.out.println("Select faculty to assign:\n" + ShowFaculty());
-     Scanner FacultySelect = new Scanner(System.in);
-     int FacultyNum = FacultySelect.nextInt();
-     System.out.println("Select Course to assign to Faculty:\n" + ShowCourses());
-     Scanner CourseSelect = new Scanner(System.in);
-     int CourseNum = CourseSelect.nextInt();
+     Scanner scanner = new Scanner(System.in);
      
-     course = courseList.get(CourseNum-1);
-     faculty = FacultyList.get(FacultyNum-1);
-     semester = SemesterList.get(SemesterNum-1);
+     int semesterNum = 0;
+     int facultyNum = 0;
+     int courseNum = 0;
+
+     // Select Semester
+     while (true) {
+         try {
+             System.out.println("Select Semester:\n" + showSemesters());
+             semesterNum = scanner.nextInt();
+             if (semesterNum < 1 || semesterNum > SemesterList.size()) {
+                 System.out.println("Please enter a valid semester number.");
+                 continue; 
+             }
+             break; 
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the semester selection.");
+             scanner.nextLine(); 
+         }
+     }
+
+     // Select Faculty
+     while (true) {
+         try {
+             System.out.println("Select faculty to assign:\n" + ShowFaculty());
+             facultyNum = scanner.nextInt();
+             if (facultyNum < 1 || facultyNum > FacultyList.size()) {
+                 System.out.println("Please enter a valid faculty number.");
+                 continue; 
+             }
+             break;
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the faculty selection.");
+             scanner.nextLine(); 
+         }
+     }
+
+     // Select Course
+     while (true) {
+         try {
+             System.out.println("Select Course to assign to Faculty:\n" + ShowCourses());
+             courseNum = scanner.nextInt();
+             if (courseNum < 1 || courseNum > courseList.size()) {
+                 System.out.println("Please enter a valid course number.");
+                 continue; 
+             }
+             break; 
+         } catch (java.util.InputMismatchException e) {
+             System.out.println("Please enter a valid integer for the course selection.");
+             scanner.nextLine(); 
+         }
+     }  
+     
+     course = courseList.get(courseNum-1);
+     faculty = FacultyList.get(facultyNum-1);
+     semester = SemesterList.get(semesterNum-1);
      
      Schedule newSchedule = new Schedule(semester,course,faculty);
      ScheduleList.add(newSchedule);
@@ -626,7 +700,24 @@ public class App {
         	   
            System.out.print(Options);
            Scanner sc = new Scanner(System.in);
-           int Selection = sc.nextInt();
+           
+           int Selection = 0;
+
+           while (true) {
+               try {
+               
+                   Selection = sc.nextInt();
+                   if (Selection <= 6 && Selection > 0) {
+                       break; 
+                   } else {
+                       System.out.println("Please enter a valid selection");
+                   }
+                   
+               } catch (java.util.InputMismatchException e) {
+                   System.out.println("Please enter a valid number.");
+                   sc.nextLine();
+               }
+           }
            
            if(Selection == 1){
         	   System.out.println();
@@ -686,14 +777,31 @@ public class App {
       }
       //Take the selection and allow users to edit/change course information
       public static void EditCourse(int Course){
-        String Options = "\nChoose Option:\n1.Name\n2.Start Time\n3.End Time\n4.Days per week\n5.Credits:";
+        String Options = "\nChoose Option:\n1.Name\n2.Start Time\n3.End Time\n4.Days per week\n5.Credits";
 
         
         for(int i = 0; i < courseList.size(); i ++){
            if(i == Course-1){
            System.out.print(Options);
            Scanner sc = new Scanner(System.in);
-           int Selection = sc.nextInt();
+           
+           int Selection = 0;
+
+           while (true) {
+               try {
+               
+                   Selection = sc.nextInt();
+                   if (Selection <= 5 && Selection > 0) {
+                       break; 
+                   } else {
+                       System.out.println("Please enter a valid selection");
+                   }
+                   
+               } catch (java.util.InputMismatchException e) {
+                   System.out.println("Please enter a valid number.");
+                   sc.nextLine();
+               }
+           }
            
            if(Selection == 1){
         	   System.out.println();
@@ -752,7 +860,24 @@ public class App {
            if(i == Student-1){
            System.out.print(Options);
            Scanner sc = new Scanner(System.in);
-           int Selection = sc.nextInt();
+           
+           int Selection = 0;
+
+           while (true) {
+               try {
+               
+                   Selection = sc.nextInt();
+                   if (Selection <= 7 && Selection > 0) {
+                       break; 
+                   } else {
+                       System.out.println("Please enter a valid selection");
+                   }
+                   
+               } catch (java.util.InputMismatchException e) {
+                   System.out.println("Please enter a valid number.");
+                   sc.nextLine();
+               }
+           }
            
            if(Selection == 1) {
            System.out.println();
