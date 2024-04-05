@@ -245,7 +245,7 @@ public class App {
                        System.out.print("Select a number to enter faculty department: ");
                        
                        System.out.println();
-                       
+                       //Create department later be use in trading faculty
                        Department facultyDepartment = null; 
                       
                        if (departmentList.isEmpty()) {
