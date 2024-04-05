@@ -27,29 +27,29 @@ public class App {
            
            while (!exit) {
         	   System.out.println("==================================================================");
-               System.out.println("University Management System");
-               System.out.println("\nChoose an option");
+               System.out.printf("%s", "University Management System");
+               System.out.printf("%s","\nChoose an option\n");
                
-               System.out.println("1 - Create Student");
-               System.out.println("2 - Create Course");
-               System.out.println("3 - Create Faculty");
-               System.out.println("4 - Create Department");
-               System.out.println("5 - Create Semester");
+               System.out.printf("%2d%s",1,"-Create Student\n");
+               System.out.printf("%2d%s",2,"-Create Course\n");
+               System.out.printf("%2d%s",3,"-Create Faculty\n");
+               System.out.printf("%2d%s",4,"-Create Department\n");
+               System.out.printf("%2d%s",5,"-Create Semester\n");
                
-               System.out.println("6 - Edit Student");
-               System.out.println("7 - Edit Course");
-               System.out.println("8 - Edit Faculty");
+               System.out.printf("%2d%s",6,"-Edit Student\n");
+               System.out.printf("%2d%s",7,"-Edit Course\n");
+               System.out.printf("%2d%s",8,"-Edit Faculty\n");
                
-               System.out.println("9 - Assign Faculty to a Course");
-               System.out.println("10 - Enroll Student in a Course");
-               System.out.println("11 - Print Courses in a Semester");
-               System.out.println("12 - Print Courses taught by a Faculty member in a Semester");
+               System.out.printf("%2d%s",9,"-Assign Faculty to a Course\n");
+               System.out.printf("%2d%s",10,"-Enroll Student in a Course\n");
+               System.out.printf("%2d%s",11,"-Print Courses in a Semester\n");
+               System.out.printf("%2d%s",12,"-Print Courses taught by a Faculty member in a Semester\n");
                
-               System.out.println("13 - Print a Student's Enrolled Courses in a Semester");
-               System.out.println("14 - Print a Course's Enrolled Students in a Semester");
-               System.out.println("0 - Exit");
+               System.out.printf("%2d%s",13,"-Print a Student's Enrolled Courses in a Semester\n");
+               System.out.printf("%2d%s",14,"-Print a Course's Enrolled Students in a Semester\n");
+               System.out.printf("%2d%s",15,"-Exit\n");
                System.out.println();
-               System.out.print("Enter your choice: ");
+               System.out.printf("%2s","Enter your choice: \n");
               
                
                
