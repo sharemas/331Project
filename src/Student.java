@@ -32,7 +32,7 @@ public class Student {
           StudentEnrollments.add(new Enrollment(semester, course));
 	}
 	
-	public void unenrollStudent(Enrollment enrollment) {
+	public void unenrollStudent(Enrollment enrollment) { //takes enrollement and deletes from the students enrollments, also calls method in courses to have student removed.
             for(int i = 0; i < StudentEnrollments.size(); i++){
             if(StudentEnrollments.get(i) == enrollment){
             enrollment.course.EnrolledStudents.remove(this);
@@ -41,7 +41,7 @@ public class Student {
             StudentEnrollments.remove(enrollment);
 	}
         
-        public String genStudentCourses(String CourseName){
+        public String genStudentCourses(String CourseName){   //takes a coursename & searches through enrollments for students
         String gen = "";
         for(int i = 0; i < StudentEnrollments.size(); i++){
         if(StudentEnrollments.get(i).course.courseName.equals(CourseName)){
