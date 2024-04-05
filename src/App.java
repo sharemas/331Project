@@ -56,10 +56,22 @@ public class App {
                System.out.printf("%2d%s",14,"-Print a Course's Enrolled Students in a Semester\n");
                System.out.printf("%2d%s",15,"-Exit\n");
                System.out.println();
-               System.out.printf("%2s","Enter your choice: \n");
+              
 
-               int choice = scanner.nextInt();
-               scanner.nextLine();
+               
+              
+               int choice = 0;
+               while (true) {
+            	   try {
+            	   System.out.printf("%2s","Enter your choice: \n");
+                   choice = scanner.nextInt();
+                   scanner.nextLine(); 
+                   break;
+            	   } catch (java.util.InputMismatchException e) {
+                   System.out.println("Invalid input. Please enter an integer.");
+                   scanner.nextLine(); 
+            	   }
+               }
                
                switch (choice) {
                    case 15:
@@ -419,27 +431,99 @@ public class App {
                         System.out.println("Enrolling a student in a course");
                         EnrollStudent();
                         break; 
-                    case 11: 
+               case 11: 
+            	   System.out.println("==================================================================");
+                   System.out.println("Printing all courses in a semester");
                         System.out.println(CourseSemester());
                         break;
-                    case 12: 
+               case 12: 
                         System.out.println("==================================================================");
                         System.out.println("Printing course taught by a faculty member");
                         System.out.println(FacultyCourses());
-			break;
-		     case 13: 
-                        System.out.println("Please enter a student: " + ShowStudents());
-                        int studentSelectionforCourse = scanner.nextInt();
-                        System.out.println("Please enter a semester: " + showSemesters());
-                        int semester = scanner.nextInt();
-                        showStudentEnrollments(studentSelectionforCourse, semester);
                         break;
+			
+		     case 13: 
+		    	  int studentNum = 0;
+
+		          while (true) {
+		              try {
+		                  System.out.println("Please enter a student: " + ShowStudents());
+		                  studentNum = scanner.nextInt();
+
+		                  if (studentNum < 1 || studentNum > StudentList.size()) {
+		                      System.out.println("Please enter a valid student number");
+		                      scanner.nextLine(); 
+		                      continue; 
+		                  }
+
+		                  break; 
+		              } catch (java.util.InputMismatchException e) {
+		                  System.out.println("Please enter a valid integer.");
+		                  scanner.nextLine(); // Consume invalid input
+		              }
+		          }
+		          int semesterNum = 0;
+
+		          while (true) {
+		              try {
+		                  System.out.println("Please enter a semester: " + showSemesters());
+		                  semesterNum = scanner.nextInt();
+
+		                  if (semesterNum < 1 || semesterNum > SemesterList.size()) {
+		                      System.out.println("Please enter a valid semester number");
+		                      scanner.nextLine(); 
+		                      continue; 
+		                  }
+
+		                  break; 
+		              } catch (java.util.InputMismatchException e) {
+		                  System.out.println("Please enter a valid integer.");
+		                  scanner.nextLine(); 
+		              }
+		          }
+                        showStudentEnrollments(studentNum, semesterNum);
+                        break;
+                        
                     case 14: 
-                        System.out.println("Please enter a course: " + ShowCourses());
-                        int courseSelection2 = scanner.nextInt();
-                        System.out.println("Please enter a semester: " + showSemesters());
-                        int semesterSelection = scanner.nextInt();
-                        showCoursesStudents(courseSelection2, semesterSelection);
+                    	 int courseNum2 = 0;
+
+       		          while (true) {
+       		              try {
+       		                  System.out.println("Please enter a course: " + ShowCourses());
+       		                  courseNum = scanner.nextInt();
+
+       		                  if (courseNum < 1 || courseNum > courseList.size()) {
+       		                      System.out.println("Please enter a valid course number");
+       		                      scanner.nextLine(); 
+       		                      continue; 
+       		                  }
+
+       		                  break; 
+       		              } catch (java.util.InputMismatchException e) {
+       		                  System.out.println("Please enter a valid integer.");
+       		                  scanner.nextLine(); 
+       		              }
+       		          }
+       		       int semesterNum2 = 0;
+
+ 		          while (true) {
+ 		              try {
+ 		                  System.out.println("Please enter a semester: " + showSemesters());
+ 		                  semesterNum = scanner.nextInt();
+
+ 		                  if (semesterNum < 1 || semesterNum > SemesterList.size()) {
+ 		                      System.out.println("Please enter a valid semester number");
+ 		                      scanner.nextLine(); 
+ 		                      continue; 
+ 		                  }
+
+ 		                  break; 
+ 		              } catch (java.util.InputMismatchException e) {
+ 		                  System.out.println("Please enter a valid integer.");
+ 		                  scanner.nextLine(); 
+ 		              }
+ 		          }
+                        showCoursesStudents(courseNum2, semesterNum2);
                         break;
                     
                     default:
@@ -453,16 +537,51 @@ public class App {
         	String gen = "";
         	Semester semester;
         	Faculty faculty;
+        	
         	int count = 0;
-        	Scanner Select = new Scanner(System.in);
-        	System.out.println("Select Semester:\n" + showSemesters());
-        	int SemesterNum = Select.nextInt();
+        	 Scanner Select = new Scanner(System.in);
+             int SemesterNum = 0;
+
+             while (true) {
+                 try {
+                     System.out.print("Select Semester:\n" + showSemesters());
+                     SemesterNum = Select.nextInt();
+                     
+                     if (SemesterNum < 1 || SemesterNum > SemesterList.size()) {
+                         System.out.println("Please enter a valid semester number");
+                         Select.nextLine(); 
+                         continue;
+                     }
+                     
+                     break; 
+                 } catch (java.util.InputMismatchException e) {
+                     System.out.println("Please enter a valid integer.");
+                     Select.nextLine(); 
+                 }
+             }
         	semester = SemesterList.get(SemesterNum-1);
         	System.out.println();
         	
-        	System.out.println("Select Faculty:\n" + ShowFaculty());
-        	int FacultyNum = Select.nextInt();
-        	faculty = FacultyList.get(FacultyNum-1); 
+        	  int FacultyNum = 0;
+
+              while (true) {
+                  try {
+                      System.out.println("Select Faculty:\n" + ShowFaculty());
+                      FacultyNum = Select.nextInt();
+
+                      if (FacultyNum < 1 || FacultyNum > FacultyList.size()) {
+                          System.out.println("Please enter a valid faculty number");
+                          Select.nextLine(); 
+                          continue; 
+                      }
+                      break;
+                  } catch (java.util.InputMismatchException e) {
+                      System.out.println("Please enter a valid integer.");
+                      Select.nextLine(); 
+                  }
+              }
+        	
+              faculty = FacultyList.get(FacultyNum-1);
         	
         	System.out.println();
         	System.out.println("Courses taught by " + faculty.name + " in " + semester.period + " " + semester.year);
@@ -482,9 +601,30 @@ public class App {
         	String gen = "";
         	Semester semester;
         	int count = 0;
-        	Scanner Select = new Scanner(System.in);
-        	System.out.print("Select Semester:\n" + showSemesters());
-        	int SemesterNum = Select.nextInt();
+        	 Scanner Select = new Scanner(System.in);
+             int SemesterNum = 0;
+
+             while (true) {
+                 try {
+                     System.out.print("Select Semester:\n" + showSemesters());
+                     SemesterNum = Select.nextInt();
+                     
+                     if (SemesterNum < 1 || SemesterNum > SemesterList.size()) {
+                         System.out.println("Please enter a valid semester number");
+                         Select.nextLine(); 
+                         continue;
+                     }
+                     
+                     break; 
+                 } catch (java.util.InputMismatchException e) {
+                     System.out.println("Please enter a valid integer.");
+                     Select.nextLine(); 
+                 }
+             }
+        	
+        	
+        	
+        	
         	semester = SemesterList.get(SemesterNum-1);
         		for(int i = 0; i < ScheduleList.size(); i++){
         			if(semester == ScheduleList.get(i).semester){
