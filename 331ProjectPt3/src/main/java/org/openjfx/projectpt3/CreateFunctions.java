@@ -62,7 +62,9 @@ public class CreateFunctions {
             String contactAddress = contactAddressField.getText();
             
             // Add Java here i think??
-
+            Main.StudentList.add(new Student(name,ssn,address,email,
+                    gpa,contactName,contactPhone,contactAddress));
+            
             createStudentStage.close(); // Close the create student window
         });
 
@@ -95,6 +97,8 @@ public class CreateFunctions {
         createStudentStage.show();
     }
 
+      
+    
     
      public static void  createCourse() {
         // Create a new stage and format it
@@ -143,7 +147,7 @@ public class CreateFunctions {
             String startTime = startTimeField.getText();
             String endTime = endTimeField.getText();
             int numCredits = Integer.parseInt(creditsField.getText());
-           
+            Main.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
             createCourseStage.close();
 });
             // more java here 
@@ -194,7 +198,7 @@ public class CreateFunctions {
 
         // Drop down menu for user to choose existing departments 
         ComboBox<String> facultyDeptComboBox = new ComboBox<>(
-            FXCollections.observableArrayList("Computer Science", "Mathematics", "Physics", "Chemistry", "Biology")
+            FXCollections.observableArrayList(Main.DepNames())
         );
 
         Label facultyEmailLabel = new Label("Enter Email:");
@@ -229,7 +233,14 @@ public class CreateFunctions {
             String position = positionField.getText();
 
            // Add java
-
+           for(int i = 0; i < Main.departmentList.size();i++){
+           if(Main.departmentList.get(i).departmentName.equals(facultyDept)){
+            Main.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
+           Integer.parseInt(officeNumber),phoneNumber,Main.departmentList.get(i),position));
+           }
+           }
+           
+           
             createFacultyStage.close(); 
         });
 
@@ -276,7 +287,7 @@ public class CreateFunctions {
         createButton.setOnAction(event -> {
             // Gather department name from the text field
             String departmentName = departmentNameField.getText();
-
+            Main.departmentList.add(new Department(departmentName));
           //put java here 
 
             createDepartmentStage.close();
@@ -294,6 +305,8 @@ public class CreateFunctions {
         createDepartmentStage.setScene(scene);
         createDepartmentStage.show(); 
     }
+      
+       
       
        public static void createSemester() {
         // Create a new stage and format it
@@ -318,7 +331,7 @@ public class CreateFunctions {
             int year = Integer.parseInt(yearField.getText());
 
             // Java here
-
+            Main.SemesterList.add(new Semester(period,year));
             createSemesterStage.close(); 
         });
 
@@ -338,3 +351,4 @@ public class CreateFunctions {
     }
 
 }
+
