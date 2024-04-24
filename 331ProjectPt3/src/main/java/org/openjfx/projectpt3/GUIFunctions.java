@@ -131,23 +131,23 @@ public class GUIFunctions {
             switch (reportType) {
                 case "All courses a faculty member is teaching in a semester":
                     Label facultyLabel = new Label("Select Faculty:");
-                    ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList("you can put an arraylist here"));
+                    ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyNames()));
                     Label semesterLabel = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList("test test semester"));
+                    ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
                     additionalFields.getChildren().addAll(facultyLabel, facultyComboBox, semesterLabel, semesterComboBox);
                     break;
                 case "All courses a student is taking in a semester":
                     Label studentLabel = new Label("Select Student:");
-                    ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList("test student"));
+                    ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentNames()));
                     Label semesterLabel2 = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox2 = new ComboBox<>(FXCollections.observableArrayList("test semester"));
+                    ComboBox<String> semesterComboBox2 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
                     additionalFields.getChildren().addAll(studentLabel, studentComboBox, semesterLabel2, semesterComboBox2);
                     break;
                 case "All students in a single course in a semester":
                     Label courseLabel = new Label("Select Course:");
-                    ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList("test Course"));
+                    ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
                     Label semesterLabel3 = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox3 = new ComboBox<>(FXCollections.observableArrayList("Test Semester"));
+                    ComboBox<String> semesterComboBox3 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
                     additionalFields.getChildren().addAll(courseLabel, courseComboBox, semesterLabel3, semesterComboBox3);
                     break;
             }
