@@ -20,12 +20,9 @@ public class EditFunctions {
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
 
-        // Temporary student list; replace with real data later
-        List<String> studentNames = Arrays.asList("teststudent", "test yay", "test");
-
         //Dropdown list of existing students to select one
         ComboBox<String> studentSelection = new ComboBox<>(
-            FXCollections.observableArrayList(studentNames)
+            FXCollections.observableArrayList(Main.StudentNames())
         );
 
         // Dropdown list to select a specific attribute to edit
@@ -158,7 +155,7 @@ public class EditFunctions {
         layout.setPadding(new Insets(10));
         
           // Example course names list; replace with real data later
-        List<String> courseNames = Arrays.asList("testCourse", "Test", "Course");
+        List<String> courseNames = Arrays.asList(Main.CourseNames());
         
          // Dropdown selectiono for selecting a course by name
         ComboBox<String> courseSelection = new ComboBox<>(
@@ -277,27 +274,30 @@ public class EditFunctions {
     
         
     }
+    
+  
+    
+   
+    
     public static void editFaculty(){
          // Create a new stage and format it
         Stage createFacultyStage = new Stage();
         createFacultyStage.setTitle("Edit Faculty");
         VBox layout =  new VBox(10);
         layout.setPadding(new Insets(10));
-
+       
         // Example list of faculty names; replace with real data later
-        List<String> facultyNames = Arrays.asList("test prof", "test", "prof");
-
+       
         //Drop down menu to select existing faculty member
         ComboBox<String> facultySelection = new ComboBox<>(
-            FXCollections.observableArrayList(facultyNames)
+            FXCollections.observableArrayList(Main.FacultyNames())
+             
         );
 
         // Drop down menu to select which attribute to edit
         ComboBox<String> editSelection = new ComboBox<>(
-            FXCollections.observableArrayList(
-                "Name", "Email", "Building Name", "Office Number", "Phone Number", 
-                "Department", "Position"
-            )
+            FXCollections.observableArrayList( "Name", "Email", "Building Name", "Office Number", "Phone Number", 
+                "Department", "Position")
         );
 
         // Create a new edit button with a event listener that stores user faculty and attribute selection
@@ -320,9 +320,9 @@ public class EditFunctions {
                     // for user to choose from
                     if ("Department".equals(selectedAttribute)) {
                         // TEMPORARY DEPARTMENTS REPLACE WITH USER MADE
-                        List<String> departments = Arrays.asList("Computer Science", "Mathematics", "Physics", "Biology", "Chemistry");
+                        
                         ComboBox<String> departmentComboBox = new ComboBox<>(
-                            FXCollections.observableArrayList(departments)
+                            FXCollections.observableArrayList(Main.DepNames())
                         );
                         // Add the components to the smaller editing window
                         layout2.getChildren().addAll(
