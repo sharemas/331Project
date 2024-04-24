@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 public class GUIFunctions {
      
-    public static void enroll() {
+       public static void enroll() {
         // Create a new stage and layout for the window
         Stage enrollmentStage = new Stage();
         enrollmentStage.setTitle("Student Enrollment");
@@ -21,13 +21,13 @@ public class GUIFunctions {
 
         // Labels and drop downs for selecting semester, course, and student
         Label semesterLabel = new Label("Select Semester:");
-        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList("TestSemester"));
+        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
         
         Label courseLabel = new Label("Select Course:");
-        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList("TestClass", "Class"));
+        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
         
         Label studentLabel = new Label("Select Student:");
-        ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList("Test Studet"));
+        ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentNames()));
 
         // Button to submit the enrollment
         Button submitButton = new Button("Submit Enrollment");
@@ -60,13 +60,13 @@ public class GUIFunctions {
         // Labels and drop downs for selecting semester, course, and faculty
         // Chang to use our app's array lists
         Label semesterLabel = new Label("Select Semester:");
-        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList("test semster"));
+        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
         
         Label courseLabel = new Label("Select Course:");
-        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList("test course", "test"));
+        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
         
         Label facultyLabel = new Label("Select Faculty:");
-        ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList("Test prof"));
+        ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyNames()));
 
         // Button to submit the schedule
         Button submitButton = new Button("Submit Schedule");
@@ -176,6 +176,4 @@ public class GUIFunctions {
         reportStage.setScene(scene);
         reportStage.show();
     }
-
-
 }
