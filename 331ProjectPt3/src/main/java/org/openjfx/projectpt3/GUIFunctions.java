@@ -43,7 +43,33 @@ public class GUIFunctions {
             studentComboBox,
             submitButton
         );
-
+      submitButton.setOnAction(event->{
+      Semester semester = null;
+      Course course = null;
+      Student student = null;
+      
+      for(int i = 0; i < Main.SemesterNames().length; i ++){
+         if(Main.SemesterNames()[i].equals(semesterComboBox.getValue())){
+         semester = Main.SemesterList.get(i);
+         }
+         }
+         
+         for(int i = 0; i < Main.CourseNames().length; i ++){
+         if(Main.CourseNames()[i].equals(courseComboBox.getValue())){
+         course = Main.courseList.get(i);
+         }
+         }
+         
+            for(int i = 0; i < Main.StudentNames().length; i ++){
+         if(Main.StudentNames()[i].equals(studentComboBox.getValue())){
+         student = Main.StudentList.get(i);
+         }
+         }
+      
+         Main.EnrollmentList.add(new Enrollment(semester,course,student));
+      
+        });
+           
         // Set the scene and display it
         Scene scene = new Scene(layout, 300, 200);
         enrollmentStage.setScene(scene);
@@ -85,6 +111,33 @@ public class GUIFunctions {
         );
 
         // Set up the scene and stage and show it
+               
+        submitButton.setOnAction(event ->{
+         Semester semester = null;
+         Course course = null;
+         Faculty faculty = null;
+         
+         for(int i = 0; i < Main.SemesterNames().length; i ++){
+         if(Main.SemesterNames()[i].equals(semesterComboBox.getValue())){
+         semester = Main.SemesterList.get(i);
+         }
+         }
+         
+         for(int i = 0; i < Main.CourseNames().length; i ++){
+         if(Main.CourseNames()[i].equals(courseComboBox.getValue())){
+         course = Main.courseList.get(i);
+         }
+         }
+         
+            for(int i = 0; i < Main.FacultyNames().length; i ++){
+         if(Main.FacultyNames()[i].equals(facultyComboBox.getValue())){
+         faculty = Main.FacultyList.get(i);
+         }
+         }
+         
+         Main.ScheduleList.add(new Schedule(semester,course,faculty));
+        });
+        
         Scene scene = new Scene(layout, 300, 200); 
         scheduleStage.setScene(scene);
         scheduleStage.show();
@@ -176,4 +229,5 @@ public class GUIFunctions {
         reportStage.setScene(scene);
         reportStage.show();
     }
+
 }
