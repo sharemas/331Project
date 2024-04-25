@@ -180,11 +180,11 @@ public class EditFunctions {
         editButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Course selectedCourseName = courseSelection.getValue();
+                Course course = courseSelection.getValue();
                 String selectedAttribute = editSelection.getValue();
 
                 // Make sure user selects something from both drop down menus
-                if (selectedCourseName != null && selectedAttribute != null) {
+                if (course != null && selectedAttribute != null) {
                    // Create a small pop up window for editing attribute and format it
                     Stage editPartStage = new Stage();
                     editPartStage.setTitle("Edit " + selectedAttribute);
@@ -196,25 +196,25 @@ public class EditFunctions {
                     // Based on the selected attribute, display in the textfield the current text in the attribute
                     switch (selectedAttribute) {
                         case "Prefix":
-                            inputField.setText(""); // set with current course prefix
+                            inputField.setText(course.prefix); // set with current course prefix
                             break;
                         case "Number":
-                            inputField.setText(""); // set with current course number
+                            inputField.setText(String.valueOf(course.number)); // set with current course number
                             break;
                         case "Course Name":
-                            inputField.setText(""); // set with current course name
+                            inputField.setText(course.courseName); // set with current course name
                             break;
                         case "Days per Week":
-                            inputField.setText(""); // set with current days per week
+                            inputField.setText(String.valueOf(course.daysWeek)); // set with current days per week
                             break;
                         case "Start Time":
-                            inputField.setText(""); // set with current start time
+                            inputField.setText(course.startTime); // set with current start time
                             break;
                         case "End Time":
-                            inputField.setText(""); // set with current end time
+                            inputField.setText(course.endTime); // set with current end time
                             break;
                         case "Number of Credits":
-                            inputField.setText(""); // set with current num credits
+                            inputField.setText(String.valueOf(course.numCredits)); // set with current num credits
                             break;
                     }
 
@@ -223,25 +223,25 @@ public class EditFunctions {
                     saveButton.setOnAction(event2 -> {
                         switch (selectedAttribute) {
                             case "Prefix":
-                                // Update course prefix
+                                course.prefix = inputField.getText();
                                 break;
                             case "Number":
-                                // Update course number
+                                course.number = Integer.parseInt(inputField.getText());
                                 break;
                             case "Course Name":
-                                // Update course name
+                                course.courseName = inputField.getText();
                                 break;
                             case "Days per Week":
-                                // Update days per week
+                                course.daysWeek = Integer.parseInt(inputField.getText());
                                 break;
                             case "Start Time":
-                                // Update start time
+                                course.startTime = inputField.getText();
                                 break;
                             case "End Time":
-                                // Update end time
+                                course.endTime = inputField.getText();
                                 break;
                             case "Number of Credits":
-                                // Update number of credits
+                                course.numCredits = Integer.parseInt(inputField.getText());
                                 break;
                         }
 
