@@ -98,6 +98,7 @@ public static void enroll() {
     }
       
       public static void report() {
+        String reportt = "";
         // Create a new stage and layout
         Stage reportStage = new Stage();
         reportStage.setTitle("Reports");
@@ -138,35 +139,35 @@ public static void enroll() {
             switch (reportType) {
                 case "All courses a faculty member is teaching in a semester":
                     Label facultyLabel = new Label("Select Faculty:");
-                    ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyNames()));
+                    ComboBox<Faculty> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyList));
                     Label semesterLabel = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
+                    ComboBox<Semester> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
                     additionalFields.getChildren().addAll(facultyLabel, facultyComboBox, semesterLabel, semesterComboBox);
+                    reportt = Main.FacultyCourses(semesterComboBox.getValue(), facultyComboBox.getValue());
                     break;
                 case "All courses a student is taking in a semester":
                     Label studentLabel = new Label("Select Student:");
-                    ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentNames()));
+                    ComboBox<Student> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentList));
                     Label semesterLabel2 = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox2 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
+                    ComboBox<Semester> semesterComboBox2 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
                     additionalFields.getChildren().addAll(studentLabel, studentComboBox, semesterLabel2, semesterComboBox2);
+                    reportt = Main.CourseSemester(semesterComboBox.getValue(), studentComboBox.getValue());
                     break;
                 case "All students in a single course in a semester":
                     Label courseLabel = new Label("Select Course:");
-                    ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
+                    ComboBox<Course> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.courseList));
                     Label semesterLabel3 = new Label("Select Semester:");
-                    ComboBox<String> semesterComboBox3 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
+                    ComboBox<Semester> semesterComboBox3 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
                     additionalFields.getChildren().addAll(courseLabel, courseComboBox, semesterLabel3, semesterComboBox3);
+                    reportt = Main.StudentCourse(courseComboBox.getValue(), semesterComboBox.getValue());
                     break;
             }
         });
 
         // On click, the report will show in the textbox 
         generateButton.setOnAction(event -> {
-          
-            String generatedReport = "Placeholder report";
 
-            // Display the generated report in the TextArea
-            reportTextArea.setText(generatedReport);
+            reportTextArea.setText(reportt);
         });
 
         // Add components to the layout
@@ -183,3 +184,4 @@ public static void enroll() {
         reportStage.setScene(scene);
         reportStage.show();
     }
+
