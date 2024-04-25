@@ -26,53 +26,46 @@ public class Main {
       
 }
 
-    public static String[] DepNames(){
-         String[] Names = new String[departmentList.size()];
-         
-     for(int i = 0; i < departmentList.size(); i++){
-     Names[i] = departmentList.get(i).departmentName;
-                }
-     return Names;
-    }
-       
-     public static String[] SemesterNames(){
-         String[] Names = new String[SemesterList.size()];
-         
-     for(int i = 0; i < Main.SemesterList.size(); i++){
-     Names[i] = SemesterList.get(i).period + " " + SemesterList.get(i).year;
-                }
-     return Names;
-    }
-        
-            
-    public static String[] CourseNames(){
-         String[] Names = new String[courseList.size()];
-         
-     for(int i = 0; i < courseList.size(); i++){
-     Names[i] = courseList.get(i).courseName;
-                }
-     return Names;
-    }
+    public static String FacultyCourses(Semester semester, Faculty faculty){
+        	String gen = "";
+        	int count = 0;
+                
+        	for (int i = 0; i < ScheduleList.size(); i++){
+        		
+        		if (faculty == ScheduleList.get(i).faculty && semester == ScheduleList.get(i).semester){
+        			count ++;
+        			gen += "\n" + count + ":" + ScheduleList.get(i).course.courseName;
+        		}
+        }
+        return gen;
+        }
     
-        public static String[] FacultyNames(){
-         String[] Names = new String[FacultyList.size()];
-         
-     for(int i = 0; i < FacultyList.size(); i++){
-     Names[i] = FacultyList.get(i).name;
-                }
-     return Names;
-    }
-    
-    
-    public static String[] StudentNames(){
-         String[] Names = new String[StudentList.size()];
-         
-     for(int i = 0; i < StudentList.size(); i++){
-     Names[i] = StudentList.get(i).name;
-                }
-     return Names;
-    }
-    
+    //Design course which is taught in this semester, takes an input for semester
+    //searches through schedule for courses and genrates string report based on the semester object that was found
+    public static String CourseSemester(Semester semester, Student student){
+        	String gen = "";     
+        	int count = 0;
 
+        		for(int i = 0; i < EnrollmentList.size(); i++){
+        			if(semester == EnrollmentList.get(i).semester && student ==  EnrollmentList.get(i).student){
+        				count ++;
+        				gen += "\n" + count + ":" + EnrollmentList.get(i).course.courseName;
+        			}	
+        		}
+        return gen;
+        }
     
+    public static String StudentCourse(Course course, Semester semester){
+    String gen = "";     
+        	int count = 0;
+
+        		for(int i = 0; i < EnrollmentList.size(); i++){
+        			if(semester == EnrollmentList.get(i).semester && course ==  EnrollmentList.get(i).course){
+        				count ++;
+        				gen += "\n" + count + ":" + EnrollmentList.get(i).student.name;
+        			}	
+        		}
+        return gen;
+    }
 }
+   
