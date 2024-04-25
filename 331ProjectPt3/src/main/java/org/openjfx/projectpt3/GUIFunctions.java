@@ -1,5 +1,23 @@
 package org.openjfx.projectpt3;
 
+import java.util.Arrays;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+
+public class GUIFunctions {
+       
+       
+
+
 public static void enroll() {
         // Create a new stage and layout for the window
         Stage enrollmentStage = new Stage();
@@ -31,6 +49,7 @@ public static void enroll() {
             studentComboBox,
             submitButton
         );
+        
       submitButton.setOnAction(event->{
       Semester semester = semesterComboBox.getValue();
       Course course = courseComboBox.getValue();
@@ -97,15 +116,14 @@ public static void enroll() {
         scheduleStage.show();
     }
       
-      public static void report() {
-        String reportt = "";
+        public static void report() {
         // Create a new stage and layout
         Stage reportStage = new Stage();
         reportStage.setTitle("Reports");
-        VBox layout = new VBox(10); 
-        layout.setPadding(new Insets(10)); 
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(10));
 
-        // Have a drop down for selecting the report type
+        // Label and ComboBox for report type
         Label reportTypeLabel = new Label("Select Report Type:");
         ComboBox<String> reportTypeComboBox = new ComboBox<>(
             FXCollections.observableArrayList(
@@ -115,73 +133,81 @@ public static void enroll() {
             )
         );
 
-        // display the generated report
+        // Text area to display the generated report
         TextArea reportTextArea = new TextArea();
-        // Dont allow user to type in textbook
-        reportTextArea.setEditable(false); 
-        // Make sure the text wraps and a scrollbar appears when text is too big for the box
+        reportTextArea.setEditable(false);
         reportTextArea.setWrapText(true);
 
-        // Additional layout for dynamic components
-        VBox additionalFields = new VBox(10); 
+        // More fields for dynamic components 
+        VBox additionalFields = new VBox(10);
         additionalFields.setPadding(new Insets(10));
 
         // Button to generate the report
         Button generateButton = new Button("Generate Report");
 
-        // Event handler to update additional fields based on selected report type
+        // Populate additional fields based on the selected report type
         reportTypeComboBox.setOnAction(event -> {
-            String reportType = reportTypeComboBox.getValue();
-            additionalFields.getChildren().clear(); // Clear any existing components
+            additionalFields.getChildren().clear();
 
-            // Display additional drop downs depending on the report that is selected
-            // Change all these to hold our app's array lists
-            switch (reportType) {
+            switch (reportTypeComboBox.getValue()) {
                 case "All courses a faculty member is teaching in a semester":
-                    Label facultyLabel = new Label("Select Faculty:");
-                    ComboBox<Faculty> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyList));
-                    Label semesterLabel = new Label("Select Semester:");
-                    ComboBox<Semester> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
-                    additionalFields.getChildren().addAll(facultyLabel, facultyComboBox, semesterLabel, semesterComboBox);
-                    reportt = Main.FacultyCourses(semesterComboBox.getValue(), facultyComboBox.getValue());
+                    additionalFields.getChildren().addAll(
+                        new Label("Select Faculty:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.FacultyList)),
+                        new Label("Select Semester:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList))
+                    );
                     break;
                 case "All courses a student is taking in a semester":
-                    Label studentLabel = new Label("Select Student:");
-                    ComboBox<Student> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentList));
-                    Label semesterLabel2 = new Label("Select Semester:");
-                    ComboBox<Semester> semesterComboBox2 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
-                    additionalFields.getChildren().addAll(studentLabel, studentComboBox, semesterLabel2, semesterComboBox2);
-                    reportt = Main.CourseSemester(semesterComboBox.getValue(), studentComboBox.getValue());
+                    additionalFields.getChildren().addAll(
+                        new Label("Select Student:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.StudentList)),
+                        new Label("Select Semester:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList))
+                    );
                     break;
                 case "All students in a single course in a semester":
-                    Label courseLabel = new Label("Select Course:");
-                    ComboBox<Course> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.courseList));
-                    Label semesterLabel3 = new Label("Select Semester:");
-                    ComboBox<Semester> semesterComboBox3 = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
-                    additionalFields.getChildren().addAll(courseLabel, courseComboBox, semesterLabel3, semesterComboBox3);
-                    reportt = Main.StudentCourse(courseComboBox.getValue(), semesterComboBox.getValue());
+                    additionalFields.getChildren().addAll(
+                        new Label("Select Course:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.courseList)),
+                        new Label("Select Semester:"),
+                        new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList))
+                    );
                     break;
             }
         });
 
-        // On click, the report will show in the textbox 
+        // Event handler to generate the report on button click
         generateButton.setOnAction(event -> {
+            // Placeholder variable for the report string
+            String reportString = ""; 
 
-            reportTextArea.setText(reportt);
+            switch (reportTypeComboBox.getValue()) {
+                case "All courses a faculty member is teaching in a semester":
+                    Faculty selectedFaculty = ((ComboBox<Faculty>) additionalFields.getChildren().get(1)).getValue();
+                    Semester selectedSemester = ((ComboBox<Semester>) additionalFields.getChildren().get(3)).getValue();
+                    reportString = Main.FacultyCourses(selectedSemester, selectedFaculty);
+                    break;
+                case "All courses a student is taking in a semester":
+                    Student selectedStudent = ((ComboBox<Student>) additionalFields.getChildren().get(1)).getValue();
+                    Semester selectedSemester2 = ((ComboBox<Semester>) additionalFields.getChildren().get(3)).getValue();
+                    reportString = Main.CourseSemester(selectedSemester2, selectedStudent);
+                    break;
+                case "All students in a single course in a semester":
+                    Course selectedCourse = ((ComboBox<Course>) additionalFields.getChildren().get(1)).getValue();
+                    Semester selectedSemester3 = ((ComboBox<Semester>) additionalFields.getChildren().get(3)).getValue();
+                    reportString = Main.StudentCourse(selectedCourse, selectedSemester3);
+                    break;
+            }
+
+            reportTextArea.setText(reportString); 
         });
 
-        // Add components to the layout
-        layout.getChildren().addAll(
-            reportTypeLabel,
-            reportTypeComboBox,
-            additionalFields, 
-            generateButton,
-            reportTextArea
-        );
+        layout.getChildren().addAll(reportTypeComboBox, additionalFields, generateButton, reportTextArea);
 
-        // Set up the scene and stage
-        Scene scene = new Scene(layout, 400, 400); // Adjusted size to fit content
+        Scene scene = new Scene(layout, 400, 300);
         reportStage.setScene(scene);
         reportStage.show();
     }
-
+    
+}
