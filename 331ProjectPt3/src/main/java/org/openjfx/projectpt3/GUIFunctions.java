@@ -1,18 +1,6 @@
 package org.openjfx.projectpt3;
 
-import java.util.Arrays;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-public class GUIFunctions {
-     
-       public static void enroll() {
+public static void enroll() {
         // Create a new stage and layout for the window
         Stage enrollmentStage = new Stage();
         enrollmentStage.setTitle("Student Enrollment");
@@ -21,13 +9,13 @@ public class GUIFunctions {
 
         // Labels and drop downs for selecting semester, course, and student
         Label semesterLabel = new Label("Select Semester:");
-        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
+        ComboBox<Semester> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
         
         Label courseLabel = new Label("Select Course:");
-        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
+        ComboBox<Course> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.courseList));
         
         Label studentLabel = new Label("Select Student:");
-        ComboBox<String> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentNames()));
+        ComboBox<Student> studentComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.StudentList));
 
         // Button to submit the enrollment
         Button submitButton = new Button("Submit Enrollment");
@@ -44,34 +32,16 @@ public class GUIFunctions {
             submitButton
         );
       submitButton.setOnAction(event->{
-      Semester semester = null;
-      Course course = null;
-      Student student = null;
+      Semester semester = semesterComboBox.getValue();
+      Course course = courseComboBox.getValue();
+      Student student = studentComboBox.getValue();
+      Main.EnrollmentList.add(new Enrollment(semester,course,student));
       
-      for(int i = 0; i < Main.SemesterNames().length; i ++){
-         if(Main.SemesterNames()[i].equals(semesterComboBox.getValue())){
-         semester = Main.SemesterList.get(i);
-         }
-         }
-         
-         for(int i = 0; i < Main.CourseNames().length; i ++){
-         if(Main.CourseNames()[i].equals(courseComboBox.getValue())){
-         course = Main.courseList.get(i);
-         }
-         }
-         
-            for(int i = 0; i < Main.StudentNames().length; i ++){
-         if(Main.StudentNames()[i].equals(studentComboBox.getValue())){
-         student = Main.StudentList.get(i);
-         }
-         }
-      
-         Main.EnrollmentList.add(new Enrollment(semester,course,student));
-      
+         enrollmentStage.close();
         });
            
         // Set the scene and display it
-        Scene scene = new Scene(layout, 300, 200);
+        Scene scene = new Scene(layout, 300, 250);
         enrollmentStage.setScene(scene);
         enrollmentStage.show();
     }
@@ -86,13 +56,13 @@ public class GUIFunctions {
         // Labels and drop downs for selecting semester, course, and faculty
         // Chang to use our app's array lists
         Label semesterLabel = new Label("Select Semester:");
-        ComboBox<String> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterNames()));
+        ComboBox<Semester> semesterComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.SemesterList));
         
         Label courseLabel = new Label("Select Course:");
-        ComboBox<String> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.CourseNames()));
+        ComboBox<Course> courseComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.courseList));
         
         Label facultyLabel = new Label("Select Faculty:");
-        ComboBox<String> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyNames()));
+        ComboBox<Faculty> facultyComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.FacultyList));
 
         // Button to submit the schedule
         Button submitButton = new Button("Submit Schedule");
@@ -113,32 +83,16 @@ public class GUIFunctions {
         // Set up the scene and stage and show it
                
         submitButton.setOnAction(event ->{
-         Semester semester = null;
-         Course course = null;
-         Faculty faculty = null;
-         
-         for(int i = 0; i < Main.SemesterNames().length; i ++){
-         if(Main.SemesterNames()[i].equals(semesterComboBox.getValue())){
-         semester = Main.SemesterList.get(i);
-         }
-         }
-         
-         for(int i = 0; i < Main.CourseNames().length; i ++){
-         if(Main.CourseNames()[i].equals(courseComboBox.getValue())){
-         course = Main.courseList.get(i);
-         }
-         }
-         
-            for(int i = 0; i < Main.FacultyNames().length; i ++){
-         if(Main.FacultyNames()[i].equals(facultyComboBox.getValue())){
-         faculty = Main.FacultyList.get(i);
-         }
-         }
+         Semester semester = semesterComboBox.getValue();
+         Course course = courseComboBox.getValue();
+         Faculty faculty = facultyComboBox.getValue();
          
          Main.ScheduleList.add(new Schedule(semester,course,faculty));
+         
+         scheduleStage.close();
         });
         
-        Scene scene = new Scene(layout, 300, 200); 
+        Scene scene = new Scene(layout, 300, 250); 
         scheduleStage.setScene(scene);
         scheduleStage.show();
     }
@@ -229,5 +183,3 @@ public class GUIFunctions {
         reportStage.setScene(scene);
         reportStage.show();
     }
-
-}
