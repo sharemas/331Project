@@ -22,6 +22,12 @@ public class Faculty {
 		this.position = position;
 		facultyCount++;
 	}
+	
+	 public String toString() {
+        String faculty = "";
+        faculty += facultyID + " " + name;
+        return faculty; // for drop don
+    }
 
 	public int getFaultyID() {
 		return facultyID;
