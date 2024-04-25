@@ -1,7 +1,7 @@
 package org.openjfx.projectpt3;
 import java.util.ArrayList;
 
-public class Student {
+ublic class Student {
   public String name;
   private int SSN;
   private static int Count = 0;
@@ -12,7 +12,6 @@ public class Student {
   public String contactName;
   private String contactPhoneNumber;
   private String contactAddress;
-  public ArrayList<Enrollment> StudentEnrollments = new ArrayList<>();
 
   public Student(String name, int SSN, String address, String email, double GPA,
       String contactName, String contactPhoneNumber, String contactAddress) {
@@ -28,30 +27,7 @@ public class Student {
     Count++;
   }
 
-  public void enrollStudent(Semester semester, Course course) {
-    course.AddStudent(this, semester);
-    StudentEnrollments.add(new Enrollment(semester, course));
-  }
 
-  public void unenrollStudent(Enrollment enrollment) { // takes enrollement and deletes from the students enrollments,
-                                                       // also calls method in courses to have student removed.
-    for (int i = 0; i < StudentEnrollments.size(); i++) {
-      if (StudentEnrollments.get(i) == enrollment) {
-        enrollment.course.EnrolledStudents.remove(this);
-      }
-    }
-    StudentEnrollments.remove(enrollment);
-  }
-
-  public String genStudentCourses(String CourseName) { // takes a coursename & searches through enrollments for students
-    String gen = "";
-    for (int i = 0; i < StudentEnrollments.size(); i++) {
-      if (StudentEnrollments.get(i).course.courseName.equals(CourseName)) {
-        gen += (i + 1) + ":\t" + StudentEnrollments.get(i).course.courseName;
-      }
-    }
-    return gen;
-  }
 
   public int GetSSN() {
     return this.SSN;
