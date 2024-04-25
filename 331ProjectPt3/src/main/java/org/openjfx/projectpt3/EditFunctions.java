@@ -350,22 +350,22 @@ public class EditFunctions {
                         TextField inputField = new TextField();
                         switch (selectedAttribute) {
                             case "Name":
-                                inputField.setText("");
+                                inputField.setText(faculty.name);
                                 break;
                             case "Email":
-                                inputField.setText("");
+                                inputField.setText(faculty.getEmail());
                                 break;
                             case "Building Name":
-                                inputField.setText("");
+                                inputField.setText(faculty.buildingName);
                                 break;
                             case "Office Number":
-                                inputField.setText("");
+                                inputField.setText(String.valueOf(faculty.officeNum));
                                 break;
                             case "Phone Number":
-                                inputField.setText("");
+                                inputField.setText(faculty.getPhoneNum());
                                 break;
                             case "Position":
-                                inputField.setText("");
+                                inputField.setText(faculty.position);
                                 break;
                         }
 
@@ -375,22 +375,22 @@ public class EditFunctions {
                             // Code to update the selected attribute
                             switch (selectedAttribute) {
                                 case "Name":
-                                    // Code to update the faculty name
+                                    faculty.name = inputField.getText();
                                     break;
                                 case "Email":
-                                    // Code to update the faculty email
+                                    faculty.setEmail(inputField.getText());
                                     break;
                                 case "Building Name":
-                                    // Code to update the faculty building name
+                                    faculty.buildingName = inputField.getText();
                                     break;
                                 case "Office Number":
-                                    // Code to update the faculty office number
+                                    faculty.officeNum = Integer.parseInt(inputField.getText());
                                     break;
                                 case "Phone Number":
-                                    // Code to update the faculty phone number
+                                    faculty.setPhoneNum(inputField.getText());
                                     break;
                                 case "Position":
-                                    // Code to update the faculty position
+                                    faculty.position = inputField.getText();
                                     break;
                             }
 
