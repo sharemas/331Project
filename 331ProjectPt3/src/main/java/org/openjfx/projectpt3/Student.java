@@ -28,9 +28,9 @@ public class Student {
     Count++;
   }
 
-  public void enrollStudent(Semester semester, Course course) {
+  public void enrollStudent(Semester semester, Course course, Student student) {
     course.AddStudent(this, semester);
-    StudentEnrollments.add(new Enrollment(semester, course));
+    StudentEnrollments.add(new Enrollment(semester, course, student));
   }
 
   public void unenrollStudent(Enrollment enrollment) { // takes enrollement and deletes from the students enrollments,
@@ -100,7 +100,7 @@ public class Student {
    @Override
     public String toString() {
         String student = "";
-        student += studentID + " " + name;
+        student += ("ID: " + studentID + 1) + " " + name;
         return student; // for drop don
     }
 }
