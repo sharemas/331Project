@@ -10,5 +10,10 @@ public class Department {
         this.departmentName = departmentName;
         this.FacultyList = new ArrayList<>();
     }
+       public String toString() {
+        String department = "";
+        department += departmentName;
+        return department; // for drop don
+    }
 
 }
