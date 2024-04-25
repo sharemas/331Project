@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class CreateFunctions {
     
-    public static void createStudent() {
+  public static void createStudent() {
         // Create a new stage and format it
         Stage createStudentStage = new Stage();
         createStudentStage.setTitle("Create Student");
@@ -197,8 +197,8 @@ public class CreateFunctions {
 // if not we can have them just type in the department
 
         // Drop down menu for user to choose existing departments 
-        ComboBox<String> facultyDeptComboBox = new ComboBox<>(
-            FXCollections.observableArrayList(Main.DepNames())
+        ComboBox<Department> facultyDeptComboBox = new ComboBox<>(
+            FXCollections.observableArrayList(Main.departmentList)
         );
 
         Label facultyEmailLabel = new Label("Enter Email:");
@@ -224,21 +224,17 @@ public class CreateFunctions {
         createButton.setOnAction(event -> {
             // Fetch data from the fields
             String facultyName = facultyNameField.getText();
-            String facultyDept = facultyDeptComboBox.getValue(); 
+            Department facultyDept = facultyDeptComboBox.getValue(); 
             String facultyEmail = facultyEmailField.getText();
 
             String buildingName = buildingNameField.getText();
             String officeNumber = officeNumberField.getText();
             String phoneNumber = phoneNumberField.getText();
             String position = positionField.getText();
-
+             Main.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
+           Integer.parseInt(officeNumber),phoneNumber,facultyDept,position));
            // Add java
-           for(int i = 0; i < Main.departmentList.size();i++){
-           if(Main.departmentList.get(i).departmentName.equals(facultyDept)){
-            Main.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
-           Integer.parseInt(officeNumber),phoneNumber,Main.departmentList.get(i),position));
-           }
-           }
+ 
            
            
             createFacultyStage.close(); 
@@ -351,4 +347,3 @@ public class CreateFunctions {
     }
 
 }
-
