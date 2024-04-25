@@ -21,8 +21,8 @@ public class EditFunctions {
         layout.setPadding(new Insets(10));
 
         //Dropdown list of existing students to select one
-        ComboBox<String> studentSelection = new ComboBox<>(
-            FXCollections.observableArrayList(Main.StudentNames())
+        ComboBox<Student> studentSelection = new ComboBox<>(
+            FXCollections.observableArrayList(Main.StudentList)   // changed to Student object here 
         );
 
         // Dropdown list to select a specific attribute to edit
@@ -42,8 +42,10 @@ public class EditFunctions {
             public void handle(ActionEvent event) {
                 // Retrieve the selected student and part to edit
                 String selection = editSelection.getValue();
-                String student = studentSelection.getValue();
-
+                Student student = studentSelection.getValue();
+                
+               // int studentID = student.GetStudentID();
+     
                 // Make sure that user selected something in both drop down menus
                 if (student != null && selection != null) {
                     // Open a new window and format it
@@ -58,28 +60,28 @@ public class EditFunctions {
                 // in that attribute
                 switch (selection) {
                     case "Name":
-                        inputField.setText(""); //student.getName());
+                        inputField.setText(student.name); 
                         break;
                     case "SSN":
-                        inputField.setText(String.valueOf("")); //student.getSsn()));
+                        inputField.setText(String.valueOf(student.GetSSN())); //student.getSsn()));
                         break;
                     case "Address":
-                        inputField.setText(""); //student.getAddress());
+                        inputField.setText(student.GetAddress()); //student.getAddress());
                         break;
                     case "Email":
-                        inputField.setText(""); //student.getEmail());
+                        inputField.setText(student.GetEmail()); //student.getEmail());
                         break;
                     case "GPA":
-                        inputField.setText(String.valueOf("")); //student.getGpa()));
+                        inputField.setText(String.valueOf(student.GPA)); //student.getGpa()));
                         break;
                     case "Emergency Contact Name":
-                        inputField.setText(""); 
+                        inputField.setText(student.contactName); 
                         break;
                     case "Emergency Contact Phone":
-                        inputField.setText("");
+                        inputField.setText(student.GetContactPhone());
                         break;
                     case  "Emergency Contact Address":
-                        inputField.setText("");
+                        inputField.setText(student.GetContactAddress());
                         break;
                         
                 }
@@ -91,25 +93,28 @@ public class EditFunctions {
                         // Save the new value to the selected part
                         switch (selection) {
                             case "Name":
-                                // student.setName(inputField.getText());
+                                student.name = inputField.getText();
                                 break;
                             case "SSN":
-                                // student.setSsn(Integer.parseInt(inputField.getText()));
+                                student.SetSSN(Integer.parseInt(inputField.getText()));
                                 break;
                             case "Address":
-                                // student.setAddress(inputField.getText());
+                                student.SetAddress(inputField.getText());
                                 break;
                             case "Email":
-                                // student.setEmail(inputField.getText());
+                                student.SetEmail(inputField.getText());
                                 break;
                             case "GPA":
-                                // student.setGpa(Double.parseDouble(inputField.getText()));
+                                student.GPA = (Double.parseDouble(inputField.getText()));
                                 break;
                             case "Emergency Contact Name":
+                                student.contactName = inputField.getText();
                                 break;
                             case "Emergency Contact Phone":
+                                student.SetContactPhone(inputField.getText());
                                 break;
                             case "Emergency Contact Address":
+                                student.SetContactAddress(inputField.getText());
                                 break;
                         }
 
@@ -158,8 +163,8 @@ public class EditFunctions {
         List<String> courseNames = Arrays.asList(Main.CourseNames());
         
          // Dropdown selectiono for selecting a course by name
-        ComboBox<String> courseSelection = new ComboBox<>(
-            FXCollections.observableArrayList(courseNames)
+        ComboBox<Course> courseSelection = new ComboBox<>(
+            FXCollections.observableArrayList(Main.courseList)
         );
 
         // Dropdown selection for selecting which course attribute to edit
@@ -175,7 +180,7 @@ public class EditFunctions {
         editButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String selectedCourseName = courseSelection.getValue();
+                Course selectedCourseName = courseSelection.getValue();
                 String selectedAttribute = editSelection.getValue();
 
                 // Make sure user selects something from both drop down menus
@@ -424,4 +429,3 @@ public class EditFunctions {
     }
 }
     
-
