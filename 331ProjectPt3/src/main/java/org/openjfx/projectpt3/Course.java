@@ -28,5 +28,12 @@ public class Course {
 
               EnrolledStudents.add(student);
        }
+       
+        @Override
+        public String toString() {
+            String course = "";
+            course += prefix + " " + number;
+            return course; // for drop don
+        }
 
 }
