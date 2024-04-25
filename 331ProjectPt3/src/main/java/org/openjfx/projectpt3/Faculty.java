@@ -48,4 +48,11 @@ public class Faculty {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
+
+	@Override
+
+	public String toString(){
+		return name;
+	}
+
 }
