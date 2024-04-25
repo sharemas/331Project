@@ -20,6 +20,7 @@ public class Main {
     public static ArrayList<Faculty> FacultyList = new ArrayList<>();
     public static ArrayList<Semester> SemesterList = new ArrayList<>();
     public static ArrayList<Schedule> ScheduleList = new ArrayList<>();
+     public static ArrayList<Enrollment> EnrollmentList = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
       
