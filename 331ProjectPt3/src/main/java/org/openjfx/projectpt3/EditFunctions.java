@@ -279,11 +279,7 @@ public class EditFunctions {
     
         
     }
-    
-  
-    
-   
-    
+
     public static void editFaculty(){
          // Create a new stage and format it
         Stage createFacultyStage = new Stage();
@@ -294,8 +290,8 @@ public class EditFunctions {
         // Example list of faculty names; replace with real data later
        
         //Drop down menu to select existing faculty member
-        ComboBox<String> facultySelection = new ComboBox<>(
-            FXCollections.observableArrayList(Main.FacultyNames())
+        ComboBox<Faculty> facultySelection = new ComboBox<>(
+            FXCollections.observableArrayList(Main.FacultyList)
              
         );
 
@@ -310,24 +306,26 @@ public class EditFunctions {
         editButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String selectedFacultyName = facultySelection.getValue();
+                Faculty faculty = facultySelection.getValue();
                 String selectedAttribute = editSelection.getValue();
 
                 // Make sure user actually chooses something in both drop down menues
-                if (selectedFacultyName != null && selectedAttribute != null) {
+                if (faculty != null && selectedAttribute != null) {
                     // Create a smaller editing pop up window
                     Stage editPartStage = new Stage();
                     editPartStage.setTitle("Edit " + selectedAttribute);
                     VBox layout2 = new VBox(10);
                     layout2.setPadding(new Insets(10));
+                    
+
 
                     // If editing the department is the selected attribute, display a drop down menu of existing departments
                     // for user to choose from
                     if ("Department".equals(selectedAttribute)) {
                         // TEMPORARY DEPARTMENTS REPLACE WITH USER MADE
                         
-                        ComboBox<String> departmentComboBox = new ComboBox<>(
-                            FXCollections.observableArrayList(Main.DepNames())
+                        ComboBox<Department> departmentComboBox = new ComboBox<>(
+                            FXCollections.observableArrayList(Main.departmentList)
                         );
                         // Add the components to the smaller editing window
                         layout2.getChildren().addAll(
@@ -337,8 +335,9 @@ public class EditFunctions {
                         // Create a save button with action listener to save the new department value
                         Button saveButton = new Button("Save");
                         saveButton.setOnAction(event2 -> {
-                            String newDepartment = departmentComboBox.getValue();
+                            Department newDepartment = departmentComboBox.getValue();
                             // Code to update the department in the faculty object
+                            faculty.department = newDepartment;
                             editPartStage.close(); 
                         });
                         // Add the save button to the small editing window
@@ -427,5 +426,6 @@ public class EditFunctions {
         createFacultyStage.setScene(scene);
         createFacultyStage.show();
     }
+
 }
     
