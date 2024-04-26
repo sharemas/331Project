@@ -99,8 +99,6 @@ public class Student {
   
    @Override
     public String toString() {
-        String student = "";
-        student += ("ID: " + studentID + 1) + " " + name;
-        return student; // for drop don
+        return name;
     }
 }
