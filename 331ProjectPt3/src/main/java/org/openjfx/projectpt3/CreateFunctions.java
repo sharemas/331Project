@@ -100,82 +100,142 @@ public class CreateFunctions {
       
     
     
-     public static void  createCourse() {
+    public static void createStudent() {
         // Create a new stage and format it
-        Stage createCourseStage = new Stage();
-        createCourseStage.setTitle("Create New Course");
+        Stage createStudentStage = new Stage();
+        createStudentStage.setTitle("Create Student");
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
+
+        // Prompt user to input details to create a student
+        Label nameLabel = new Label("Enter Student's Name:");
+        TextField nameField = new TextField();
+
+        Label ssnLabel = new Label("Enter Student's SSN:");
+        TextField ssnField = new TextField();
+
         
+        Label addressLabel = new Label("Enter Address:");
+        TextField addressField = new TextField();
 
-        // Prompt user to input details to create a course
-        Label prefixLabel = new Label("Course Prefix:");
-        TextField prefixField = new TextField();
-      
+        Label emailLabel = new Label("Enter Email:");
+        TextField emailField = new TextField();
 
-        Label courseNumberLabel = new Label("Course Number:");
-        TextField courseNumberField = new TextField();
+        Label gpaLabel = new Label("Enter GPA:");
+        TextField gpaField = new TextField();
+
+        Label emergencyContactLabelLine = new Label("---------------------------------------------------------------");
+        Label emergencyContactLabel = new Label("Emergency Contact Info");
+       
         
-
-        Label courseNameLabel = new Label("Course Name:");
-        TextField courseNameField = new TextField();
-      
-
-        Label daysPerWeekLabel = new Label("Days per Week:");
-        TextField daysPerWeekField = new TextField();
- 
-        Label startTimeLabel = new Label("Start Time:");
-        TextField startTimeField = new TextField();
- 
-
-        Label endTimeLabel = new Label("End Time:");
-        TextField endTimeField = new TextField();
-    
-        Label creditsLabel = new Label("Credits:");
-        TextField creditsField = new TextField();
-
-
-        // Create buttons for actions
-        Button createButton = new Button("Create Course");
+        Label contactNameLabel = new Label("Enter Contact Name:");
+        TextField contactNameField = new TextField();
         
-        // Get the user input values and store in variables for later use
-         createButton.setOnAction(event -> {
-            String name = courseNameField.getText();
-            String prefix = prefixField.getText();
-            int num = Integer.parseInt(courseNumberField.getText());
-            int daysWeek = Integer.parseInt(daysPerWeekField.getText());
-            String startTime = startTimeField.getText();
-            String endTime = endTimeField.getText();
-            int numCredits = Integer.parseInt(creditsField.getText());
-            Main.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
-            createCourseStage.close();
-});
-            // more java here 
+        Label contactPhoneLabel = new Label("Enter Contact Phone:");
+        TextField contactPhoneField = new TextField();
+        
+        Label contactAddressLabel = new Label("Enter Contact Address:");
+        TextField contactAddressField = new TextField();
+
+        // Create a button to create the student
+        // Set an action listener to get the user input from each text field
+        // Store input in variables for later use
+        Button createButton = new Button("Create Student");
+        createButton.setOnAction(event -> {
+            int ssn = 0 ;
+            double gpa = 0;
+            boolean Valid= true;
+            try{
+            ssn = Integer.parseInt(ssnField.getText());
+            }
+            catch(Exception e){
+            ssnField.setTooltip(new Tooltip("Please input a valid SSN"));
+            Valid = false;
+            }
             
-        // Add all components to the stage
+            try{
+            gpa = Double.parseDouble(gpaField.getText());
+            }
+            catch(Exception e){
+            gpaField.setTooltip(new Tooltip("Please input a valid GPA"));
+            Valid = false;
+            }
+            
+            String name = nameField.getText();
+            String address = addressField.getText();
+            String email = emailField.getText();
+            String contactName = contactNameField.getText();
+            String contactPhone = contactPhoneField.getText();
+            String contactAddress = contactAddressField.getText();
+
+            
+            if(name.length() == 0){
+            nameField.setTooltip(new Tooltip("Please enter a valid name"));
+            Valid = false;
+            }
+            if(address.length() == 0){
+            addressField.setTooltip(new Tooltip("Please enter a valid address"));
+            Valid = false;
+            }
+            
+            if(email.length() == 0){
+            emailField.setTooltip(new Tooltip("Please enter a valid email"));
+            Valid = false;
+            }
+            
+            if(contactName.length() == 0){
+            contactNameField.setTooltip(new Tooltip("please enter a valid contact name"));
+            Valid = false;
+            }
+            
+            if(contactPhone.length() == 0){
+            contactPhoneField.setTooltip(new Tooltip("Please enter a valid contact phone number"));
+            Valid = false;
+            }
+            
+            if(contactAddress.length() == 0){
+            contactAddressField.setTooltip(new Tooltip("Please enter a valid contact Phone number"));
+            Valid = false;
+            }
+            
+            
+            
+            if(Valid == true){
+             Main.StudentList.add(new Student(name,ssn,address,email,
+                    gpa,contactName,contactPhone,contactAddress));
+            createStudentStage.close();
+            }
+            
+            
+        });
+
+        // Add all the components to the stage
         layout.getChildren().addAll(
-            prefixLabel,
-            prefixField,
-            courseNumberLabel,
-            courseNumberField,
-            courseNameLabel,
-            courseNameField,
-            daysPerWeekLabel,
-            daysPerWeekField,
-            startTimeLabel,
-            startTimeField,
-            endTimeLabel,
-            endTimeField,
-            creditsLabel,
-            creditsField,            
+            nameLabel,
+            nameField,
+            ssnLabel,
+            ssnField,
+            addressLabel,
+            addressField,
+            emailLabel,
+            emailField,
+            gpaLabel,
+            gpaField,
+            emergencyContactLabelLine,
+            emergencyContactLabel,
+            contactNameLabel,
+            contactNameField,
+            contactPhoneLabel,
+            contactPhoneField,
+            contactAddressLabel,
+            contactAddressField,
             createButton
         );
-        
 
-        // Set up the scene and display it
-        Scene scene = new Scene(layout, 400, 510);
-        createCourseStage.setScene(scene);
-        createCourseStage.show();
+        // Set the scene and display it
+        Scene scene = new Scene(layout, 400, 630);
+        createStudentStage.setScene(scene);
+        createStudentStage.show();
     }
 
      public static void  createFaculty() {
