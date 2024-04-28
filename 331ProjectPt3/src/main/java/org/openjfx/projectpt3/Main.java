@@ -26,15 +26,12 @@ public class Main {
       
 }
 
-    public static String FacultyCourses(Semester semester, Faculty faculty){
+   public static String FacultyCourses(Semester semester, Faculty faculty){
         	String gen = "";
-        	int count = 0;
-                
         	for (int i = 0; i < ScheduleList.size(); i++){
         		
         		if (faculty == ScheduleList.get(i).faculty && semester == ScheduleList.get(i).semester){
-        			count ++;
-        			gen += "\n" + count + ":" + ScheduleList.get(i).course.courseName;
+        			gen += "\n" + String.format("%-10s%15s", ScheduleList.get(i).course.prefix, ScheduleList.get(i).course.courseName);
         		}
         }
         return gen;
@@ -44,12 +41,10 @@ public class Main {
     //searches through schedule for courses and genrates string report based on the semester object that was found
     public static String CourseSemester(Semester semester, Student student){
         	String gen = "";     
-        	int count = 0;
 
         		for(int i = 0; i < EnrollmentList.size(); i++){
         			if(semester == EnrollmentList.get(i).semester && student ==  EnrollmentList.get(i).student){
-        				count ++;
-        				gen += "\n" + count + ":" + EnrollmentList.get(i).course.courseName;
+        				gen += "\n" + String.format("%-10s%15s", ScheduleList.get(i).course.prefix,EnrollmentList.get(i).course.courseName);
         			}	
         		}
         return gen;
@@ -62,10 +57,13 @@ public class Main {
         		for(int i = 0; i < EnrollmentList.size(); i++){
         			if(semester == EnrollmentList.get(i).semester && course ==  EnrollmentList.get(i).course){
         				count ++;
-        				gen += "\n" + count + ":" + EnrollmentList.get(i).student.name;
+        				gen += "\n" + String.format("%-10s%30s", EnrollmentList.get(i).student.GetEmail(),EnrollmentList.get(i).student.name);
         			}	
         		}
         return gen;
     }
-}
+    
    
+    
+}
+    
