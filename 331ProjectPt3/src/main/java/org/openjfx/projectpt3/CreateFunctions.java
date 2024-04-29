@@ -10,97 +10,7 @@ import javafx.stage.Stage;
 
 public class CreateFunctions {
     
-  public static void createStudent() {
-        // Create a new stage and format it
-        Stage createStudentStage = new Stage();
-        createStudentStage.setTitle("Create Student");
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(10));
-
-        // Prompt user to input details to create a student
-        Label nameLabel = new Label("Enter Student's Name:");
-        TextField nameField = new TextField();
-
-        Label ssnLabel = new Label("Enter Student's SSN:");
-        TextField ssnField = new TextField();
-
-        
-        Label addressLabel = new Label("Enter Address:");
-        TextField addressField = new TextField();
-
-        Label emailLabel = new Label("Enter Email:");
-        TextField emailField = new TextField();
-
-        Label gpaLabel = new Label("Enter GPA:");
-        TextField gpaField = new TextField();
-
-        Label emergencyContactLabelLine = new Label("---------------------------------------------------------------");
-        Label emergencyContactLabel = new Label("Emergency Contact Info");
-       
-        
-        Label contactNameLabel = new Label("Enter Contact Name:");
-        TextField contactNameField = new TextField();
-        
-        Label contactPhoneLabel = new Label("Enter Contact Phone:");
-        TextField contactPhoneField = new TextField();
-        
-        Label contactAddressLabel = new Label("Enter Contact Address:");
-        TextField contactAddressField = new TextField();
-
-        // Create a button to create the student
-        // Set an action listener to get the user input from each text field
-        // Store input in variables for later use
-        Button createButton = new Button("Create Student");
-        createButton.setOnAction(event -> {
-            String name = nameField.getText();
-            int ssn = Integer.parseInt(ssnField.getText());
-            String address = addressField.getText();
-            String email = emailField.getText();
-            double gpa = Double.parseDouble(gpaField.getText());
-            String contactName = contactNameField.getText();
-            String contactPhone = contactPhoneField.getText();
-            String contactAddress = contactAddressField.getText();
-            
-            // Add Java here i think??
-            Main.StudentList.add(new Student(name,ssn,address,email,
-                    gpa,contactName,contactPhone,contactAddress));
-            
-            createStudentStage.close(); // Close the create student window
-        });
-
-        // Add all the components to the stage
-        layout.getChildren().addAll(
-            nameLabel,
-            nameField,
-            ssnLabel,
-            ssnField,
-            addressLabel,
-            addressField,
-            emailLabel,
-            emailField,
-            gpaLabel,
-            gpaField,
-            emergencyContactLabelLine,
-            emergencyContactLabel,
-            contactNameLabel,
-            contactNameField,
-            contactPhoneLabel,
-            contactPhoneField,
-            contactAddressLabel,
-            contactAddressField,
-            createButton
-        );
-
-        // Set the scene and display it
-        Scene scene = new Scene(layout, 400, 630);
-        createStudentStage.setScene(scene);
-        createStudentStage.show();
-    }
-
-      
-    
-    
-    public static void createStudent() {
+   public static void createStudent() {
         // Create a new stage and format it
         Stage createStudentStage = new Stage();
         createStudentStage.setTitle("Create Student");
@@ -236,6 +146,85 @@ public class CreateFunctions {
         Scene scene = new Scene(layout, 400, 630);
         createStudentStage.setScene(scene);
         createStudentStage.show();
+    }
+
+    
+     public static void  createCourse() {
+        // Create a new stage and format it
+        Stage createCourseStage = new Stage();
+        createCourseStage.setTitle("Create New Course");
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(10));
+        
+
+        // Prompt user to input details to create a course
+        Label prefixLabel = new Label("Course Prefix:");
+        TextField prefixField = new TextField();
+      
+
+        Label courseNumberLabel = new Label("Course Number:");
+        TextField courseNumberField = new TextField();
+        
+
+        Label courseNameLabel = new Label("Course Name:");
+        TextField courseNameField = new TextField();
+      
+
+        Label daysPerWeekLabel = new Label("Days per Week:");
+        TextField daysPerWeekField = new TextField();
+ 
+        Label startTimeLabel = new Label("Start Time:");
+        TextField startTimeField = new TextField();
+ 
+
+        Label endTimeLabel = new Label("End Time:");
+        TextField endTimeField = new TextField();
+    
+        Label creditsLabel = new Label("Credits:");
+        TextField creditsField = new TextField();
+
+
+        // Create buttons for actions
+        Button createButton = new Button("Create Course");
+        
+        // Get the user input values and store in variables for later use
+         createButton.setOnAction(event -> {
+            String name = courseNameField.getText();
+            String prefix = prefixField.getText();
+            int num = Integer.parseInt(courseNumberField.getText());
+            int daysWeek = Integer.parseInt(daysPerWeekField.getText());
+            String startTime = startTimeField.getText();
+            String endTime = endTimeField.getText();
+            int numCredits = Integer.parseInt(creditsField.getText());
+            Main.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
+            createCourseStage.close();
+});
+            // more java here 
+            
+        // Add all components to the stage
+        layout.getChildren().addAll(
+            prefixLabel,
+            prefixField,
+            courseNumberLabel,
+            courseNumberField,
+            courseNameLabel,
+            courseNameField,
+            daysPerWeekLabel,
+            daysPerWeekField,
+            startTimeLabel,
+            startTimeField,
+            endTimeLabel,
+            endTimeField,
+            creditsLabel,
+            creditsField,            
+            createButton
+        );
+        
+
+        // Set up the scene and display it
+        Scene scene = new Scene(layout, 400, 510);
+        createCourseStage.setScene(scene);
+        createCourseStage.show();
     }
 
      public static void  createFaculty() {
