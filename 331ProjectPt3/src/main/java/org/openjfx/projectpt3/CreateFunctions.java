@@ -109,7 +109,11 @@ public class CreateFunctions {
             if (valid) {
                 // Add the new student to the list
                 ReportFunctions.StudentList.add(new Student(name, ssn, address, email, gpa, contactName, contactPhone, contactAddress));
+                String Insert = "Insert values into STUDENT(" + ssn +"," + name + "," + address + "," + email + "," + gpa + "," + contactName + "," + contactPhone + "," + contactAddress + ");"; 
+                App.runDBQuery(Insert, 'i');
+                // Show success message
 
+                // fix the values()
                 // Show success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
