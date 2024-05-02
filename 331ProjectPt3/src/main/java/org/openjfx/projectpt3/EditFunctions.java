@@ -1,10 +1,7 @@
 package org.openjfx.projectpt3;
 
-import java.util.Arrays;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,129 +11,119 @@ import javafx.stage.Stage;
 public class EditFunctions {
     
     public static void editStudent() {
-        // Create the stage and format it
-        Stage createStudentStage = new Stage();
-        createStudentStage.setTitle("Edit Student");
+        Stage editStudentStage = new Stage();
+        editStudentStage.setTitle("Edit Student");
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
 
-        //Dropdown list of existing students to select one
         ComboBox<Student> studentSelection = new ComboBox<>(
-            FXCollections.observableArrayList(Main.StudentList)   // changed to Student object here 
+            FXCollections.observableArrayList(ReportFunctions.StudentList)
         );
 
-        // Dropdown list to select a specific attribute to edit
         ComboBox<String> editSelection = new ComboBox<>(
             FXCollections.observableArrayList(
-                "Name", "SSN", "Address", "Email", "GPA", "Emergency Contact Name", 
+                "Name", "SSN", "Address", "Email", "GPA", "Emergency Contact Name",
                 "Emergency Contact Phone", "Emergency Contact Address"
             )
         );
 
-        // Edit button with action handler to display another pop up
-        // Based on the user selection, the pop up will prompt the user to edit the selected attribute
         Button editButton = new Button("Edit");
+        editButton.setOnAction(event -> {
+            String selectedAttribute = editSelection.getValue();
+            Student student = studentSelection.getValue();
 
-        editButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // Retrieve the selected student and part to edit
-                String selection = editSelection.getValue();
-                Student student = studentSelection.getValue();
+            if (student != null && selectedAttribute != null) {
+                Stage editPartStage = new Stage();
+                editPartStage.setTitle("Edit " + selectedAttribute);
+                VBox layout2 = new VBox(10);
+                layout2.setPadding(new Insets(10));
                 
-               // int studentID = student.GetStudentID();
-     
-                // Make sure that user selected something in both drop down menus
-                if (student != null && selection != null) {
-                    // Open a new window and format it
-                    Stage editPartStage = new Stage();
-                    editPartStage.setTitle("Edit " + selection);
-                    VBox layout2 = new VBox(10);
-                    layout2.setPadding(new Insets(10));
-                    // text field for user input
-                    TextField inputField = new TextField();
-                
-                // show the existing text to the user so that they know what they had before
-                // in that attribute
-                switch (selection) {
+                TextField inputField = new TextField();
+                switch (selectedAttribute) {
                     case "Name":
-                        inputField.setText(student.name); 
+                        inputField.setText(student.name);
                         break;
                     case "SSN":
-                        inputField.setText(String.valueOf(student.GetSSN())); //student.getSsn()));
+                        inputField.setText(String.valueOf(student.GetSSN()));
                         break;
                     case "Address":
-                        inputField.setText(student.GetAddress()); //student.getAddress());
+                        inputField.setText(student.GetAddress());
                         break;
                     case "Email":
-                        inputField.setText(student.GetEmail()); //student.getEmail());
+                        inputField.setText(student.GetEmail());
                         break;
                     case "GPA":
-                        inputField.setText(String.valueOf(student.GPA)); //student.getGpa()));
+                        inputField.setText(String.valueOf(student.GPA));
                         break;
                     case "Emergency Contact Name":
-                        inputField.setText(student.contactName); 
+                        inputField.setText(student.contactName);
                         break;
                     case "Emergency Contact Phone":
                         inputField.setText(student.GetContactPhone());
                         break;
-                    case  "Emergency Contact Address":
+                    case "Emergency Contact Address":
                         inputField.setText(student.GetContactAddress());
                         break;
-                        
                 }
 
-                    // Create a save button with an action listener to store the user input
-                    // Switch statement used to determine which attribute is being altered 
-                    Button saveButton = new Button("Save");
-                    saveButton.setOnAction(event2 -> {
-                        // Save the new value to the selected part
-                        switch (selection) {
-                            case "Name":
-                                student.name = inputField.getText();
-                                break;
-                            case "SSN":
-                                student.SetSSN(Integer.parseInt(inputField.getText()));
-                                break;
-                            case "Address":
-                                student.SetAddress(inputField.getText());
-                                break;
-                            case "Email":
-                                student.SetEmail(inputField.getText());
-                                break;
-                            case "GPA":
-                                student.GPA = (Double.parseDouble(inputField.getText()));
-                                break;
-                            case "Emergency Contact Name":
-                                student.contactName = inputField.getText();
-                                break;
-                            case "Emergency Contact Phone":
-                                student.SetContactPhone(inputField.getText());
-                                break;
-                            case "Emergency Contact Address":
-                                student.SetContactAddress(inputField.getText());
-                                break;
-                        }
+                Button saveButton = new Button("Save");
+                saveButton.setOnAction(event2 -> {
+                    switch (selectedAttribute) {
+                        case "Name":
+                            student.name = inputField.getText();
+                            break;
+                        case "SSN":
+                            student.SetSSN(Integer.parseInt(inputField.getText()));
+                            break;
+                        case "Address":
+                            student.SetAddress(inputField.getText());
+                            break;
+                        case "Email":
+                            student.SetEmail(inputField.getText());
+                            break;
+                        case "GPA":
+                            student.GPA = Double.parseDouble(inputField.getText());
+                            break;
+                        case "Emergency Contact Name":
+                            student.contactName = inputField.getText();
+                            break;
+                        case "Emergency Contact Phone":
+                            student.SetContactPhone(inputField.getText());
+                            break;
+                        case "Emergency Contact Address":
+                            student.SetContactAddress(inputField.getText());
+                            break;
+                    }
 
-                        editPartStage.close(); 
-                    });
-
-                    // Add all components to the small editing window
-                    layout2.getChildren().addAll(
-                        new Label("Edit " + selection + ":"),
-                        inputField,
-                        saveButton
+                    // Display a success message after saving
+                      String successMessage = String.format(
+                        "Successfully updated the '%s' attribute for student %s.",
+                        selectedAttribute,
+                        student.name
                     );
 
-                    // Set the small editing window scene and display it
-                    Scene scene = new Scene(layout2, 200, 100); 
-                    editPartStage.setScene(scene);
-                    editPartStage.show();
-                }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Edit Successful");
+                    alert.setHeaderText("Student Information Updated");
+                    alert.setContentText(successMessage);
+                    alert.showAndWait();
+
+
+                    editPartStage.close();
+                });
+
+                layout2.getChildren().addAll(
+                    new Label("Edit " + selectedAttribute + ":"),
+                    inputField,
+                    saveButton
+                );
+
+                Scene scene = new Scene(layout2, 200, 100);
+                editPartStage.setScene(scene);
+                editPartStage.show();
             }
         });
 
-        // Add all the components to the scene
         layout.getChildren().addAll(
             new Label("Select Student:"),
             studentSelection,
@@ -145,125 +132,119 @@ public class EditFunctions {
             editButton
         );
 
-        // Create the scene and stage and display it
-        Scene scene = new Scene(layout, 300, 200); 
-        createStudentStage.setScene(scene);
-        createStudentStage.show();
-    
+        Scene scene = new Scene(layout, 300, 200);
+        editStudentStage.setScene(scene);
+        editStudentStage.show();
     }
 
-    public static void editCourse(){
-        // Create a new stage and format it
-        Stage createCourseStage = new Stage();
-        createCourseStage.setTitle("Edit Course");
+    public static void editCourse() {
+        Stage editCourseStage = new Stage();
+        editCourseStage.setTitle("Edit Course");
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
-        
-          // Example course names list; replace with real data later
-        List<String> courseNames = Arrays.asList(Main.CourseNames());
-        
-         // Dropdown selectiono for selecting a course by name
+
         ComboBox<Course> courseSelection = new ComboBox<>(
-            FXCollections.observableArrayList(Main.courseList)
+            FXCollections.observableArrayList(ReportFunctions.courseList)
         );
 
-        // Dropdown selection for selecting which course attribute to edit
         ComboBox<String> editSelection = new ComboBox<>(
             FXCollections.observableArrayList(
-                "Prefix", "Number", "Course Name", "Days per Week", "Start Time", "End Time", "Number of Credits"
+                "Prefix", "Number", "Course Name", "Days per Week", "Start Time", 
+                "End Time", "Number of Credits"
             )
         );
-        
-        // Create an edit button with an action handler that stores the selected course and course attribute to edit
- 
+
         Button editButton = new Button("Edit");
-        editButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Course course = courseSelection.getValue();
-                String selectedAttribute = editSelection.getValue();
+        editButton.setOnAction(event -> {
+            Course course = courseSelection.getValue();
+            String selectedAttribute = editSelection.getValue();
 
-                // Make sure user selects something from both drop down menus
-                if (course != null && selectedAttribute != null) {
-                   // Create a small pop up window for editing attribute and format it
-                    Stage editPartStage = new Stage();
-                    editPartStage.setTitle("Edit " + selectedAttribute);
-                    VBox layout2 = new VBox(10);
-                    layout2.setPadding(new Insets(10));
+            if (course != null && selectedAttribute != null) {
+                Stage editPartStage = new Stage();
+                editPartStage.setTitle("Edit " + selectedAttribute);
+                VBox layout2 = new VBox(10);
+                layout2.setPadding(new Insets(10));
 
-                    TextField inputField = new TextField();
+                TextField inputField = new TextField();
+                switch (selectedAttribute) {
+                    case "Prefix":
+                        inputField.setText(course.prefix);
+                        break;
+                    case "Number":
+                        inputField.setText(String.valueOf(course.number));
+                        break;
+                    case "Course Name":
+                        inputField.setText(course.courseName);
+                        break;
+                    case "Days per Week":
+                        inputField.setText(String.valueOf(course.daysWeek));
+                        break;
+                    case "Start Time":
+                        inputField.setText(course.startTime);
+                        break;
+                    case "End Time":
+                        inputField.setText(course.endTime);
+                        break;
+                    case "Number of Credits":
+                        inputField.setText(String.valueOf(course.numCredits));
+                        break;
+                }
 
-                    // Based on the selected attribute, display in the textfield the current text in the attribute
+                Button saveButton = new Button("Save");
+                saveButton.setOnAction(event2 -> {
                     switch (selectedAttribute) {
                         case "Prefix":
-                            inputField.setText(course.prefix); // set with current course prefix
+                            course.prefix = inputField.getText();
                             break;
                         case "Number":
-                            inputField.setText(String.valueOf(course.number)); // set with current course number
+                            course.number = Integer.parseInt(inputField.getText());
                             break;
                         case "Course Name":
-                            inputField.setText(course.courseName); // set with current course name
+                            course.courseName = inputField.getText();
                             break;
                         case "Days per Week":
-                            inputField.setText(String.valueOf(course.daysWeek)); // set with current days per week
+                            course.daysWeek = Integer.parseInt(inputField.getText());
                             break;
                         case "Start Time":
-                            inputField.setText(course.startTime); // set with current start time
+                            course.startTime = inputField.getText();
                             break;
                         case "End Time":
-                            inputField.setText(course.endTime); // set with current end time
+                            course.endTime = inputField.getText();
                             break;
                         case "Number of Credits":
-                            inputField.setText(String.valueOf(course.numCredits)); // set with current num credits
+                            course.numCredits = Integer.parseInt(inputField.getText());
                             break;
                     }
-
-                    // Create a save button that saved the new value to the selected attribute
-                    Button saveButton = new Button("Save");
-                    saveButton.setOnAction(event2 -> {
-                        switch (selectedAttribute) {
-                            case "Prefix":
-                                course.prefix = inputField.getText();
-                                break;
-                            case "Number":
-                                course.number = Integer.parseInt(inputField.getText());
-                                break;
-                            case "Course Name":
-                                course.courseName = inputField.getText();
-                                break;
-                            case "Days per Week":
-                                course.daysWeek = Integer.parseInt(inputField.getText());
-                                break;
-                            case "Start Time":
-                                course.startTime = inputField.getText();
-                                break;
-                            case "End Time":
-                                course.endTime = inputField.getText();
-                                break;
-                            case "Number of Credits":
-                                course.numCredits = Integer.parseInt(inputField.getText());
-                                break;
-                        }
-
-                        editPartStage.close(); 
-                    });
-
-                    // Add all elements to the smaller editing window
-                    layout2.getChildren().addAll(
-                        new Label("Edit " + selectedAttribute + ":"),
-                        inputField,
-                        saveButton
+                    
+                     // Display a success message after saving
+                      String successMessage = String.format(
+                        "Successfully updated the '%s' attribute for %s.",
+                        selectedAttribute,
+                        course.prefix + course.number
                     );
 
-                    // Set the scene for the smaller editing window and display it
-                    Scene scene = new Scene(layout2, 300, 150);
-                    editPartStage.setScene(scene);
-                    editPartStage.show();
-                }
+                    // Show success message
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Edit Successful");
+                    alert.setHeaderText("Course Information Updated");
+                    alert.setContentText(successMessage);
+                    alert.showAndWait();
+
+                    editPartStage.close();
+                });
+
+                layout2.getChildren().addAll(
+                    new Label("Edit " + selectedAttribute + ":"),
+                    inputField,
+                    saveButton
+                );
+
+                Scene scene = new Scene(layout2, 300, 150);
+                editPartStage.setScene(scene);
+                editPartStage.show();
             }
         });
 
-        // Add all components to the bigger editing course window
         layout.getChildren().addAll(
             new Label("Select Course:"),
             courseSelection,
@@ -272,147 +253,137 @@ public class EditFunctions {
             editButton
         );
 
-        // Set the scene and stage and display it
         Scene scene = new Scene(layout, 300, 200); 
-        createCourseStage.setScene(scene);
-        createCourseStage.show();
-    
-        
+        editCourseStage.setScene(scene);
+        editCourseStage.show();
     }
 
-    public static void editFaculty(){
-         // Create a new stage and format it
-        Stage createFacultyStage = new Stage();
-        createFacultyStage.setTitle("Edit Faculty");
-        VBox layout =  new VBox(10);
+    public static void editFaculty() {
+        Stage editFacultyStage = new Stage();
+        editFacultyStage.setTitle("Edit Faculty");
+        VBox layout = new VBox(10);
         layout.setPadding(new Insets(10));
-       
-        // Example list of faculty names; replace with real data later
-       
-        //Drop down menu to select existing faculty member
+
         ComboBox<Faculty> facultySelection = new ComboBox<>(
-            FXCollections.observableArrayList(Main.FacultyList)
-             
+            FXCollections.observableArrayList(ReportFunctions.FacultyList)
         );
 
-        // Drop down menu to select which attribute to edit
         ComboBox<String> editSelection = new ComboBox<>(
-            FXCollections.observableArrayList( "Name", "Email", "Building Name", "Office Number", "Phone Number", 
-                "Department", "Position")
+            FXCollections.observableArrayList(
+                "Name", "Email", "Building Name", "Office Number", 
+                "Phone Number", "Department", "Position"
+            )
         );
 
-        // Create a new edit button with a event listener that stores user faculty and attribute selection
         Button editButton = new Button("Edit");
-        editButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Faculty faculty = facultySelection.getValue();
-                String selectedAttribute = editSelection.getValue();
+        editButton.setOnAction(event -> {
+            Faculty faculty = facultySelection.getValue();
+            String selectedAttribute = editSelection.getValue();
 
-                // Make sure user actually chooses something in both drop down menues
-                if (faculty != null && selectedAttribute != null) {
-                    // Create a smaller editing pop up window
-                    Stage editPartStage = new Stage();
-                    editPartStage.setTitle("Edit " + selectedAttribute);
-                    VBox layout2 = new VBox(10);
-                    layout2.setPadding(new Insets(10));
-                    
+            if (faculty != null && selectedAttribute != null) {
+                Stage editPartStage = new Stage();
+                editPartStage.setTitle("Edit " + selectedAttribute);
+                VBox layout2 = new VBox(10);
+                layout2.setPadding(new Insets(10));
 
+                if ("Department".equals(selectedAttribute)) {
+                    ComboBox<Department> departmentComboBox = new ComboBox<>(
+                        FXCollections.observableArrayList(ReportFunctions.departmentList)
+                    );
+                    Button saveButton = new Button("Save");
+                    saveButton.setOnAction(event2 -> {
+                        faculty.department = departmentComboBox.getValue();
 
-                    // If editing the department is the selected attribute, display a drop down menu of existing departments
-                    // for user to choose from
-                    if ("Department".equals(selectedAttribute)) {
-                        // TEMPORARY DEPARTMENTS REPLACE WITH USER MADE
-                        
-                        ComboBox<Department> departmentComboBox = new ComboBox<>(
-                            FXCollections.observableArrayList(Main.departmentList)
-                        );
-                        // Add the components to the smaller editing window
-                        layout2.getChildren().addAll(
-                            new Label("Select New Department:"),
-                            departmentComboBox
-                        );
-                        // Create a save button with action listener to save the new department value
-                        Button saveButton = new Button("Save");
-                        saveButton.setOnAction(event2 -> {
-                            Department newDepartment = departmentComboBox.getValue();
-                            // Code to update the department in the faculty object
-                            faculty.department = newDepartment;
-                            editPartStage.close(); 
-                        });
-                        // Add the save button to the small editing window
-                        layout2.getChildren().add(saveButton);
-                        
-                    } else {
-                        // If selected attribute is not department,
-                        // display the current attribute value to the user
-                        TextField inputField = new TextField();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Edit Successful");
+                        alert.setHeaderText("Faculty Information Updated");
+                        alert.setContentText("Successfully updated.");
+                        alert.showAndWait();
+
+                        editPartStage.close(); 
+                    });
+
+                    layout2.getChildren().addAll(
+                        new Label("Edit " + selectedAttribute + ":"),
+                        departmentComboBox,
+                        saveButton
+                    );
+                } else {
+                    TextField inputField = new TextField();
+                    switch (selectedAttribute) {
+                        case "Name":
+                            inputField.setText(faculty.name);
+                            break;
+                        case "Email":
+                            inputField.setText(faculty.getEmail());
+                            break;
+                        case "Building Name":
+                            inputField.setText(faculty.buildingName);
+                            break;
+                        case "Office Number":
+                            inputField.setText(String.valueOf(faculty.officeNum));
+                            break;
+                        case "Phone Number":
+                            inputField.setText(faculty.getPhoneNum());
+                            break;
+                        case "Position":
+                            inputField.setText(faculty.position);
+                            break;
+                    }
+
+                    Button saveButton = new Button("Save");
+                    saveButton.setOnAction(event2 -> {
                         switch (selectedAttribute) {
                             case "Name":
-                                inputField.setText(faculty.name);
+                                faculty.name = inputField.getText();
                                 break;
                             case "Email":
-                                inputField.setText(faculty.getEmail());
+                                faculty.setEmail(inputField.getText());
                                 break;
                             case "Building Name":
-                                inputField.setText(faculty.buildingName);
+                                faculty.buildingName = inputField.getText();
                                 break;
                             case "Office Number":
-                                inputField.setText(String.valueOf(faculty.officeNum));
+                                faculty.officeNum = Integer.parseInt(inputField.getText());
                                 break;
                             case "Phone Number":
-                                inputField.setText(faculty.getPhoneNum());
+                                faculty.setPhoneNum(inputField.getText());
                                 break;
                             case "Position":
-                                inputField.setText(faculty.position);
+                                faculty.position = inputField.getText();
                                 break;
                         }
 
-                        // Create save button with action listener to update the selected attribute
-                        Button saveButton = new Button("Save");
-                        saveButton.setOnAction(event2 -> {
-                            // Code to update the selected attribute
-                            switch (selectedAttribute) {
-                                case "Name":
-                                    faculty.name = inputField.getText();
-                                    break;
-                                case "Email":
-                                    faculty.setEmail(inputField.getText());
-                                    break;
-                                case "Building Name":
-                                    faculty.buildingName = inputField.getText();
-                                    break;
-                                case "Office Number":
-                                    faculty.officeNum = Integer.parseInt(inputField.getText());
-                                    break;
-                                case "Phone Number":
-                                    faculty.setPhoneNum(inputField.getText());
-                                    break;
-                                case "Position":
-                                    faculty.position = inputField.getText();
-                                    break;
-                            }
+                           // Display a success message after saving
+                      String successMessage = String.format(
+                        "Successfully updated the '%s' attribute for faculty member %s.",
+                        selectedAttribute,
+                        faculty.name
+                    );
 
-                            editPartStage.close();
-                        });
+                    // Show success message
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Edit Successful");
+                    alert.setHeaderText("Faculty Information Updated");
+                    alert.setContentText(successMessage);
+                    alert.showAndWait();
 
-                        // Add components to small editing window
-                        layout2.getChildren().addAll(
-                            new Label("Edit " + selectedAttribute + ":"),
-                            inputField,
-                            saveButton
-                        );
-                    }
+                    editPartStage.close();
+                    });
 
-                    // Set the scene and stage and display small editing window
-                    Scene scene = new Scene(layout2, 300, 150);
-                    editPartStage.setScene(scene);
-                    editPartStage.show();
+                    layout2.getChildren().addAll(
+                        new Label("Edit " + selectedAttribute + ":"),
+                        inputField,
+                        saveButton
+                    );
                 }
+
+                Scene scene = new Scene(layout2, 300, 150);
+                editPartStage.setScene(scene);
+                editPartStage.show();
             }
         });
 
-        // Add all components to faculty editing window
         layout.getChildren().addAll(
             new Label("Select Faculty Member:"),
             facultySelection,
@@ -421,11 +392,8 @@ public class EditFunctions {
             editButton
         );
 
-        // Set the scene and stage and display
         Scene scene = new Scene(layout, 300, 200); 
-        createFacultyStage.setScene(scene);
-        createFacultyStage.show();
+        editFacultyStage.setScene(scene);
+        editFacultyStage.show();
     }
-
 }
-    
