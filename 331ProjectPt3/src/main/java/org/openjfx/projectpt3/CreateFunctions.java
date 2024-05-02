@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class CreateFunctions {
     
-   public static void createStudent() {
+    public static void createStudent() {
         // Create a new stage and format it
         Stage createStudentStage = new Stage();
         createStudentStage.setTitle("Create Student");
@@ -24,7 +24,6 @@ public class CreateFunctions {
         Label ssnLabel = new Label("Enter Student's SSN:");
         TextField ssnField = new TextField();
 
-        
         Label addressLabel = new Label("Enter Address:");
         TextField addressField = new TextField();
 
@@ -36,41 +35,39 @@ public class CreateFunctions {
 
         Label emergencyContactLabelLine = new Label("---------------------------------------------------------------");
         Label emergencyContactLabel = new Label("Emergency Contact Info");
-       
-        
+
         Label contactNameLabel = new Label("Enter Contact Name:");
         TextField contactNameField = new TextField();
-        
+
         Label contactPhoneLabel = new Label("Enter Contact Phone:");
         TextField contactPhoneField = new TextField();
-        
+
         Label contactAddressLabel = new Label("Enter Contact Address:");
         TextField contactAddressField = new TextField();
 
         // Create a button to create the student
-        // Set an action listener to get the user input from each text field
-        // Store input in variables for later use
         Button createButton = new Button("Create Student");
         createButton.setOnAction(event -> {
-            int ssn = 0 ;
+            // Initial validations
+            boolean valid = true;
+            int ssn = 0;
             double gpa = 0;
-            boolean Valid= true;
-            try{
-            ssn = Integer.parseInt(ssnField.getText());
+
+            try {
+                ssn = Integer.parseInt(ssnField.getText());
+            } catch (Exception e) {
+                ssnField.setTooltip(new Tooltip("Please input a valid SSN"));
+                valid = false;
             }
-            catch(Exception e){
-            ssnField.setTooltip(new Tooltip("Please input a valid SSN"));
-            Valid = false;
+
+            try {
+                gpa = Double.parseDouble(gpaField.getText());
+            } catch (Exception e) {
+                gpaField.setTooltip(new Tooltip("Please input a valid GPA"));
+                valid = false;
             }
-            
-            try{
-            gpa = Double.parseDouble(gpaField.getText());
-            }
-            catch(Exception e){
-            gpaField.setTooltip(new Tooltip("Please input a valid GPA"));
-            Valid = false;
-            }
-            
+
+            // Get user inputs
             String name = nameField.getText();
             String address = addressField.getText();
             String email = emailField.getText();
@@ -78,45 +75,51 @@ public class CreateFunctions {
             String contactPhone = contactPhoneField.getText();
             String contactAddress = contactAddressField.getText();
 
-            
-            if(name.length() == 0){
-            nameField.setTooltip(new Tooltip("Please enter a valid name"));
-            Valid = false;
+            // Additional validations
+            if (name.isEmpty()) {
+                nameField.setTooltip(new Tooltip("Please enter a valid name"));
+                valid = false;
             }
-            if(address.length() == 0){
-            addressField.setTooltip(new Tooltip("Please enter a valid address"));
-            Valid = false;
+
+            if (address.isEmpty()) {
+                addressField.setTooltip(new Tooltip("Please enter a valid address"));
+                valid = false;
             }
-            
-            if(email.length() == 0){
-            emailField.setTooltip(new Tooltip("Please enter a valid email"));
-            Valid = false;
+
+            if (email.isEmpty()) {
+                emailField.setTooltip(new Tooltip("Please enter a valid email"));
+                valid = false;
             }
-            
-            if(contactName.length() == 0){
-            contactNameField.setTooltip(new Tooltip("please enter a valid contact name"));
-            Valid = false;
+
+            if (contactName.isEmpty()) {
+                contactNameField.setTooltip(new Tooltip("Please enter a valid contact name"));
+                valid = false;
             }
-            
-            if(contactPhone.length() == 0){
-            contactPhoneField.setTooltip(new Tooltip("Please enter a valid contact phone number"));
-            Valid = false;
+
+            if (contactPhone.isEmpty()) {
+                contactPhoneField.setTooltip(new Tooltip("Please enter a valid contact phone number"));
+                valid = false;
             }
-            
-            if(contactAddress.length() == 0){
-            contactAddressField.setTooltip(new Tooltip("Please enter a valid contact Phone number"));
-            Valid = false;
+
+            if (contactAddress.isEmpty()) {
+                contactAddressField.setTooltip(new Tooltip("Please enter a valid contact address"));
+                valid = false;
             }
-            
-            
-            
-            if(Valid == true){
-             Main.StudentList.add(new Student(name,ssn,address,email,
-                    gpa,contactName,contactPhone,contactAddress));
-            createStudentStage.close();
+
+            if (valid) {
+                // Add the new student to the list
+                ReportFunctions.StudentList.add(new Student(name, ssn, address, email, gpa, contactName, contactPhone, contactAddress));
+
+                // Show success message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Student Created");
+                alert.setContentText("Student " + name + " has been successfully created.");
+
+                alert.showAndWait(); // Show the success message
+
+                createStudentStage.close(); // Close the form
             }
-            
-            
         });
 
         // Add all the components to the stage
@@ -196,7 +199,14 @@ public class CreateFunctions {
             String startTime = startTimeField.getText();
             String endTime = endTimeField.getText();
             int numCredits = Integer.parseInt(creditsField.getText());
-            Main.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
+            ReportFunctions.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Course Created");
+                alert.setContentText("Course " + prefix + name + " has been successfully created.");
+
+                alert.showAndWait(); 
             createCourseStage.close();
 });
             // more java here 
@@ -247,7 +257,7 @@ public class CreateFunctions {
 
         // Drop down menu for user to choose existing departments 
         ComboBox<Department> facultyDeptComboBox = new ComboBox<>(
-            FXCollections.observableArrayList(Main.departmentList)
+            FXCollections.observableArrayList(ReportFunctions.departmentList)
         );
 
         Label facultyEmailLabel = new Label("Enter Email:");
@@ -280,9 +290,17 @@ public class CreateFunctions {
             String officeNumber = officeNumberField.getText();
             String phoneNumber = phoneNumberField.getText();
             String position = positionField.getText();
-             Main.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
+             ReportFunctions.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
            Integer.parseInt(officeNumber),phoneNumber,facultyDept,position));
            // Add java
+           
+           // Show success message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Faculty Member Created");
+                alert.setContentText("Faculty member " + facultyName + " has been successfully created.");
+
+                alert.showAndWait(); 
  
            
            
@@ -307,6 +325,8 @@ public class CreateFunctions {
             positionField,
             createButton
         );
+        
+        
 
         // Set up the scene and display
         Scene scene = new Scene(layout, 400, 500);  
@@ -332,8 +352,15 @@ public class CreateFunctions {
         createButton.setOnAction(event -> {
             // Gather department name from the text field
             String departmentName = departmentNameField.getText();
-            Main.departmentList.add(new Department(departmentName));
+            ReportFunctions.departmentList.add(new Department(departmentName));
           //put java here 
+          
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Department Created");
+                alert.setContentText("Department " + departmentName + " has been successfully created.");
+
+                alert.showAndWait(); 
 
             createDepartmentStage.close();
         });
@@ -376,7 +403,13 @@ public class CreateFunctions {
             int year = Integer.parseInt(yearField.getText());
 
             // Java here
-            Main.SemesterList.add(new Semester(period,year));
+            ReportFunctions.SemesterList.add(new Semester(period,year));
+             Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText("Semester Created");
+                alert.setContentText("Semester " + period + year + " has been successfully created.");
+
+                alert.showAndWait(); 
             createSemesterStage.close(); 
         });
 
