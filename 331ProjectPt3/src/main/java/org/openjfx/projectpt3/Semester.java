@@ -7,10 +7,11 @@ public class Semester {
 		this.period = period;
 		this.year = year;
 	}
-
-	 public String toString() {
-        String semester = "";
-        semester += period + " " + year;
-        return semester; // for drop don
-    }
+        
+        @Override
+        public String toString() {
+            String semester = "";
+            semester += period + " " + year;
+            return semester; 
+        }
 }
