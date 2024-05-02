@@ -22,12 +22,6 @@ public class Faculty {
 		this.position = position;
 		facultyCount++;
 	}
-	
-	 public String toString() {
-        String faculty = "";
-        faculty += facultyID + " " + name;
-        return faculty; // for drop don
-    }
 
 	public int getFaultyID() {
 		return facultyID;
@@ -48,11 +42,9 @@ public class Faculty {
 	public String getPhoneNum() {
 		return phoneNum;
 	}
-
-	@Override
-
+        
+        @Override
 	public String toString(){
 		return name;
 	}
-
 }
