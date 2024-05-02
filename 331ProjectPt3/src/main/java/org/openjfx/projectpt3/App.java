@@ -12,7 +12,14 @@ import javafx.stage.Stage;
 /**
  * Holds the main GUI of the University Management System
  * 
+ * The purpose of the program is to allow for the creation of Students,
+ * Faculty, Course,Semesters
+ * and departments, as well as generating reports based on the
+ * schedule/enrollments.
+ * The program also allows for the assigning of courses to students and faculty.
+ * 
  * @author Masha Share, Noah Kurtz, Tam Dang
+ * @version 4/29/24
  */
 public class App extends Application {
 
