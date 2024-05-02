@@ -16,7 +16,7 @@ public class Student {
 
   public Student(String name, int SSN, String address, String email, double GPA,
       String contactName, String contactPhoneNumber, String contactAddress) {
-    studentID = Count;
+    studentID = Count + 1;
     this.name = name;
     this.SSN = SSN;
     this.address = address;
