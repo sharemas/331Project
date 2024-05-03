@@ -1,4 +1,5 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
+
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -109,20 +110,21 @@ public class CreateFunctions {
             if (valid) {
                 // Add the new student to the list
                 ReportFunctions.StudentList.add(new Student(name, ssn, address, email, gpa, contactName, contactPhone, contactAddress));
-                String Insert = "Insert values into STUDENT(" + ssn +"," + name + "," + address + "," + email + "," + gpa + "," + contactName + "," + contactPhone + "," + contactAddress + ");"; 
-                App.runDBQuery(Insert, 'i');
-                // Show success message
 
-                // fix the values()
+                // Insert into database 
+               String insert = "INSERT INTO STUDENT (SSN, STUDENTNAME, ADDRESS, EMAIL, GPA, CONTACTNAME, CONTACTNUMBER, CONTACTADDRESS) " +
+                "VALUES (" + ssn + ", " + "'" + name + "', " + "'" + address + "', " + "'" + email + "', " + gpa + ", " + "'" + contactName + "', " +"'" + contactPhone + "', " + "'" + contactAddress + "'" +")";
+                App.runDBQuery(insert, 'c');
+                
                 // Show success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("Student Created");
                 alert.setContentText("Student " + name + " has been successfully created.");
 
-                alert.showAndWait(); // Show the success message
+                alert.showAndWait(); 
 
-                createStudentStage.close(); // Close the form
+                createStudentStage.close();
             }
         });
 
@@ -205,6 +207,11 @@ public class CreateFunctions {
             int numCredits = Integer.parseInt(creditsField.getText());
             ReportFunctions.courseList.add(new Course(prefix,num,name,daysWeek,startTime,endTime,numCredits));
             
+            String insert = "INSERT INTO COURSE (COURSEPREFIX, COURSENUMBER, COURSENAME, DAYSWEEK, STARTTIME, ENDTIME, NUMCREDITS) " +
+                "VALUES (" +"'" + prefix + "', " + num + ", " + "'" + name + "', " + "'" + daysWeek + "', " + "'" + startTime + "', " + "'" + endTime + "', " + 
+                numCredits + ")"; 
+            App.runDBQuery(insert, 'c');
+            
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
                 alert.setHeaderText("Course Created");
@@ -213,7 +220,6 @@ public class CreateFunctions {
                 alert.showAndWait(); 
             createCourseStage.close();
 });
-            // more java here 
             
         // Add all components to the stage
         layout.getChildren().addAll(
@@ -296,7 +302,12 @@ public class CreateFunctions {
             String position = positionField.getText();
              ReportFunctions.FacultyList.add(new Faculty(facultyName,facultyEmail,buildingName,
            Integer.parseInt(officeNumber),phoneNumber,facultyDept,position));
-           // Add java
+           
+             String insert = "INSERT INTO FACULTY (NAME, EMAIL, BUILDINGNAME, OFFICENUM, PHONENUM, DEPARTMENTID, POSITION) " +
+                "VALUES (" +"'" + facultyName + "', '" + facultyEmail + "', " + "'" + buildingName + "', "  + officeNumber + ", " + "'" + phoneNumber+ "', " + "'" + facultyDept.departmentID + "', '" + 
+                position + "')"; 
+
+            App.runDBQuery(insert, 'c');
            
            // Show success message
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -357,7 +368,11 @@ public class CreateFunctions {
             // Gather department name from the text field
             String departmentName = departmentNameField.getText();
             ReportFunctions.departmentList.add(new Department(departmentName));
-          //put java here 
+            
+             String insert = "INSERT INTO DEPARTMENT(DEPARTMENTNAME) " +
+                "VALUES ('" + departmentName + "')";
+              App.runDBQuery(insert, 'c');
+
           
            Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
@@ -405,6 +420,10 @@ public class CreateFunctions {
         createButton.setOnAction(event -> { 
             String period = periodField.getText();
             int year = Integer.parseInt(yearField.getText());
+            
+             String insert = "INSERT INTO SEMESTERS (PERIOD, YEAR) " +
+                "VALUES ('" + period + "', " + year + ")";
+              App.runDBQuery(insert, 'c');
 
             // Java here
             ReportFunctions.SemesterList.add(new Semester(period,year));
