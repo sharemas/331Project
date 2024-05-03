@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditFunctions {
+ static String command = "";
     
     public static void editStudent() {
         Stage editStudentStage = new Stage();
@@ -71,50 +71,49 @@ public class EditFunctions {
                     switch (selectedAttribute) {
                         case "Name":
                             student.name = inputField.getText();
+                            command = "Update Student set studentname = " + "'" + student.name + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                            App.runDBQuery(command, 'u');
                             break;
                         case "SSN":
-                            student.SetSSN(Integer.parseInt(inputField.getText()));
+                            student.SetSSN(Integer.parseInt(inputField.getText()));                   
+                        command = "Update Student set ssn = " + "'" + student.GetSSN() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                        App.runDBQuery(command, 'u');
                             break;
                         case "Address":
                             student.SetAddress(inputField.getText());
+                            command = "Update Student set address = " + "'" + student.GetAddress() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Email":
                             student.SetEmail(inputField.getText());
+                            command = "Update Student set email = " + student.GetEmail() + " where Student.STUDENTID = " + student.GetStudentID();
+                            App.runDBQuery(command, 'u');
                             break;
                         case "GPA":
                             student.GPA = Double.parseDouble(inputField.getText());
+                                command = "Update Student set gpa = " + "'" + student.GPA + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                                App.runDBQuery(command, 'u');
                             break;
                         case "Emergency Contact Name":
                             student.contactName = inputField.getText();
+                                command = "Update Student set contactname = " + "'" + student.contactName + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                                App.runDBQuery(command, 'u');
                             break;
                         case "Emergency Contact Phone":
                             student.SetContactPhone(inputField.getText());
+                            command = "Update Student set contactnumber = " + "'" + student.GetContactPhone() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Emergency Contact Address":
                             student.SetContactAddress(inputField.getText());
+                            command = "Update Student set contactaddress = " + "'" + student.GetContactAddress() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
+                            App.runDBQuery(command, 'u');
                             break;
                     }
+                   
                     
-                    String Insert = "Update Student set studentname = " + "'" + student.name + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert, 'u');
                     
-                    String Insert2 = "Update Student set address = " + "'" + student.GetAddress() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert2, 'u');
-
-                    String Insert3 = "Update Student set email  = " + "'" + student.GetEmail() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert3, 'u');
                     
-                    String Insert4 = "Update Student set gpa = " + student.GPA  + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert4, 'u');
-                    
-                    String Insert5 = "Update Student set contactaddress = " + "'" + student.GetContactAddress() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert5, 'u');
-                    
-                    String Insert6 = "Update Student set contactname = " + "'" + student.contactName + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert6, 'u');
-                    
-                    String Insert7 = "Update Student set contactnumber = " + "'" + student.GetContactPhone() + "'" + " where Student.STUDENTID = " + student.GetStudentID();
-                    App.runDBQuery(Insert7, 'u');
 
                     // Display a success message after saving
                       String successMessage = String.format(
@@ -216,38 +215,48 @@ public class EditFunctions {
                     switch (selectedAttribute) {
                         case "Prefix":
                             course.prefix = inputField.getText();
+                            command = "Update Course set CoursePrefix = " + "'" + course.prefix + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Number":
                             course.number = Integer.parseInt(inputField.getText());
+                            command = "Update Course set CourseNumber = " + "'" + course.number + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Course Name":
                             course.courseName = inputField.getText();
+                            command = "Update Course set CourseName = " + "'" + course.courseName + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Days per Week":
                             course.daysWeek = Integer.parseInt(inputField.getText());
+                            command = "Update Course set CourseDaysWeek= " + "'" + course.daysWeek + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Start Time":
                             course.startTime = inputField.getText();
+                            command = "Update Course set CourseStartTime = " + "'" + course.startTime + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "End Time":
                             course.endTime = inputField.getText();
+                            command = "Update Course set CourseEndTime = " + "'" + course.endTime + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                         case "Number of Credits":
                             course.numCredits = Integer.parseInt(inputField.getText());
+                            command = "Update Course set NumCredits = " + "'" + course.numCredits + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(command, 'u');
                             break;
                     }
                     
-                    String insert = "Update Course set CoursePrefix = " + "'" + course.prefix + "'" + " where CourseID = " + course.courseID;
-                    App.runDBQuery(insert, 'u');
+                    
                         
-                    String insert2 = "Update Course set CourseNumber = " + "'" + course.number + "'" + " where CourseID = " + course.courseID;
-                    App.runDBQuery(insert2, 'u');   
+                       
                     
-                    String insert3 = "Update Course set CourseName = " + "'" + course.courseName + "'" + " where CourseID = " + course.courseID;
-                    App.runDBQuery(insert3, 'u');
                     
-                    String insert4 = "Update Course set CourseDaysWeek= " + "'" + course.daysWeek + "'" + " where CourseID = " + course.courseID;
-                    App.runDBQuery(insert4, 'u');
+                    
+                    
                     
                      // Display a success message after saving
                       String successMessage = String.format(
@@ -326,7 +335,9 @@ public class EditFunctions {
                     Button saveButton = new Button("Save");
                     saveButton.setOnAction(event2 -> {
                         faculty.department = departmentComboBox.getValue();
-
+                         command = "Update faculty set departmentid = " + "'" + faculty.department.departmentID + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                        App.runDBQuery(command, 'u');
+                        
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Edit Successful");
                         alert.setHeaderText("Faculty Information Updated");
@@ -369,44 +380,37 @@ public class EditFunctions {
                         switch (selectedAttribute) {
                             case "Name":
                                 faculty.name = inputField.getText();
+                                command = "Update faculty set name = " + "'" + faculty.name + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                App.runDBQuery(command, 'u');
                                 break;
                             case "Email":
                                 faculty.setEmail(inputField.getText());
+                                 command = "Update faculty set email = " + "'" + faculty.getEmail() + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                App.runDBQuery(command, 'u');
+                        
                                 break;
                             case "Building Name":
                                 faculty.buildingName = inputField.getText();
+                                   command = "Update faculty set buildingname = " + "'" + faculty.buildingName + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                   App.runDBQuery(command, 'u');
                                 break;
                             case "Office Number":
                                 faculty.officeNum = Integer.parseInt(inputField.getText());
+                                 command = "Update faculty set officenum= " + "'" + faculty.officeNum + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                  App.runDBQuery(command, 'u');
                                 break;
                             case "Phone Number":
                                 faculty.setPhoneNum(inputField.getText());
+                                command = "Update faculty set phonenum = " + "'" + faculty.getPhoneNum() + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                App.runDBQuery(command, 'u');
+                        
                                 break;
                             case "Position":
                                 faculty.position = inputField.getText();
+                                command = "Update faculty set position = " + "'" + faculty.position + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
+                                 App.runDBQuery(command, 'u');
                                 break;
                         }
-                        
-                        String Insert = "Update faculty set name = " + "'" + faculty.name + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert, 'u');
-                        
-                        String Insert2 = "Update faculty set email = " + "'" + faculty.getEmail() + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert2, 'u');
-                        
-                        String Insert3 = "Update faculty set buildingname = " + "'" + faculty.buildingName + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert3, 'u');
-                        
-                        String Insert4 = "Update faculty set officenum= " + "'" + faculty.officeNum + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert4, 'u');
-                        
-                        String Insert5 = "Update faculty set phonenum = " + "'" + faculty.getPhoneNum() + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert5, 'u');
-                        
-                        String Insert6 = "Update faculty set departmentid = " + "'" + faculty.department.departmentID + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert6, 'u');
-                        
-                        String Insert7 = "Update faculty set position = " + "'" + faculty.position + "'" + " where Faculty.FACULTYID = " + faculty.facultyID;
-                        App.runDBQuery(Insert7, 'u');
                         
 
                            // Display a success message after saving
