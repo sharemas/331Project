@@ -1,4 +1,5 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
+
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -32,6 +33,11 @@ public class GUIFunctions {
             
             if (semester != null && course != null && student != null) {
                 ReportFunctions.EnrollmentList.add(new Enrollment(semester, course, student));
+                
+                String insert = "INSERT INTO ENROLLMENT (COURSEID, STUDENTID, SEMESTERID) " +
+                "VALUES (" + course.courseID + ", " + student.studentID + ", " + semester.semesterID + ")"; 
+
+                App.runDBQuery(insert, 'c');
                 
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setTitle("Enrollment Successful");
@@ -87,6 +93,11 @@ public class GUIFunctions {
             
             if (semester != null && course != null && faculty != null) {
                 ReportFunctions.ScheduleList.add(new Schedule(semester, course, faculty));
+                
+                String insert = "INSERT INTO SCHEDULE (SEMESTERID, COURSEID, FACULTYID) " +
+                "VALUES (" + semester.semesterID + ", " + course.courseID + ", " + faculty .facultyID + ")"; 
+
+                App.runDBQuery(insert, 'c');
                 
                 Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                 successAlert.setTitle("Schedule Successful");
