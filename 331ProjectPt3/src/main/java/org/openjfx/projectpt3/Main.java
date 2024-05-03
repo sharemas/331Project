@@ -1,4 +1,5 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
