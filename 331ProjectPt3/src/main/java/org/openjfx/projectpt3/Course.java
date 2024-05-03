@@ -1,4 +1,5 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
+
 import java.util.ArrayList;
 
 public class Course {
@@ -10,6 +11,8 @@ public class Course {
        public String startTime;
        public String endTime;
        public int numCredits;
+       public int courseID;
+       private static int Count = 0;
 
        public ArrayList<Student> EnrolledStudents = new ArrayList<>();
 
@@ -22,6 +25,8 @@ public class Course {
               this.startTime = startTime;
               this.endTime = endTime;
               this.numCredits = numCredits;
+              this.courseID = Count + 1;
+              Count++;
        }
 
        public void AddStudent(Student student, Semester semester) {
