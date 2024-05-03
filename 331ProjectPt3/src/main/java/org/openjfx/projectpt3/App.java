@@ -1,30 +1,60 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
 
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import oracle.jdbc.*;
+import java.util.*;
+import static javafx.application.Application.launch;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import java.sql.*;
+import java.util.Scanner;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import oracle.jdbc.pool.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
-/**
- * Holds the main GUI of the University Management System
- * 
- * The purpose of the program is to allow for the creation of Students,
- * Faculty, Course,Semesters
- * and departments, as well as generating reports based on the
- * schedule/enrollments.
- * The program also allows for the assigning of courses to students and faculty.
- * 
- * @author Masha Share, Noah Kurtz, Tam Dang
- * @version 4/29/24
- */
 public class App extends Application {
 
+public static OracleDataSource oDS;
+public static Connection jsqlConn;
+public static PreparedStatement jsqlStmt;
+public static ResultSet jsqlResults;
+public static Scanner keyboardIn = new Scanner(System.in);
+
+public static void runDBQuery(String query, char queryType)
+{
+// queryType - Using the C.R.U.D. acronym
+// 'r' - SELECT
+// 'c', 'u', or 'd' - UPDATE, INSERT, DELETE
+try
+{
+String URL = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
+String user = "javauser";
+String pass = "javapass";
+oDS = new OracleDataSource();
+oDS.setURL(URL);
+jsqlConn = oDS.getConnection(user, pass);
+jsqlStmt = jsqlConn.prepareStatement(
+query,
+ResultSet.TYPE_SCROLL_INSENSITIVE,
+ResultSet.CONCUR_READ_ONLY);
+if (queryType == 'r')
+jsqlResults = jsqlStmt.executeQuery();
+else
+jsqlStmt.executeUpdate();
+}
+catch (SQLException sqlex)
+{
+System.out.println(sqlex.toString());
+}
+} // End of runDBQuery() method
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
         primaryStage.setTitle("JMU University Management System");
 
         // Create a GridPane layout and format it
@@ -96,6 +126,15 @@ public class App extends Application {
         
         reportButton.setOnAction(event -> GUIFunctions.report());
        
+        // update lists using the database
+        ReportFunctions.updateDepartments();
+        ReportFunctions.updateCourseList();
+        ReportFunctions.updateStudentList();
+        ReportFunctions.updateFacultyList();
+        ReportFunctions.updateSemesterList();
+        ReportFunctions.updateEnrollmentList();
+        ReportFunctions.updateScheduleList();
+        
         // Create the scene and set it on the stage
         Scene scene = new Scene(gridLayout, 450, 400); 
         primaryStage.setScene(scene);
