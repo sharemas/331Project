@@ -190,32 +190,46 @@ public class EditFunctions {
                         break;
                 }
 
-                Button saveButton = new Button("Save");
+               Button saveButton = new Button("Save");
+                String Insert = "";
                 saveButton.setOnAction(event2 -> {
                     switch (selectedAttribute) {
                         case "Prefix":
                             course.prefix = inputField.getText();
+                        Insert = "Update Course set CoursePrefix = " + "'" + course.prefix + "'" + " where CourseID = " + course.courseID;
+                        App.runDBQuery(Insert, 'u');
                             break;
                         case "Number":
                             course.number = Integer.parseInt(inputField.getText());
+                            Insert = "Update Course set CourseNumber = " + "'" + course.number + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                         case "Course Name":
                             course.courseName = inputField.getText();
+                            Insert = "Update Course set CourseName = " + "'" + course.courseName + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                         case "Days per Week":
                             course.daysWeek = Integer.parseInt(inputField.getText());
+                            Insert = "Update Course set CourseDaysWeek= " + "'" + course.daysWeek + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                         case "Start Time":
                             course.startTime = inputField.getText();
+                            Insert = "Update Course set CourseStartTime = " + "'" + course.startTime + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                         case "End Time":
                             course.endTime = inputField.getText();
+                            Insert = "Update Course set CourseEndTime = " + "'" + course.endTime + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                         case "Number of Credits":
                             course.numCredits = Integer.parseInt(inputField.getText());
+                            Insert = "Update Course set CourseNumCredits = " + "'" + course.numCredits + "'" + " where CourseID = " + course.courseID;
+                            App.runDBQuery(Insert, 'u');
                             break;
                     }
-                    
                      // Display a success message after saving
                       String successMessage = String.format(
                         "Successfully updated the '%s' attribute for %s.",
