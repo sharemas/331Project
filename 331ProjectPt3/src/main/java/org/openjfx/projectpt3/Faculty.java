@@ -1,7 +1,8 @@
-package org.openjfx.projectpt3;
+package com.noahkurtz.databasep4;
+
 public class Faculty {
 	private static int facultyCount = 0;
-	private int facultyID;
+	public int facultyID;
 	public String name;
 	private String email;
 	public String buildingName;
